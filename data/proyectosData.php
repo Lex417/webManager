@@ -11,7 +11,7 @@
 
        function obtenerVistaPreviaProyecto(){
             $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,desc_Proyecto 
-            from tabla_proyecto where estado_Proyecto=?');
+            from vista_proyectos_activos');
             $stmt->execute(['activo']);
             $listaProyectos=array();
             while($fila=$stmt->fetch()){
