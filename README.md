@@ -28,7 +28,7 @@ Se tienen 3 branches(ramas) principales development, front-end y back-end.
 
 1 - Clone el repositorio en su area de trabajo.
 ```
-$ git clone https://github.com/dennisbonilla/web-manager.git
+$ git clone https://github.com/NanaOva/webManager.git
 ```
 
 2 - Una vez clonado, desde el terminal coloquese dentro de la carpeta web-manager y ejecute los siguientes comandos.
