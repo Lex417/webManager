@@ -1,19 +1,20 @@
 <?php 
     class proyectosData{
-       include "conexion.php"; 
+       
        private $objetoConexion;
        
        function __construct(){
+           include "conexion.php"; 
            $conexion=new conexion();
-           $objetoConexion=$conexion->crearConexion();
+           $this->objetoConexion=$conexion->crearConexion();
        } 
 
        function obtenerVistaPreviaProyecto(){
-            $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,desc_Proyecto 
+            $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,desc_Proyecto 
             from tabla_proyecto where estado_Proyecto=?');
-            $this->objetoConexion->execute(['activo']);
+            $stmt->execute(['activo']);
             $listaProyectos=array();
-            while($fila=$this->objetoConexion->fetch()){
+            while($fila=$stmt->fetch()){
                 $proyecto=array('ideProyecto'=>$fila['id_Proyecto'],
             'nomProyecto'=>$fila['nombre_Proyecto'],'fechaProyecto'=>$fila['inicio_Proyecto'],
         'descripProyecto'=>$fila['desc_Proyecto']);

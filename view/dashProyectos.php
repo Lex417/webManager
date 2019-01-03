@@ -32,7 +32,7 @@
 
 </head>
 
-<body class="animsition">
+<body class="animsition" onload="obtenerVistaPreviaProyecto()">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <?php include "menu.php"?>
@@ -46,74 +46,10 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div  class="au-card recent-report">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2">Proyecto 1</h3>
-                                        <div style="padding: 20px"  class="chart-info">
-                                            <div class="chart-info__left">
-                                                <div  class="chart-note">
-                                                    <span class="dot dot--blue"></span>
-                                                    <span>Nombre del Proyecto:</span>
-                                                </div>
-                                                <div class="chart-note mr-0">
-                                                    <span class="dot dot--green"></span>
-                                                    <span>Fecha de Inicio:</span>
-                                                </div>
-                                            </div>
-                                            <div class="chart-info__right">
-                                                <div class="chart-statis">
-                                                   
-                                                    <span class="label">Proyecto 1</span>
-                                                </div>
-                                                <div class="chart-statis mr-0">
-                                                    
-                                                    <span class="label">25/12/2018</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="centrarBoton">
-                                        <center><button type="button" class="btn btn-primary">Ver detalles</button></center>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="au-card recent-report">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 tm-b-5">Proyecto 2</h3>
-                                        <div style="padding: 20px"  class="chart-info">
-                                            <div class="chart-info__left">
-                                                <div class="chart-note">
-                                                    <span class="dot dot--blue"></span>
-                                                    <span>Nombre del Proyecto:</span>
-                                                </div>
-                                                <div class="chart-note mr-0">
-                                                    <span class="dot dot--green"></span>
-                                                    <span>Fecha de Inicio:</span>
-                                                </div>
-                                            </div>
-                                            <div class="chart-info__right">
-                                                <div class="chart-statis">
-                                                   
-                                                    <span class="label">Proyecto 2</span>
-                                                </div>
-                                                <div class="chart-statis mr-0">
-                                                    
-                                                    <span class="label">15/12/2018</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="centrarBoton">
-                                            <center><button type="button" class="btn btn-primary">Ver detalles</button></center>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row" id="proyectoC">
+                            
+                           
                         </div>
-                        
-                        
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
@@ -153,6 +89,7 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <script src="js/proyectosJs.js"></script>
 
 </body>
 
