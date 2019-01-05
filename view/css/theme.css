@@ -453,6 +453,14 @@ section {
     cursor: pointer;
 }
 
+.btn-primary{
+    background: #f09c3a;
+    border-color: #f09c3a;
+}
+.btn-primary:hover{
+    background: #d88c34;
+    border-color: #d88c34;
+}
 .au-btn:hover {
     color: #fff;
     background: #d88c34;
