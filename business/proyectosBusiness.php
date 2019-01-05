@@ -12,6 +12,10 @@
             return $this->data->obtenerVistaPreviaProyecto();
 
         }
+       /* function insertar($dato1, $dato2){
+            return $this->data->insertar($dato1, $dato2);
+        }*/
+
 
 
     }
