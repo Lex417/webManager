@@ -12,44 +12,35 @@ Eithan Méndez Méndez.<br>
 Didier Ocampo Martínez.<br>
 Yaudi Somarribas Araya.<br>
 <hr>
+
 # Web Manager.
 
 Web Manager es un sistema  cuya finalidad es permitirle a una
-organización dar a conocer su estructura a sus coolaboradores así como la administración del recurso humano. Esta herramienta esta dirigida a Managers de equipo, Project Managers y Lideres de equipo.
+organización mantener un control de los proyectos activos, manejar el recurso humano y su debido tiempo dentro de cada proyecto, además de poder visualizar la estructura de sus colaboradores según áreas disciplinarias. Esta herramienta esta dirigida a Managers de equipo, Project Managers y Lideres de equipo.
 
-## Primeros Pasos.
+## Información.
 
 
-#### Configuración para el Front-End.
+#### Directorios.
 
-Antes de inicar es importante tomar en cuenta el flujo de trabajo que se está siguiendo en este proyecto a nivel de control de versiones.
+El proyecto cuenta con 4 directorios distintos el cual separa la base de datos, las acciones de backend y front end.
 
-Se tienen 3 branches(ramas) principales development, front-end y back-end.
 
-1 - Clone el repositorio en su area de trabajo.
+
+Se tienen 2 branches(ramas) principales development para modificar y controlar los módulos funcionales que irán al master.
+
+Para clonar el repositorio: 
 ```
 $ git clone https://github.com/NanaOva/webManager.git
 ```
 
-2 - Una vez clonado, desde el terminal coloquese dentro de la carpeta web-manager y ejecute los siguientes comandos.
-```
-$ npm install
-$ bower install
-```
-3 - Ejecute el proyecto.
-
-Una vez habiendo instalado todas las dependencias y paquetes ejecute el proyecto mediante el siguiente comando.
-
-```
-$ gulp serve
-```
-El proyeto al correr abrirá una ventana en el navegador con la pagina inicial de la aplicación.
-
+### Tecnologias
+<img src="http://eduinfinity.in/wp-content/uploads/2018/07/javascript.png" alt="drawing" width="110"/> <img src="https://pngimg.com/uploads/php/php_PNG3.png" alt="drawing" width="110"/> <img src="https://blog.irontec.com/wp-content/uploads/2016/01/apache.png" alt="drawing" width="110"/> <img src="https://toppng.com/public/uploads/preview/mysql-logo-11536003912o2fjzalzdb.png" alt="drawing" width="110"/>
 
 ## Authors
 
 * Dennis Bonilla Ramírez.
-* Leonardo Hidalgo.
+* Leonardo Hidalgo Fonseca.
 * Nathalia Ovares.
 * Eithan Méndez Méndez.
 * Didier Ocampo Martínez.
