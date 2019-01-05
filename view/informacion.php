@@ -24,9 +24,9 @@
                     <div class="row" style=align>
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">Formulario 1</div>
+                                <div class="card-header"><h3>Agregar Empleado</h3></div>
                                     <div class="card-body">
-                                        <div class="card-title"><h2>Agregar Empleado</h2></div>
+                                        <div class="card-title"></div>
                                             <form action="" method="post" id="form-add-usuario" novalidate="novalidate">
                                                 <div class="form-group">
                                                     <label for="cedula" class="control-label mb-1">Cedula de empleado</label>
