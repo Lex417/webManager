@@ -21,7 +21,7 @@
                                 <i class="fas fa-chart-bar"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="#">
                                 <i class="fas fa-table"></i>Información</a>
                         </li>
                         <li class="has-sub">
@@ -57,7 +57,7 @@
                                 <i class="fas fa-chart-bar"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="informacion.php">
                                 <i class="fas fa-table"></i>Información</a>
                         </li>
                         <li class="active has-sub">
