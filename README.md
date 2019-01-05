@@ -18,7 +18,7 @@ Yaudi Somarribas Araya.<br>
 Web Manager es un sistema  cuya finalidad es permitirle a una
 organización mantener un control de los proyectos activos, manejar el recurso humano y su debido tiempo dentro de cada proyecto, además de poder visualizar la estructura de sus colaboradores según áreas disciplinarias. Esta herramienta esta dirigida a Managers de equipo, Project Managers y Lideres de equipo.
 
-## Primeros Pasos.
+## Información.
 
 
 #### Directorios.
