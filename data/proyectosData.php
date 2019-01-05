@@ -4,7 +4,7 @@
        private $objetoConexion;
        
        function __construct(){
-           include "conexion.php"; 
+           include_once "conexion.php"; 
            $conexion=new conexion();
            $this->objetoConexion=$conexion->crearConexion();
        } 

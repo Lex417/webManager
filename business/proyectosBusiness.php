@@ -1,5 +1,5 @@
 <?php 
-
+    // aqui se almacenan los metodos que se van a ejecutar.
     class proyectosBusiness{
         
         private $data;
