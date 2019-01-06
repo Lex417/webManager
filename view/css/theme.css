@@ -461,6 +461,10 @@ section {
     background: #d88c34;
     border-color: #d88c34;
 }
+input[type=submit]:focus {
+    background-color: #d88c34;
+    border-color: #d88c34;
+  } 
 .au-btn:hover {
     color: #fff;
     background: #d88c34;
