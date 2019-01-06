@@ -68,51 +68,51 @@
 												Busqueda de colaboradores
 											</div>
 											<div class="card-body background-white">
-											<form class="form-inline">
-													<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
+												<form class="form-inline">
+												
+													<div class="row"> 
+
+														<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
 														<div class="row">
+
 															<div class="col-9 col-sm-9 col-md-9 col-xs-12" style="display: flex;">
-																<label class="text-inline-block" style="display: inline-block;padding-right: 10px;"> Id Proyecto:</label>
+																<label class="text-inline-block" style="display: inline-block;padding-right: 10px;">Nombre:</label>
 																<input type="text" class="form-control width-100"  aria-label="Recipient's username" aria-describedby="button-addon2">
-															</div>
-														boton
-														</div>
-														
-													</div>
-													
-													<div class="row">
-														<div class="col-9 col-sm-9 col-md-9 col-xs-12" style="display: flex;padding: 0;">
-															<div class="col-6 col-sm-6 col-md-6 col-xs-6" style="display: flex;">
-																<label class="text-inline-block" style="display: inline-block;padding-right: 10px;">Estado</label>
+																<label class="text-inline-block" style="display: inline-block;padding-right: 10px;">Departamento</label>
 																<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
 																<option selected>Estado del proyecto</option>
 																<option value="activo">Activo</option>
 																<option value="inactivo">Inactivo</option>
 																
-															</select>
-															</div>
-															<div class="col-6 col-sm-6 col-md-6 col-xs-6" style="display: flex;">
-																<label class="text-inline-block" style="display: inline-block;padding-right: 10px;">Manager </label>
+															    </select>
+																<label class="text-inline-block" style="display: inline-block;padding-right: 10px;">Habilidades </label>
 																<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
 																<option selected>M del proyecto</option>
 																<option value="activo">Activo</option>
 																<option value="inactivo">Inactivo</option>
 																
-															</select>
+																</select>
+																		<button type="button" class="btn btn-outline-success">Buscar</button>
+																
 															</div>
+														
 														</div>
+														
+													</div>
 														
 													</div>
 														<div class="row">
-															<div class="col-12 col-sm-12 col-md-12 col-xs-12 text-right">
-																<button type="button" class="btn btn-outline-success">Guardar cambios</button>
+															<div class="col-12 col-sm-12 col-md-12 col-xs-12 text-left">
+																
+																
 															</div>
+
 														</div>
-														
-													</div>
-												</form>
+												
+														</div>
+													</form>
+												</div>
 											</div>
-										</div>
 									    </div>
 										 <div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
 											<div class="card text-white bg-primary mb-5p">
@@ -165,6 +165,59 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
+											<div class="card text-white bg-primary mb-5p">
+											<div class="card-header text-center">
+												Colaboradores Agregados
+											</div>
+											<div class="card-body background-white">
+												<div class="table-responsive">
+													<table class="table">
+														<thead class="thead-light">
+															<tr>
+																<th scope="col">Nombre</th>
+																<th scope="col">Departamento</th>
+																<th scope="col">Tiempo Dedicado</th>
+																<th scope="col">Manager</th>
+																<th scope="col">Acciones</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th>###</th>
+																<td>###</td>
+																<td>###</td>
+																<td>###</td>
+																<td>
+																	<a href="">Ver</a> | <a href="">Editar</a>
+																</td>
+															</tr>
+															<tr>
+																<th>###</th>
+																<td>###</td>
+																<td>###</td>
+																<td>###</td>
+																<td>
+																	<a href="">Ver</a> | <a href="">Editar</a>
+																</td>
+															</tr>
+															<tr>
+																<th>###</th>
+																<td>###</td>
+																<td>###</td>
+																<td>###</td>
+																<td>
+																	<a href="">Ver</a> | <a href="">Editar</a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button type="button" class="btn btn-outline-success">Finalizar</button>
+														</div>
 								</div>
 							 </div>
 							</div>
@@ -228,7 +281,7 @@
 				autoclose: true
 			});
 		</script>
-		    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
