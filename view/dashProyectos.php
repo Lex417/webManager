@@ -24,7 +24,7 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <h2 class="title-1">Proyectos</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                    <button onclick="location.href='vistaProyecto.php' ;"class="au-btn au-btn-icon au-btn--blue">
                                         <i class="zmdi zmdi-plus"></i>Nuevo proyecto</button>
                                 </div>
                             </div>

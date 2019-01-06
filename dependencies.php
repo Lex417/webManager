@@ -6,6 +6,11 @@
     <!-- Vendor JS       -->
     <script src="vendor/slick/slick.min.js">
     </script>
+     <script src="https://cdn.jsdelivr.net/velocity/1.1.0/velocity.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/velocity/1.1.0/velocity.ui.min.js"></script>
+    <script src="datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="datepicker/js/locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>
+    <script src="chosen.jquery.min.js" type="text/javascript"></script>
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
     <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
