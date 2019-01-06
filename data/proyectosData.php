@@ -22,8 +22,7 @@
             }
             return json_encode($listaProyectos);
        }
-
-      function insertar($parametro1,$parametro2){
+      /*function insertar($parametro1,$parametro2){
 
           $stmt = $this->objetoConexion->prepare('Insert into tb_prueba(columna1, columna2) values (?,?)');
           if($stmt->execute([$parametro1,$parametro2])){
@@ -31,7 +30,7 @@
           }else{
               return false;
           }
-      }
+      }*/
 
     }
 
