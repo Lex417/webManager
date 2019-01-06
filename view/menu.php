@@ -30,7 +30,6 @@
                             <ul id="proyectoMM"class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 
                             </ul>
-                        </li>
                         
                         
                         
@@ -59,6 +58,10 @@
                         <li>
                             <a href="informacion.php">
                                 <i class="fas fa-table"></i>Información</a>
+                        </li>
+                        <li>
+                            <a href="areasTrabajo.php">
+                                <i class="fas fa-tasks"></i>Áreas de Trabajo</a>
                         </li>
                         <li class="active has-sub">
                             <a class="js-arrow" href="dashProyectos.php">

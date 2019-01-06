@@ -26,9 +26,16 @@ if($accion == 'insertar_usuario') {
    } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
    
    echo json_encode($text);
+
+   
 } else if($accion == 'modificar_usuario') {
 
+
 } else if($accion == 'eliminar_usuario') {
+
+
+} else if ($accion == 'mostrar_vista_colaborador_manager') {
+        $business->mostrar_vista_colaborador_manager();
 
 } else if($accion == 'mostrar_usuario') {
         $business->mostrar_usuarios();

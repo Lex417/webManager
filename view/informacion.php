@@ -29,7 +29,7 @@
                                         <div class="card-title"></div>
                                             <form action="" method="post" id="form-add-usuario" novalidate="novalidate">
                                                 <div class="form-group">
-                                                    <label for="cedula" class="control-label mb-1">Cedula de empleado</label>
+                                                    <label for="cedula" class="control-label mb-1">Id de empleado</label>
                                                     <input id="cedula" name="cedula" type="text" class="form-control" aria-required="true">
                                                 </div>
                                                 <div class="form-group">
@@ -49,14 +49,14 @@
                                                         <select name="select" id="select-puesto" class="form-control">
                                                             <option value="0">Please select</option>
                                                             <option value="1">Programador</option>
-                                                            <option value="2">Administracion</option>
+                                                            <option value="2">Aseguramiento de calidad</option>
                                                             <option value="3">Servicio al cliente</option>
                                                             <option value="4">Soporte</option>
                                                         </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="tipo" class="control-label mb-1">Tipo de usuario</label>
-                                                    <input readonly="readonly" type="text" id="tipo" name="tipo" placeholder="Empleado" value="Empleado"  class="form-control">
+                                                    <input readonly="readonly" type="text" id="tipo" name="tipo" placeholder="Empleado" value="Colaborador"  class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="estado" class="control-label mb-1">Estado de usuario</label>
@@ -92,15 +92,14 @@
                     <div class=" table-responsive m-b-40">
                         <table class="table table-data2">
                         <thead>
-                            <th>Cedula</th>
+                            <th>Id</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Puesto</th>
-                            <th>Tipo</th>
-                            <th>Estado</th>
+                            <th width="15%">Puesto</th>
+                            <th width="10%">Tipo</th>
+                            <th width="15%">Estado</th>
                         </thead>
                         <tbody id="t_body">
-
                         </tbody>
                         </div>
                     </div>

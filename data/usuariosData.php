@@ -10,7 +10,7 @@ class usuariosData {
         $this->objetoConexion=$conexion->crearConexion();
     }
 
-
+// INSERTA UN USUARIO EN  LA BD
     function insertar($cedula, $nombre, $apellido, $pass, $puesto, $tipo, $estado) {
 
         $sql = $this->objetoConexion->prepare('INSERT INTO tabla_Usuario(id_Usuario, nombre_Usuario, password, apellido_Usuario, puesto_Usuario, tipo_Usuario, estado_Usuario) VALUES(?,?,?,?,?,?,?)');
@@ -19,7 +19,21 @@ class usuariosData {
         } else {return false;}
     }
 
+// BUSCA UNA VISTA 'vista_colaborador_manager' EN LA BD
+    function vista_colaborador_manager() {
+        $sql = $this->objetoConexion->prepare('SELECT nombre_Usuario, nombre_Manager, id_Departamento FROM  vista_colaborador_manager');
+        $sql->execute(['activo']);
+        $lista=array();
+        while($valor=$sql->fetch()) {
+            $objeto=array('nombre_Usuario'=>$valor['nombre_Usuario'],
+                          'nombre_Manager'=>$valor['nombre_Manager'],
+                          'id_Departamento'=>$valor['id_Departamento']);
+            array_push($lista,$objeto);
+        }
+        echo json_encode($lista);
+    }
 
+// cumple la funcion de un SELECT *
     function select_all_usuarios() {
         $sql = $this->objetoConexion->prepare('SELECT id_Usuario, nombre_Usuario, password, apellido_Usuario, puesto_Usuario, tipo_Usuario, estado_Usuario FROM tabla_Usuario');
         $sql->execute(['activo']);

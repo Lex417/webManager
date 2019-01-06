@@ -56,6 +56,33 @@ function insertarUsuario() {
 
 }
 
+// va a llamar a 'vista_colaborador_manager'
+function obtenerColaboradorManager() {
+    var formData = new FormData();
+    formData.append('accion','mostrar_vista_colaborador_manager');
+
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            var json = JSON.parse(respuesta);
+            console.log(json);
+            var t_body1 = document.getElementById('area_trabajo_uno');
+            var t_body2 = document.getElementById('area_trabajo_dos');
+            var t_body3 = document.getElementById('area_trabajo_tres');
+            var t_body4 = document.getElementById('area_trabajo_cuatro');
+            for(i = 0; i < json.length; i++) {
+                llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_body4);
+            }
+        }
+    });
+}
+
 // modifica la informacion de un usuario
 function modificarUsuario() {
 
@@ -70,6 +97,8 @@ function eliminarUsuario() {
 function sayHello() {
     alert("holis");
 }
+
+
  // inserta la informacion en cada fila y la agraga a una tabla.
 function llenar_fila(json, t_body) {
     var tr = document.createElement('tr');
@@ -88,5 +117,51 @@ function llenar_fila(json, t_body) {
 
     t_body.appendChild(tr);
 }
+
+function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_body4) {
+    switch(json[i].id_Departamento) {
+        case "1": //area de Desarrollo 
+            var tr = document.createElement('tr');
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Usuario;
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Manager;
+
+            t_body2.appendChild(tr);
+        break;
+
+        case "2": // area de Aseguramiento de Calidad (QA)
+            var tr = document.createElement('tr');
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Usuario;
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Manager;
+
+            t_body1.appendChild(tr);
+        break;
+
+        case "3": // Area de Liderazgo (Tech Leader)
+            var tr = document.createElement('tr');
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Usuario;
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Manager;
+
+            t_body4.appendChild(tr);
+        break;
+
+        case "4": //Area de Soporte
+            var tr = document.createElement('tr');
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Usuario;
+            var x = tr.insertCell(-1);
+            x.innerHTML = json[i].nombre_Manager;
+
+            t_body3.appendChild(tr);
+        break;
+    }
+
+}
+
 
 
