@@ -20,53 +20,6 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                     <!-- Aqui va el cuerpo de la pantalla -->
-                    <div class="row" style=align>
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-header"><h3>Agregar Empleado</h3></div>
-                                    <div class="card-body">
-                                        <div class="card-title"></div>
-                                            <form action="" method="post" id="form-add-usuario" novalidate="novalidate">
-                                                <div class="form-group">
-                                                    <label for="cedula" class="control-label mb-1">Id de empleado</label>
-                                                    <input id="cedula" name="cedula" type="text" class="form-control" aria-required="true">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nombre" class="control-label mb-1">Nombre de empleado</label>
-                                                    <input id="nombre" name="nombre" type="text" class="form-control" aria-required="true">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="apellido" class="control-label mb-1">Apellido de empleado</label>
-                                                    <input id="apellido" name="apellido" type="text" class="form-control" aria-required="true">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="pass" class="control-label mb-1">Password</label>
-                                                    <input type="password" id="pass" name="pass" placeholder="Password" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="puesto" class="control-label mb-1">Puesto de usuario</label>
-                                                        <select name="select" id="select-puesto" class="form-control">
-                                                            <option value="0">Please select</option>
-                                                            <option value="1">Programador</option>
-                                                            <option value="2">Aseguramiento de calidad</option>
-                                                            <option value="3">Servicio al cliente</option>
-                                                            <option value="4">Soporte</option>
-                                                        </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="tipo" class="control-label mb-1">Tipo de usuario</label>
-                                                    <input readonly="readonly" type="text" id="tipo" name="tipo" placeholder="Empleado" value="Colaborador"  class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="estado" class="control-label mb-1">Estado de usuario</label>
-                                                    <input id="estado" name="estado" type="text" class="form-control" aria-required="true">
-                                                </div>
-                                                <div class="card-footer">
-                                                    <button type="submit" class="btn btn-primary btn-sm" onclick="insertarUsuario();"><i class="fa fa-dot-circle-o"></i> Submit</button>
-                                                </div>
-                                            </form>
-                                    </div>
-                            </div>
                       <div class="row" style = "padding: 20px">
                         <div class="col-md-12">
                           <div class="overview-wrap">
