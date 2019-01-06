@@ -12,13 +12,14 @@
             return $this->data->obtenerVistaPreviaProyecto();
 
         }
-       /* function insertar($dato1, $dato2){
-            return $this->data->insertar($dato1, $dato2);
-        }*/
+         function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, 
+            $estado_Proyecto, $id_Proyect_Manager) {
+            return $this->data->insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
+        }
 
 
 
-    }
+ }
 
 
 ?>

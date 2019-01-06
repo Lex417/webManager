@@ -17,20 +17,23 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
-                            <a href="chart.html">
+                            <a href="index.php">
                                 <i class="fas fa-chart-bar"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="informacion.php">
                                 <i class="fas fa-table"></i>Información</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="dashProyectos.php">
+<<<<<<< HEAD
                                 <i class="fas fa-tachometer-alt" ></i>Dashboard</a>
+=======
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+>>>>>>> 78f59b43d60f2abde0193f99de9bf68f87b963fb
                             <ul id="proyectoMM"class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 
                             </ul>
-                        </li>
                         
                         
                         
@@ -53,15 +56,19 @@
                     <ul class="list-unstyled navbar__list">
                         
                         <li>
-                            <a href="chart.html">
+                            <a href="index.php">
                                 <i class="fas fa-chart-bar"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="informacion.php">
                                 <i class="fas fa-table"></i>Información</a>
                         </li>
+                        <li>
+                            <a href="areasTrabajo.php">
+                                <i class="fas fa-tasks"></i>Áreas de Trabajo</a>
+                        </li>
                         <li class="active has-sub">
-                            <a class="js-arrow" href="www.google.com">
+                            <a class="js-arrow" href="dashProyectos.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <ul id="proyectoMD" class="list-unstyled navbar__sub-list js-sub-list">
                                 
