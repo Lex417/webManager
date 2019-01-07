@@ -17,8 +17,20 @@
             return $this->data->insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
         }
 
+        function cargarDepartamentos(){
+        return $this->data->cargarDepartamentos();
+      }
+        function cargarHabilidades(){
+        return $this->data->cargarHabilidades();
+      }
 
+      function cargarColaboradoresFiltro($nombre,$departamento,$habilidad){
+        return $this->data->cargarColaboradoresFiltro($nombre,$departamento,$habilidad);
+      }
 
+       function agregarColaboradoresProyecto($json,$idProyecto){
+        return $this->data->agregarColaboradoresProyecto($json,$idProyecto);
+      }
  }
 
 

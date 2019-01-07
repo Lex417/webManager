@@ -1,4 +1,5 @@
-
+listaPosiblesColaboradores=[];
+contLista = 0;
 function obtenerVistaPreviaProyecto(){
     var formData = new FormData();
     formData.append('accion','obtenerVistaProyectos');
@@ -55,7 +56,8 @@ function insertarProyecto() {
             console.log(respuesta);
             json = JSON.parse(respuesta);
             if(json.status == "true") {
-				
+                localStorage.setItem("idProyecto",$('#id_Proyecto').val());
+				location.href="añadirColaboradoresProyecto.php";
 
             } else {alert(json[0].error + " no se agrego correctamente..");
         }
@@ -66,4 +68,144 @@ function insertarProyecto() {
 
 }
 
+function insertarColaboradoresProyecto(){
+    var formData = new FormData();
+    formData.append('accion','insertarColaboradoresProyecto');
+    formData.append('accion','insertarColaboradoresProyecto');
+}
 
+function cargarDepartamentos(){
+    var formData = new FormData();
+    formData.append('accion','cargarDepartamentos');
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            htmlM="";
+            html="<option value='0'>Todos los departamentos</option>";
+            for(i=0; i<json.length;i++){
+                html += '<option value="'+json[i].idD+'">'+json[i].nombreD+'</option>';
+            }  
+
+            $("#departamentoSelect").html(html);
+        }
+    });
+
+}
+
+function cargarSkills(){
+    var formData = new FormData();
+    formData.append('accion','cargarHabilidades');
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            htmlM="";
+            html="<option value='0'>Todas las habilidades</option>";
+            for(i=0; i<json.length;i++){
+                html += '<option value="'+json[i].idH+'">'+json[i].nombreH+'</option>';
+            }  
+
+            $("#habilidadSelect").html(html);
+            
+        }
+    });
+
+}
+
+function cargarColaboradoresFiltro(){
+
+    var formData = new FormData();
+    formData.append('accion','cargarColaboradoresFiltro');
+    formData.append('nombreUsuario', $('#nombreU').val());
+    formData.append('departamento', $('#departamentoSelect').val()); 
+    formData.append('habilidad', $('#habilidadSelect').val()); 
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            html="";            
+            for(i=0; i<json.length;i++){
+                //variables = '"'+json[i].nomUsu+" "+json[i].apeUsu+',"'+json[i].nomD+'"';
+                localStorage.setItem(i.toString(),JSON.stringify(json[i]))
+                html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="agregarColaborador('+i+')">Agregar</button></td></tr>';
+                                                                
+            }  
+            $("#tablaPosibles").html(html);
+            
+        }
+    });
+}
+
+function agregarColaborador(i){
+    json = JSON.parse(localStorage.getItem(i.toString()));
+    listaPosiblesColaboradores.push(json);
+    html="";
+    for(i=0; i<listaPosiblesColaboradores.length;i++){
+        html += '<tr><td>'+listaPosiblesColaboradores[i].nomUsu+" "+listaPosiblesColaboradores[i].apeUsu+'</td><td>'+listaPosiblesColaboradores[i].nomD+'</td><td>'+listaPosiblesColaboradores[i].nomS+'</td><td>'+listaPosiblesColaboradores[i].nomM+" "+listaPosiblesColaboradores[i].apeM+ '</td><td><button type="button" onclick="eliminarLista('+i+')" class="btn btn-outline-success">Eliminar</button></td></tr>';
+                                                                
+    }  
+    $("#tablaAgregados").html(html);
+}
+
+function eliminarLista(cont){
+    listaPosiblesColaboradores.splice(cont, 1);
+    html="";
+    for(i=0; i<listaPosiblesColaboradores.length;i++){
+        html += '<tr><td>'+listaPosiblesColaboradores[i].nomUsu+" "+listaPosiblesColaboradores[i].apeUsu+'</td><td>'+listaPosiblesColaboradores[i].nomD+'</td><td>'+listaPosiblesColaboradores[i].nomS+'</td><td>'+listaPosiblesColaboradores[i].nomM+" "+listaPosiblesColaboradores[i].apeM+ '</td><td><button type="button" onclick="eliminarLista('+i+')" class="btn btn-outline-success">Eliminar</button></td></tr>';
+                                                                
+    }  
+    $("#tablaAgregados").html(html);
+}
+
+
+
+function agregarColaboradoresProyecto(){
+    var formData = new FormData();
+    formData.append('accion','agregarColaboradoresProyecto');
+    formData.append('json', JSON.stringify(listaPosiblesColaboradores));
+    formData.append('idProyecto', localStorage.getItem("idProyecto"));
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            location.href="dashProyectos.php"
+            
+        }
+    });
+}

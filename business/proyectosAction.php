@@ -34,11 +34,28 @@
       } else if($accion == 'mostrar_usuario') {
               $business->mostrar_usuarios();
 
- } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
+      } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
 
-   
+      if($accion=="cargarDepartamentos"){
+        echo $business->cargarDepartamentos();
+      }
+        if($accion=="cargarHabilidades"){
+        echo $business->cargarHabilidades();
+      }
 
+      if($accion=="cargarColaboradoresFiltro"){
+        $nombre=$_POST['nombreUsuario']; 
+       $departamento=$_POST['departamento']; 
+       $habilidad=$_POST['habilidad']; 
+        echo $business->cargarColaboradoresFiltro($nombre,$departamento,$habilidad);
+      }
 
+      if($accion=="agregarColaboradoresProyecto"){
+        $json=$_POST['json']; 
+        $json = json_decode($json,true);
+        $idProyecto = $_POST['idProyecto'];
+        echo $business->agregarColaboradoresProyecto($json,$idProyecto);
+      }
 
 
 ?>

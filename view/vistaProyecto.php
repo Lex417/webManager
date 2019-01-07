@@ -34,7 +34,7 @@
 															Crear Proyecto
 														</div>
 														<div class="card-body background-white">
-															<form  id="vistaFormulario" method="post"  class="form-inline">
+															<form  id="vistaFormulario" method="post"  class="form-inline" action="#">
 																<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
 																	<div class="row">
 																		<div class="col-9 col-sm-9 col-md-9 col-xs-12" style="display: flex;">
@@ -105,7 +105,7 @@
 																	</div>
 																	<div class="row">
 																		<div class="col-12 col-sm-12 col-md-12 col-xs-12 text-right">
-																			<button  onclick="insertarProyecto();" type="submit" id="#modalForm" class="btn btn-outline-success">Guardar cambios</button>
+																			<button  onclick="insertarProyecto();"  id="#modalForm" class="btn btn-outline-success">Guardar cambios</button>
 
 																		</div>
 																	</div>
@@ -130,58 +130,3 @@
 	</body>  
 </html>
 
-<!--
-	Estilo de tabla
-<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-											<div class="card text-white bg-primary mb-5p">
-											<div class="card-header text-center">
-												Recursos Afines
-											</div>
-											<div class="card-body background-white">
-												<div class="table-responsive">
-													<table class="table">
-														<thead class="thead-light">
-															<tr>
-																<th scope="col">Nombre</th>
-																<th scope="col">Departamento</th>
-																<th scope="col">Tiempo Dedicado</th>
-																<th scope="col">Manager</th>
-																<th scope="col">Acciones</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<th>###</th>
-																<td>###</td>
-																<td>###</td>
-																<td>###</td>
-																<td>
-																	<a href="">Ver</a> | <a href="">Editar</a>
-																</td>
-															</tr>
-															<tr>
-																<th>###</th>
-																<td>###</td>
-																<td>###</td>
-																<td>###</td>
-																<td>
-																	<a href="">Ver</a> | <a href="">Editar</a>
-																</td>
-															</tr>
-															<tr>
-																<th>###</th>
-																<td>###</td>
-																<td>###</td>
-																<td>###</td>
-																<td>
-																	<a href="">Ver</a> | <a href="">Editar</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-
--->
