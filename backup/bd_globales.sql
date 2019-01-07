@@ -231,6 +231,15 @@ ALTER TABLE `tabla_usuario_proyecto`
   ADD CONSTRAINT `tabla_usuario_proyecto_ibfk_2` FOREIGN KEY (`id_Proyecto`) REFERENCES `tabla_proyecto` (`id_Proyecto`);
 COMMIT;
 
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_colaborador_manager` AS
+	SELECT `tu`.`nombre_Usuario` AS `nombre_Usuario`,
+		   `tm`. `nombre_Manager` AS `nombre_Manager`,
+		   `td`. `id_Departamento` AS `id_Departamento`
+	FROM 	(`tabla_Usuario` `tu` join `tabla_Manager` `tm` join `tabla_Departamento` `td`)
+	WHERE (`tm`.`id_Manager` = `tu`.`id_Manager`) AND (`td`.`id_Departamento` = `tm`.`id_Departamento`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

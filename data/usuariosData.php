@@ -50,4 +50,6 @@ class usuariosData {
         }
          echo json_encode($lista_usuarios);
     }
+
+
 }
