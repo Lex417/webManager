@@ -163,5 +163,44 @@ function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_bo
 
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
 
+function getQueryVariable() {
+    //ESTE METODO TOMA EL URL DE LA PAGINA Y OBTINE EL VALOR DEL PARAMETRO ID QUE NECESITAMOS PARA BUSCAR EL PROYECTO POR SU ID.
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == "id") {
+            return pair[1];
+        }
+    }
+    return false;
+ }
+function obtenerVistaUsuariosPorProyecto() {
+    var formData = new FormData();
+    formData.append('accion', 'mostrar_usuarios_proyecto');
+     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+    formData.append('id',getQueryVariable());
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+             var json = JSON.parse(respuesta);
+             console.log(json);
+            var t_body = document.getElementById('t_body_empleados_proyecto');
+            for(i=0; i<json.length;i++) {
+                llenar_fila(json, t_body);
+            }
+        }
+    });
+}

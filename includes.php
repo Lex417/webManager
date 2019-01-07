@@ -3,6 +3,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    
     <!-- Fontfaces CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="chosen.min.css">
+    <link rel="stylesheet" href="datepicker/css/datepicker.css">
+    <link href="css/template.css" rel="stylesheet" media="all"> 
+
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">

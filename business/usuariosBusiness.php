@@ -21,6 +21,12 @@ class usuariosBusiness {
     function mostrar_vista_colaborador_manager() {
         return $this->data->vista_colaborador_manager();
     }
+<<<<<<< HEAD
+    function obtener_colaboradores_proyecto($id){
+        return $this->data->obtener_colaboradores_proyecto($id);
+    }
+=======
+>>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
 
 }
 ?>

@@ -26,7 +26,11 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="dashProyectos.php">
+
+                                <i class="fas fa-tachometer-alt" ></i>Dashboard</a>
+
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+
                             <ul id="proyectoMM"class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 
                             </ul>
