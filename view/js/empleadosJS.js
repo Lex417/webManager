@@ -163,6 +163,10 @@ function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_bo
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
 
 function getQueryVariable() {
     //ESTE METODO TOMA EL URL DE LA PAGINA Y OBTINE EL VALOR DEL PARAMETRO ID QUE NECESITAMOS PARA BUSCAR EL PROYECTO POR SU ID.
