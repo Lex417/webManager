@@ -1,236 +1,257 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-01-2019 a las 20:59:30
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+DROP DATABASE IF EXISTS `bd_globales` ;
 
---
--- Base de datos: `bd_globales`
---
+CREATE  DATABASE  IF NOT EXISTS `bd_globales` CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bd_globales` ;
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `tabla_departamento`
---
 
-CREATE TABLE `tabla_departamento` (
-  `id_Departamento` int(3) NOT NULL,
-  `nombre_Departamento` varchar(45) NOT NULL,
-  `id_Manager_Departamento` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ---------------------------------------------------
+--                  Tabla_Managers
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Manager` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Manager`(
+	`id_Manager`		VARCHAR(45) NOT NULL,
+	`nombre_Manager`	VARCHAR(45) NOT NULL,
+	`apellido_Manager`	VARCHAR(45) NOT NULL,
+	`puesto_Manager`	VARCHAR(45) NOT NULL,
+	
+	PRIMARY KEY(`id_Manager`))
+ENGINE = InnoDB	
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
--- --------------------------------------------------------
+-- ---------------------------------------------------
+--                  Tabla_Departamento
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Departamento` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Departamento`(
+    `id_Departamento`       INT(3) NOT NULL AUTO_INCREMENT,
+    `nombre_Departamento`   VARCHAR(45) NOT NULL,
+    `id_Manager_Departamento` VARCHAR(45) NOT NULL,
 
---
--- Estructura de tabla para la tabla `tabla_departamento_usuario`
---
+    PRIMARY KEY(`id_Departamento`),
+	FOREIGN KEY(`id_Manager_Departamento`) REFERENCES `bd_globales`.`tabla_Manager`(`id_Manager`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE `tabla_departamento_usuario` (
-  `id_Departamento` int(3) NOT NULL,
-  `id_usuario` varchar(20) NOT NULL,
-  `fecha_Departamento` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ---------------------------------------------------
+--                  Tabla_Usuarios
+-- ---------------------------------------------------
+-- tipo_Usuario : 0 -> Invitado, 1 -> Colaborador, -> 2 Manager
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Usuario` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Usuario`(
+    `id_Usuario`        VARCHAR(45) NOT NULL,
+    `nombre_Usuario`    VARCHAR(45) NOT NULL,
+    `apellido_Usuario`  VARCHAR(45) NOT NULL,
+	`password`			VARCHAR(10) NOT NULL,
+    `puesto_Usuario`    VARCHAR(45) NOT NULL,
+    `tipo_Usuario`      INT(1) NOT NULL,
+    `estado_Usuario`    VARCHAR(45) NOT NULL,
+	`id_Manager`		VARCHAR(45) NULL,
+    
+    PRIMARY KEY(`id_Usuario`),
+	FOREIGN KEY(`id_Manager`) REFERENCES `bd_globales`.`tabla_Manager`(`id_Manager`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `tabla_proyecto`
---
+-- ---------------------------------------------------
+--                  Tabla_Proyecto
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Proyecto` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Proyecto`(
+    `id_Proyecto`       INT(10) NOT NULL,
+    `nombre_Proyecto`   VARCHAR(45) NOT NULL,
+    `inicio_Proyecto`   DATE NOT NULL,
+    `fin_Proyecto`      DATE NOT NULL,
+    `desc_Proyecto`     VARCHAR(45) NOT NULL,
+    `estado_Proyecto`   VARCHAR(45) NOT NULL,
+    `id_Proyect_Manager` VARCHAR(45) NOT NULL,
 
-CREATE TABLE `tabla_proyecto` (
-  `id_Proyecto` int(10) NOT NULL,
-  `nombre_Proyecto` varchar(45) NOT NULL,
-  `inicio_Proyecto` date NOT NULL,
-  `fin_Proyecto` date NOT NULL,
-  `desc_Proyecto` varchar(45) NOT NULL,
-  `estado_Proyecto` varchar(45) NOT NULL,
-  `id_Proyect_Manager` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    PRIMARY KEY (`id_Proyecto`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
---
--- Volcado de datos para la tabla `tabla_proyecto`
---
 
-INSERT INTO `tabla_proyecto` (`id_Proyecto`, `nombre_Proyecto`, `inicio_Proyecto`, `fin_Proyecto`, `desc_Proyecto`, `estado_Proyecto`, `id_Proyect_Manager`) VALUES
-(0, 'Proyecto RUBY', '2019-01-03', '2019-01-24', 'sdsdsds', 'inactivo', 1),
-(1, 'Proyecto JAVA', '2019-01-03', '2019-01-24', 'sdsdsds', 'activo', 1),
-(2, 'Proyecto C++', '2019-01-24', '2019-02-01', 'dddddd', 'activo', 1);
+-- ---------------------------------------------------
+--                  Tabla_Skill
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Skill` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Skill`(
+    `id_Skill`      INT(3) NOT NULL AUTO_INCREMENT,
+    `nombre_Skill`  VARCHAR(45) NOT NULL,
 
--- --------------------------------------------------------
+    PRIMARY KEY(`id_Skill`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
---
--- Estructura de tabla para la tabla `tabla_skill`
---
+-- ---------------------------------------------------
+--               Tabla_Skill_Usuario
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Skill_Usuario` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Skill_Usuario`(
+    `id_Skill`      INT(3) NULL,
+    `id_Usuario`    VARCHAR(20) NOT NULL,
 
-CREATE TABLE `tabla_skill` (
-  `id_Skill` int(3) NOT NULL,
-  `nombre_Skill` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    FOREIGN KEY(`id_Skill`) REFERENCES `bd_globales`.`tabla_Skill`(`id_Skill`),
+    FOREIGN KEY(`id_Usuario`) REFERENCES `bd_globales`.`tabla_Usuario`(`id_Usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
--- --------------------------------------------------------
+-- ---------------------------------------------------
+--            Tabla_Departamento_Usuario
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Departamento_Usuario` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Departamento_Usuario`(
+    `id_Departamento`   INT(3) NOT NULL,
+    `id_Usuario`        VARCHAR(20) NOT NULL,
+    `fecha_Departamento` DATE NOT NULL,
 
---
--- Estructura de tabla para la tabla `tabla_skill_usuario`
---
+    FOREIGN  KEY(`id_Departamento`) REFERENCES `bd_globales`.`tabla_Departamento`(`id_Departamento`),
+    FOREIGN KEY(`id_Usuario`) REFERENCES `bd_globales`.`tabla_Usuario`(`id_Usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE `tabla_skill_usuario` (
-  `id_Skill` int(3) DEFAULT NULL,
-  `id_Usuario` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ---------------------------------------------------
+--            Tabla_Usuario_Proyecto
+-- ---------------------------------------------------
+DROP TABLE IF EXISTS `bd_globales`.`tabla_Usuario_Proyecto` ;
+CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Usuario_Proyecto`(
+    `id_Usuario`    VARCHAR(20) NOT NULL,
+    `id_Proyecto`   INT(10) NOT NULL,
+    `tiempo_Dedicado` VARCHAR(45) NOT NULL,
 
--- --------------------------------------------------------
+    FOREIGN KEY(`id_Usuario`) REFERENCES `bd_globales`.`tabla_Usuario`(`id_Usuario`),
+    FOREIGN KEY(`id_Proyecto`) REFERENCES `bd_globales`.`tabla_Proyecto`(`id_Proyecto`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
---
--- Estructura de tabla para la tabla `tabla_usuario`
---
+-- ---------------------------------------------------
+--            		INSERTCIONES
+-- ---------------------------------------------------
+-- ---------------------------------------------------
+--            			ADMIN
+-- ---------------------------------------------------
+INSERT INTO `tabla_Usuario` VALUES ('123', 'admin', 'admin', 'root', '--' ,2 ,'--', NULL);
 
-CREATE TABLE `tabla_usuario` (
-  `id_Usuario` varchar(45) NOT NULL,
-  `nombre_Usuario` varchar(45) NOT NULL,
-  `password` varchar(10) NOT NULL,
-  `apellido_Usuario` varchar(45) NOT NULL,
-  `puesto_Usuario` varchar(45) NOT NULL,
-  `tipo_Usuario` varchar(45) NOT NULL,
-  `estado_Usuario` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ---------------------------------------------------
+--            	  	  MANAGERS
+-- ---------------------------------------------------
+INSERT INTO `tabla_Manager` VALUES ('121340567', 'Robin', 'Wallace', 'Develop');
+INSERT INTO `tabla_Manager` VALUES ('134350983', 'Marthin', 'Gonz', 'QA');
+INSERT INTO `tabla_Manager` VALUES ('140098323', 'Roberth', 'Smith', 'Tech Leader');
+INSERT INTO `tabla_Manager` VALUES ('159877662', 'Laura', 'Mendoza', 'Support');
 
--- --------------------------------------------------------
+-- ---------------------------------------------------
+--            	  	DEPARTAMENTOS
+-- ---------------------------------------------------
+INSERT INTO `tabla_Departamento` VALUES (DEFAULT, 'Develop','121340567');
+INSERT INTO `tabla_Departamento` VALUES (DEFAULT, 'QA','134350983');
+INSERT INTO `tabla_Departamento` VALUES (DEFAULT, 'Tech Leadership','140098323');
+INSERT INTO `tabla_Departamento` VALUES (DEFAULT, 'Support','159877662');
 
---
--- Estructura de tabla para la tabla `tabla_usuario_proyecto`
---
 
-CREATE TABLE `tabla_usuario_proyecto` (
-  `id_Usuario` varchar(20) NOT NULL,
-  `id_Proyecto` int(10) NOT NULL,
-  `tiempo_Dedicado` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ---------------------------------------------------
+--            	  	Skills
+-- ---------------------------------------------------
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'JavaScript');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'C++');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'C#');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'Java');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'Python');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'C');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'Ruby');
+INSERT INTO `tabla_Skill` VALUES (DEFAULT, 'Kobol');
 
--- --------------------------------------------------------
 
---
--- Estructura Stand-in para la vista `vista_proyectos_activos`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `vista_proyectos_activos` (
-`id_Proyecto` int(10)
-,`nombre_Proyecto` varchar(45)
-,`inicio_Proyecto` date
-,`fin_Proyecto` date
-,`desc_Proyecto` varchar(45)
-,`estado_Proyecto` varchar(45)
-,`id_Proyect_Manager` int(11)
-);
+-- ---------------------------------------------------
+--            	  EMPLEADOS NORMALES
+-- ---------------------------------------------------
+INSERT INTO `tabla_Usuario` VALUES ('116290648', 'Eithan', 'Mendez Mendez', 'qwsa', 'Programador' , 1 ,'Ocupado','121340567');
+INSERT INTO `tabla_Usuario` VALUES ('120934505', 'Jack', 'Williams', 'wqsa1223', 'Programador' , 1 ,'Ocupado','121340567');
 
--- --------------------------------------------------------
+INSERT INTO `tabla_Usuario` VALUES ('102930934', 'Adam', 'Johnson', 'ssdder', 'Soporte Tecnico' , 1 ,'Disponible','159877662');
+INSERT INTO `tabla_Usuario` VALUES ('234454556', 'Aaron', 'Garcia', 'gbnhju8', 'Soporte Tecnico' , 1 ,'Disponible','159877662'); 
+INSERT INTO `tabla_Usuario` VALUES ('133344566', 'Ahmed', 'Rodriguez', 'sdwe234', 'Soporte Tecnico' , 1 ,'Disponible','159877662');
 
---
--- Estructura para la vista `vista_proyectos_activos`
---
-DROP TABLE IF EXISTS `vista_proyectos_activos`;
+INSERT INTO `tabla_Usuario` VALUES ('343456654', 'Alexander', 'Miller', 'd4f55', 'Aseguramiento de calidad' ,1 ,'Nuevo ingreso','134350983');
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_proyectos_activos`  AS  select `tabla_proyecto`.`id_Proyecto` AS `id_Proyecto`,`tabla_proyecto`.`nombre_Proyecto` AS `nombre_Proyecto`,`tabla_proyecto`.`inicio_Proyecto` AS `inicio_Proyecto`,`tabla_proyecto`.`fin_Proyecto` AS `fin_Proyecto`,`tabla_proyecto`.`desc_Proyecto` AS `desc_Proyecto`,`tabla_proyecto`.`estado_Proyecto` AS `estado_Proyecto`,`tabla_proyecto`.`id_Proyect_Manager` AS `id_Proyect_Manager` from `tabla_proyecto` where (`tabla_proyecto`.`estado_Proyecto` = 'activo') ;
+INSERT INTO `tabla_Usuario` VALUES ('121340567', 'Robin', 'Wallace', 'man1', 'Manager',2,'Ocupado', NULL);
+INSERT INTO `tabla_Usuario` VALUES ('134350983', 'Marthin', 'Gonz', 'man2', 'Manager',2,'Disponible', NULL);
+INSERT INTO `tabla_Usuario` VALUES ('140098323', 'Roberth', 'Smith', 'man3', 'Manager',2,'Disponible', NULL);
+INSERT INTO `tabla_Usuario` VALUES ('159877662', 'Laura', 'Mendoza', 'man4', 'Manager',2,'Disponible', NULL);
 
---
--- Índices para tablas volcadas
---
+-- ---------------------------------------------------
+--            	TABLAS INTERMEDIAS
+-- ---------------------------------------------------
+INSERT INTO `tabla_Skill_Usuario` VALUES (1,'116290648');
+INSERT INTO `tabla_Skill_Usuario` VALUES (2,'116290648');
+INSERT INTO `tabla_Skill_Usuario` VALUES (3,'116290648');
 
---
--- Indices de la tabla `tabla_departamento`
---
-ALTER TABLE `tabla_departamento`
-  ADD PRIMARY KEY (`id_Departamento`);
+INSERT INTO `tabla_Skill_Usuario` VALUES (8,'102930934');
+INSERT INTO `tabla_Skill_Usuario` VALUES (1,'102930934');
+INSERT INTO `tabla_Skill_Usuario` VALUES (8,'102930934');
 
---
--- Indices de la tabla `tabla_departamento_usuario`
---
-ALTER TABLE `tabla_departamento_usuario`
-  ADD KEY `id_Departamento` (`id_Departamento`),
-  ADD KEY `id_usuario` (`id_usuario`);
+INSERT INTO `tabla_Skill_Usuario` VALUES (7,'234454556');
+INSERT INTO `tabla_Skill_Usuario` VALUES (8,'133344566');
+INSERT INTO `tabla_Skill_Usuario` VALUES (6,'121340567');
+INSERT INTO `tabla_Skill_Usuario` VALUES (5,'134350983');
 
---
--- Indices de la tabla `tabla_proyecto`
---
-ALTER TABLE `tabla_proyecto`
-  ADD PRIMARY KEY (`id_Proyecto`);
+INSERT INTO `tabla_Skill_Usuario` VALUES (3,'159877662');
+INSERT INTO `tabla_Skill_Usuario` VALUES (2,'159877662');
+INSERT INTO `tabla_Skill_Usuario` VALUES (2,'159877662');
+INSERT INTO `tabla_Skill_Usuario` VALUES (3,'121340567');
 
---
--- Indices de la tabla `tabla_skill`
---
-ALTER TABLE `tabla_skill`
-  ADD PRIMARY KEY (`id_Skill`);
+INSERT INTO `tabla_Departamento_Usuario` VALUES(1, '116290648', '06-01-2019');
+INSERT INTO `tabla_Departamento_Usuario` VALUES(1, '120934505', '06-01-2019');
 
---
--- Indices de la tabla `tabla_skill_usuario`
---
-ALTER TABLE `tabla_skill_usuario`
-  ADD KEY `id_Skill` (`id_Skill`),
-  ADD KEY `id_Usuario` (`id_Usuario`);
+INSERT INTO `tabla_Departamento_Usuario` VALUES(4, '102930934', '06-01-2019');
+INSERT INTO `tabla_Departamento_Usuario` VALUES(4, '234454556', '06-01-2019');
+INSERT INTO `tabla_Departamento_Usuario` VALUES(4, '133344566', '06-01-2019');
 
---
--- Indices de la tabla `tabla_usuario`
---
-ALTER TABLE `tabla_usuario`
-  ADD PRIMARY KEY (`id_Usuario`);
+INSERT INTO `tabla_Departamento_Usuario` VALUES(2, '343456654', '06-01-2019');
 
---
--- Indices de la tabla `tabla_usuario_proyecto`
---
-ALTER TABLE `tabla_usuario_proyecto`
-  ADD KEY `id_Usuario` (`id_Usuario`),
-  ADD KEY `id_Proyecto` (`id_Proyecto`);
+-- ------------------------------------------------------------------------------------------------------------
+--            								VISTAS
+-- ------------------------------------------------------------------------------------------------------------
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_proyectos_activos`  AS
+  SELECT `tabla_proyecto`.`id_Proyecto` AS `id_Proyecto`,
+		 `tabla_proyecto`.`nombre_Proyecto` AS `nombre_Proyecto`,
+		 `tabla_proyecto`.`inicio_Proyecto` AS `inicio_Proyecto`,
+		 `tabla_proyecto`.`fin_Proyecto` AS `fin_Proyecto`,
+		 `tabla_proyecto`.`desc_Proyecto` AS `desc_Proyecto`,
+		 `tabla_proyecto`.`estado_Proyecto` AS `estado_Proyecto`,
+		 `tabla_proyecto`.`id_Proyect_Manager` AS `id_Proyect_Manager`
+	FROM `tabla_proyecto` WHERE (`tabla_proyecto`.`estado_Proyecto` = 'activo') ;
+	
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_colaborador_manager` AS
+	SELECT `tu`.`nombre_Usuario` AS `nombre_Usuario`,
+		   `tm`. `nombre_Manager` AS `nombre_Manager`,
+		   `td`. `id_Departamento` AS `id_Departamento`
+	FROM 	(`tabla_Usuario` `tu` join `tabla_Manager` `tm` join `tabla_Departamento` `td`)
+	WHERE (`tm`.`id_Manager` = `tu`.`id_Manager`) AND (`tm`.`id_Manager` = `td`.`id_Manager_Departamento`);
+	
+	
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW vista_mostrar_todo_filtro AS 
+	SELECT  tabla_usuario.nombre_Usuario,
+		      tabla_usuario.apellido_Usuario,
+		      tabla_usuario.id_Usuario,
+			    tabla_departamento.nombre_Departamento,
+			    tabla_manager.nombre_Manager,
+			    tabla_manager.apellido_Manager,
+			    tabla_skill.nombre_Skill
+			
+	FROM 	tabla_usuario INNER JOIN tabla_skill_usuario ON tabla_usuario.id_Usuario=tabla_skill_usuario.id_Usuario 
+			INNER JOIN tabla_skill ON tabla_skill.id_Skill=tabla_skill_usuario.id_Skill 
+			INNER JOIN tabla_departamento_usuario ON tabla_usuario.id_Usuario=tabla_departamento_usuario.id_Usuario 
+			INNER JOIN tabla_departamento ON tabla_departamento.id_Departamento=tabla_departamento_usuario.id_Departamento 
+			INNER JOIN tabla_manager ON tabla_manager.id_Manager=tabla_departamento.id_Manager_Departamento
+-- ------------------------------------------------------------------------------------------------------------
+--            								VISTAS
+-- ------------------------------------------------------------------------------------------------------------
 
---
--- AUTO_INCREMENT de la tabla `tabla_skill`
---
-ALTER TABLE `tabla_skill`
-  MODIFY `id_Skill` int(3) NOT NULL AUTO_INCREMENT;
 
---
--- Restricciones para tablas volcadas
---
 
---
--- Filtros para la tabla `tabla_departamento_usuario`
---
-ALTER TABLE `tabla_departamento_usuario`
-  ADD CONSTRAINT `tabla_departamento_usuario_ibfk_1` FOREIGN KEY (`id_Departamento`) REFERENCES `tabla_departamento` (`id_Departamento`),
-  ADD CONSTRAINT `tabla_departamento_usuario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `tabla_usuario` (`id_Usuario`);
 
---
--- Filtros para la tabla `tabla_skill_usuario`
---
-ALTER TABLE `tabla_skill_usuario`
-  ADD CONSTRAINT `tabla_skill_usuario_ibfk_1` FOREIGN KEY (`id_Skill`) REFERENCES `tabla_skill` (`id_Skill`),
-  ADD CONSTRAINT `tabla_skill_usuario_ibfk_2` FOREIGN KEY (`id_Usuario`) REFERENCES `tabla_usuario` (`id_Usuario`);
-
---
--- Filtros para la tabla `tabla_usuario_proyecto`
---
-ALTER TABLE `tabla_usuario_proyecto`
-  ADD CONSTRAINT `tabla_usuario_proyecto_ibfk_1` FOREIGN KEY (`id_Usuario`) REFERENCES `tabla_usuario` (`id_Usuario`),
-  ADD CONSTRAINT `tabla_usuario_proyecto_ibfk_2` FOREIGN KEY (`id_Proyecto`) REFERENCES `tabla_proyecto` (`id_Proyecto`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
