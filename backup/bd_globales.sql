@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Manager`(
 	`nombre_Manager`	VARCHAR(45) NOT NULL,
 	`apellido_Manager`	VARCHAR(45) NOT NULL,
 	`puesto_Manager`	VARCHAR(45) NOT NULL,
-	
+
 	PRIMARY KEY(`id_Manager`))
-ENGINE = InnoDB	
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8 COLLATE utf8_general_ci;
 
 -- ---------------------------------------------------
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `bd_globales`.`tabla_Usuario`(
     `tipo_Usuario`      INT(1) NOT NULL,
     `estado_Usuario`    VARCHAR(45) NOT NULL,
 	`id_Manager`		VARCHAR(45) NULL,
-    
+
     PRIMARY KEY(`id_Usuario`),
 	FOREIGN KEY(`id_Manager`) REFERENCES `bd_globales`.`tabla_Manager`(`id_Manager`))
 ENGINE = InnoDB
@@ -172,7 +172,7 @@ INSERT INTO `tabla_Usuario` VALUES ('116290648', 'Eithan', 'Mendez Mendez', 'qws
 INSERT INTO `tabla_Usuario` VALUES ('120934505', 'Jack', 'Williams', 'wqsa1223', 'Programador' , 1 ,'Ocupado','121340567');
 
 INSERT INTO `tabla_Usuario` VALUES ('102930934', 'Adam', 'Johnson', 'ssdder', 'Soporte Tecnico' , 1 ,'Disponible','159877662');
-INSERT INTO `tabla_Usuario` VALUES ('234454556', 'Aaron', 'Garcia', 'gbnhju8', 'Soporte Tecnico' , 1 ,'Disponible','159877662'); 
+INSERT INTO `tabla_Usuario` VALUES ('234454556', 'Aaron', 'Garcia', 'gbnhju8', 'Soporte Tecnico' , 1 ,'Disponible','159877662');
 INSERT INTO `tabla_Usuario` VALUES ('133344566', 'Ahmed', 'Rodriguez', 'sdwe234', 'Soporte Tecnico' , 1 ,'Disponible','159877662');
 
 INSERT INTO `tabla_Usuario` VALUES ('343456654', 'Alexander', 'Miller', 'd4f55', 'Aseguramiento de calidad' ,1 ,'Nuevo ingreso','134350983');
@@ -224,7 +224,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 		 `tabla_proyecto`.`estado_Proyecto` AS `estado_Proyecto`,
 		 `tabla_proyecto`.`id_Proyect_Manager` AS `id_Proyect_Manager`
 	FROM `tabla_proyecto` WHERE (`tabla_proyecto`.`estado_Proyecto` = 'activo') ;
-	
+
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_colaborador_manager` AS
 	SELECT `tu`.`nombre_Usuario` AS `nombre_Usuario`,
@@ -232,26 +232,22 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 		   `td`. `id_Departamento` AS `id_Departamento`
 	FROM 	(`tabla_Usuario` `tu` join `tabla_Manager` `tm` join `tabla_Departamento` `td`)
 	WHERE (`tm`.`id_Manager` = `tu`.`id_Manager`) AND (`tm`.`id_Manager` = `td`.`id_Manager_Departamento`);
-	
-	
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW vista_mostrar_todo_filtro AS 
+
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW vista_mostrar_todo_filtro AS
 	SELECT  tabla_usuario.nombre_Usuario,
-		      tabla_usuario.apellido_Usuario,
-		      tabla_usuario.id_Usuario,
-			    tabla_departamento.nombre_Departamento,
-			    tabla_manager.nombre_Manager,
-			    tabla_manager.apellido_Manager,
-			    tabla_skill.nombre_Skill
-			
-	FROM 	tabla_usuario INNER JOIN tabla_skill_usuario ON tabla_usuario.id_Usuario=tabla_skill_usuario.id_Usuario 
-			INNER JOIN tabla_skill ON tabla_skill.id_Skill=tabla_skill_usuario.id_Skill 
-			INNER JOIN tabla_departamento_usuario ON tabla_usuario.id_Usuario=tabla_departamento_usuario.id_Usuario 
-			INNER JOIN tabla_departamento ON tabla_departamento.id_Departamento=tabla_departamento_usuario.id_Departamento 
+		    tabla_usuario.apellido_Usuario,
+		    tabla_usuario.id_Usuario,
+			tabla_departamento.nombre_Departamento,
+			tabla_manager.nombre_Manager,
+			tabla_manager.apellido_Manager,
+			tabla_skill.nombre_Skill
+
+	FROM 	tabla_usuario INNER JOIN tabla_skill_usuario ON tabla_usuario.id_Usuario=tabla_skill_usuario.id_Usuario
+			INNER JOIN tabla_skill ON tabla_skill.id_Skill=tabla_skill_usuario.id_Skill
+			INNER JOIN tabla_departamento_usuario ON tabla_usuario.id_Usuario=tabla_departamento_usuario.id_Usuario
+			INNER JOIN tabla_departamento ON tabla_departamento.id_Departamento=tabla_departamento_usuario.id_Departamento
 			INNER JOIN tabla_manager ON tabla_manager.id_Manager=tabla_departamento.id_Manager_Departamento
 -- ------------------------------------------------------------------------------------------------------------
 --            								VISTAS
 -- ------------------------------------------------------------------------------------------------------------
-
-
-
-
