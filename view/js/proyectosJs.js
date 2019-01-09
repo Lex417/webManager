@@ -15,7 +15,7 @@ function obtenerVistaPreviaProyecto(){
         processData: false,
         success: function(data)             
         {
-            //console.log(data);
+            console.log(data);
             json = JSON.parse(data);
             console.log(json);
             console.log(json.length);
