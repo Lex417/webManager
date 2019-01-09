@@ -33,7 +33,7 @@ function insertarUsuario() {
     formData.append('apellido', $('#apellido').val());
     formData.append('pass', $('#pass').val());
     formData.append('puesto', $('#select-puesto option:selected').text());
-    formData.append('tipo', $('#tipo').val());
+    formData.append('tipo', switch_tipo_colaborador($('#tipo').val()));
     formData.append('estado',$('#estado').val());
 
     $.ajax({
@@ -96,6 +96,23 @@ function eliminarUsuario() {
 //funcion de prueba
 function sayHello() {
     alert("holis");
+}
+
+// determina un valor numerico si el usuario es invitado, colaborador o manager
+function switch_tipo_colaborador($tipo) {
+    var res = "";
+    switch($tipo) {
+        case "Invitado":
+            res = "0";
+        break;
+        case "Colaborador":
+            res = "1";
+        break;
+        case "Manager":
+            res = "2";
+        break;
+    }
+return res;
 }
 
 
@@ -163,10 +180,6 @@ function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_bo
 
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
 
 function getQueryVariable() {
     //ESTE METODO TOMA EL URL DE LA PAGINA Y OBTINE EL VALOR DEL PARAMETRO ID QUE NECESITAMOS PARA BUSCAR EL PROYECTO POR SU ID.

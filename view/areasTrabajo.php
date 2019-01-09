@@ -29,7 +29,7 @@
                                 <div id="area_1" class="panel-collapse collapse">
                                     <ul class="list-group">
                                         <li style="list-style-type: none;">
-                                            <button type="button"  data-toggle="collapse" href="#collapse_uno" style="width: 310px;" class="btn btn-primary btn-lg">Aseguramiento de Calidad</button>
+                                            <button type="button"  data-toggle="collapse" href="#collapse_uno" style="width: 310px;" class="btn btn-primary btn-lg">Quality Assurance</button>
                                                 <div id="collapse_uno" class="panel-collapse collapse">
                                                     <table id="tabla_collapse_uno"  style="width:32%" class="table table-borderless table-striped table-earning">
                                                         <thead>

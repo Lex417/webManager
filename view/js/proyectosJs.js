@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-
-=======
 listaPosiblesColaboradores=[];
 contLista = 0;
->>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
 function obtenerVistaPreviaProyecto(){
 
     var formData = new FormData();
@@ -19,32 +15,23 @@ function obtenerVistaPreviaProyecto(){
         processData: false,
         success: function(data)             
         {
-            console.log(data);
+            //console.log(data);
             json = JSON.parse(data);
+            console.log(json);
             console.log(json.length);
             htmlM="";
             html="";
             for(i=0; i<json.length;i++){
-<<<<<<< HEAD
-                html += '<div class="col-lg-6"><div  class="au-card recent-report"><div class="au-card-inner"><h3 class="title-2">'+json[i].nomProyecto+'</h3><div style="padding: 20px"  class="chart-info"><div class="chart-info__left"><div  class="chart-note"><span class="dot dot--blue"></span><span>Nombre del Proyecto:</span></div><div class="chart-note mr-0"><span class="dot dot--green"></span><span>Fecha de Inicio:</span></div></div><div class="chart-info__right"><div class="chart-statis"><span class="label">'+json[i].nomProyecto+'</span></div><div class="chart-statis mr-0"><span class="label">'+json[i].fechaInicio+'</span></div></div></div><div class="centrarBoton"><center><button type="button" id='+json[i].idProyecto+' name="botonesDetallesProyectos" onclick="agregarEventos(); "  class="btn btn-primary">Ver detalles</button></center></div></div></div></div>';              
+                html += '<div class="col-lg-6"><div  class="au-card recent-report"><div class="au-card-inner"><h3 class="title-2">'+json[i].nomProyecto+'</h3><div style="padding: 20px"  class="chart-info"><div class="chart-info__left"><div  class="chart-note"><span class="dot dot--blue"></span><span>Nombre del Proyecto:</span></div><div class="chart-note mr-0"><span class="dot dot--green"></span><span>Fecha de Inicio:</span></div></div><div class="chart-info__right"><div class="chart-statis"><span class="label">'+json[i].nomProyecto+'</span></div><div class="chart-statis mr-0"><span class="label">'+json[i].fechaProyecto+'</span></div></div></div><div class="centrarBoton"><center><button onclick="mostrarFormularioEditaProyecto('+json[i].ideProyecto+');" type="button" class="btn btn-primary">Ver detalles</button></center></div></div></div></div>';              
                 htmlM+='<li><a href="#">'+json[i].nomProyecto+'</a></li>'
-
-                //var btn = document.getElementById(""+json[i].idProyecto);
-                //btn.addEventListener("click",mostrarID,true);
-               
-=======
-                html += '<div class="col-lg-6"><div  class="au-card recent-report"><div class="au-card-inner"><h3 class="title-2">'+json[i].nomProyecto+'</h3><div style="padding: 20px"  class="chart-info"><div class="chart-info__left"><div  class="chart-note"><span class="dot dot--blue"></span><span>Nombre del Proyecto:</span></div><div class="chart-note mr-0"><span class="dot dot--green"></span><span>Fecha de Inicio:</span></div></div><div class="chart-info__right"><div class="chart-statis"><span class="label">'+json[i].nomProyecto+'</span></div><div class="chart-statis mr-0"><span class="label">'+json[i].fechaProyecto+'</span></div></div></div><div class="centrarBoton"><center><button type="button" class="btn btn-primary">Ver detalles</button></center></div></div></div></div>';              
-                htmlM+='<li><a href="#">'+json[i].nomProyecto+'</a></li>'
->>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
             }  
 
             $("#proyectoC").html(html);
             $("#proyectoMM").html(htmlM);
             $("#proyectoMD").html(htmlM);
+            agregarEventos();
         }
     });
-
-    agregarEventos();
 }
 
 // INICIA CODIGO HECHO POR JOSE OCAMPO
@@ -93,7 +80,6 @@ function insertarProyecto() {
 
 }
 
-<<<<<<< HEAD
 function enviarIdProyecto(event){
     //TOMA EL ID DEL PROYECTO Y LO ENVIA A LA PAGINA DE DITAR DATOS PROYECTO.
     var obj = event.target;
@@ -108,6 +94,7 @@ function mostrarFormularioEditaProyecto(id){
 function getQueryVariable() {
     //ESTE METODO TOMA EL URL DE LA PAGINA Y OBTINE EL VALOR DEL PARAMETRO ID QUE NECESITAMOS PARA BUSCAR EL PROYECTO POR SU ID.
     var query = window.location.search.substring(1);
+    console.log(query);
     var vars = query.split("&");
     for (var i=0; i < vars.length; i++) {
         var pair = vars[i].split("=");
@@ -148,18 +135,8 @@ function editarDatosProyecto(){
     var formData = new FormData();
     formData.append('accion','editarDatosProyecto');
     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+    var s = getQueryVariable();
     formData.append('id',getQueryVariable());
-=======
-function insertarColaboradoresProyecto(){
-    var formData = new FormData();
-    formData.append('accion','insertarColaboradoresProyecto');
-    formData.append('accion','insertarColaboradoresProyecto');
-}
-
-function cargarDepartamentos(){
-    var formData = new FormData();
-    formData.append('accion','cargarDepartamentos');
->>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
     $.ajax({                        
         type: "POST",                 
         url: "../business/proyectosAction.php",                     
@@ -173,24 +150,23 @@ function cargarDepartamentos(){
         {
             console.log(data);
             json = JSON.parse(data);
-<<<<<<< HEAD
             console.log(json.length);
             htmlM="";
             html="";
             for(i=0; i<1;i++){
                
-                id_Proyecto.value= json[i].idProyecto;
-                nombre_Proyecto.value= json[i].nomProyecto;
-                inicio_Proyecto.value= json[i].fechaInicio;
-                fin_Proyecto.value= json[i].fechaFinal;
-                desc_Proyecto.value= json[i].descripProyecto;
-                if(json[i].estado_Proyecto=="activo"){
-                    estado_activo.setAttribute("selected","selected");
+                 id_Proyecto.value= json[i].idProyecto;
+                 nombre_Proyecto.value= json[i].nomProyecto;
+                 inicio_Proyecto.value= json[i].fechaInicio;
+                 fin_Proyecto.value= json[i].fechaFinal;
+                 desc_Proyecto.value= json[i].descripProyecto;
+                 if(json[i].estado_Proyecto=="activo"){
+                     estado_activo.setAttribute("selected","selected");
 
-                }else{
-                    estado_inactivo.setAttribute("selected","selected");
+                 }else{
+                     estado_inactivo.setAttribute("selected","selected");
 
-                }
+                 }
                 
 
             }  
@@ -377,103 +353,6 @@ function insertarProyecto() {
 
 
 }
-=======
-            htmlM="";
-            html="<option value='0'>Todos los departamentos</option>";
-            for(i=0; i<json.length;i++){
-                html += '<option value="'+json[i].idD+'">'+json[i].nombreD+'</option>';
-            }  
-
-            $("#departamentoSelect").html(html);
-        }
-    });
-
-}
-
-function cargarSkills(){
-    var formData = new FormData();
-    formData.append('accion','cargarHabilidades');
-    $.ajax({                        
-        type: "POST",                 
-        url: "../business/proyectosAction.php",                     
-        data: formData, 
-        dataType: "html",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data)             
-        {
-            console.log(data);
-            json = JSON.parse(data);
-            htmlM="";
-            html="<option value='0'>Todas las habilidades</option>";
-            for(i=0; i<json.length;i++){
-                html += '<option value="'+json[i].idH+'">'+json[i].nombreH+'</option>';
-            }  
-
-            $("#habilidadSelect").html(html);
-            
-        }
-    });
-
-}
-
-function cargarColaboradoresFiltro(){
-
-    var formData = new FormData();
-    formData.append('accion','cargarColaboradoresFiltro');
-    formData.append('nombreUsuario', $('#nombreU').val());
-    formData.append('departamento', $('#departamentoSelect').val()); 
-    formData.append('habilidad', $('#habilidadSelect').val()); 
-    $.ajax({                        
-        type: "POST",                 
-        url: "../business/proyectosAction.php",                     
-        data: formData, 
-        dataType: "html",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data)             
-        {
-            console.log(data);
-            json = JSON.parse(data);
-            html="";            
-            for(i=0; i<json.length;i++){
-                //variables = '"'+json[i].nomUsu+" "+json[i].apeUsu+',"'+json[i].nomD+'"';
-                localStorage.setItem(i.toString(),JSON.stringify(json[i]))
-                html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="agregarColaborador('+i+')">Agregar</button></td></tr>';
-                                                                
-            }  
-            $("#tablaPosibles").html(html);
-            
-        }
-    });
-}
-
-function agregarColaborador(i){
-    json = JSON.parse(localStorage.getItem(i.toString()));
-    listaPosiblesColaboradores.push(json);
-    html="";
-    for(i=0; i<listaPosiblesColaboradores.length;i++){
-        html += '<tr><td>'+listaPosiblesColaboradores[i].nomUsu+" "+listaPosiblesColaboradores[i].apeUsu+'</td><td>'+listaPosiblesColaboradores[i].nomD+'</td><td>'+listaPosiblesColaboradores[i].nomS+'</td><td>'+listaPosiblesColaboradores[i].nomM+" "+listaPosiblesColaboradores[i].apeM+ '</td><td><button type="button" onclick="eliminarLista('+i+')" class="btn btn-outline-success">Eliminar</button></td></tr>';
-                                                                
-    }  
-    $("#tablaAgregados").html(html);
-}
-
-function eliminarLista(cont){
-    listaPosiblesColaboradores.splice(cont, 1);
-    html="";
-    for(i=0; i<listaPosiblesColaboradores.length;i++){
-        html += '<tr><td>'+listaPosiblesColaboradores[i].nomUsu+" "+listaPosiblesColaboradores[i].apeUsu+'</td><td>'+listaPosiblesColaboradores[i].nomD+'</td><td>'+listaPosiblesColaboradores[i].nomS+'</td><td>'+listaPosiblesColaboradores[i].nomM+" "+listaPosiblesColaboradores[i].apeM+ '</td><td><button type="button" onclick="eliminarLista('+i+')" class="btn btn-outline-success">Eliminar</button></td></tr>';
-                                                                
-    }  
-    $("#tablaAgregados").html(html);
-}
-
->>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
 
 
 function agregarColaboradoresProyecto(){

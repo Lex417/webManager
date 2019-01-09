@@ -1,30 +1,37 @@
 <?php
 
-class usuariosBusiness {
+include "usuariosBusiness.php";
 
-    private $data; 
+/* ---------PARAMETROS------------ */
+$accion=$_POST['accion'];
+$business=new usuariosBusiness();
+/* ------------------------------- */
 
-    function __construct() {
-        include "../data/usuariosData.php";
-        $this->data=new usuariosData();
-    }
+if($accion == 'insertar_usuario') {
+    $text = null;
+    if(isset($_POST['cedula']) &&
+       isset($_POST['nombre']) &&
+       isset($_POST['apellido']) &&
+       isset($_POST['pass']) &&
+       isset($_POST['puesto']) &&
+       isset($_POST['tipo']) &&
+       isset($_POST['estado'])) {
 
+        if($business->insertar_usuario($_POST['cedula'], $_POST['nombre'], $_POST['apellido'], $_POST['pass'], $_POST['puesto'], $_POST['tipo'], $_POST['estado'])) {
+            $text = array('status' => "true", 'error'=>"");
+        } else {
+            $text = array('status' => "false", 'error'=>"Error al insertar en la bd");
+        }
 
-<<<<<<< HEAD
-    function insertar_usuario($cedula, $nombre, $apellido, $pass, $puesto, $tipo, $estado) {
-            return $this->data->insertar($cedula, $nombre, $apellido, $pass, $puesto, $tipo, $estado);
-    }
-
-    function mostrar_usuarios() {
-        return $this->data->select_all_usuarios();
-    }
-=======
    } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
    
    echo json_encode($text);
 
    
-} else if($accion == 'modificar_usuario') {
+} else if($accion == 'mostrar_usuarios_proyecto') {
+
+    $id=$_POST['id'];
+    $business->obtener_colaboradores_proyecto($id);
 
 
 } else if($accion == 'eliminar_usuario') {
@@ -38,14 +45,3 @@ class usuariosBusiness {
 
 
 } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
->>>>>>> b4f251c2dae4e6f6bbe45192f223d51e2f99ca39
-
-    function mostrar_vista_colaborador_manager() {
-        return $this->data->vista_colaborador_manager();
-    }
-    function obtener_colaboradores_proyecto($id){
-        return $this->data->obtener_colaboradores_proyecto($id);
-    }
-
-}
-?>
