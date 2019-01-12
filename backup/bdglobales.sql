@@ -117,7 +117,7 @@ CREATE TABLE `tablaobjetivoproyecto` (
 CREATE TABLE `tablapersona` (
   `idPersona` int(11) NOT NULL,
   `cedulaPersona` varchar(25) NOT NULL,
-  `nombrePersona` int(11) NOT NULL,
+  `nombrePersona` varchar(25) NOT NULL,
   `apellidoPersona` varchar(25) NOT NULL,
   `passwordPersona` varchar(25) NOT NULL,
   `estadoPersona` varchar(25) NOT NULL

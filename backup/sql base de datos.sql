@@ -1,7 +1,7 @@
 
 
 create table if not exists tablaPersona(idPersona int AUTO_INCREMENT NOT NULL,cedulaPersona VARCHAR(25) not null,
- nombrePersona int not NULL,apellidoPersona VARCHAR(25) NOT NULL,passwordPersona VARCHAR(25) NOT NULL, estadoPersona VARCHAR(25) NOT NULL,
+ nombrePersona VARCHAR(25) not NULL,apellidoPersona VARCHAR(25) NOT NULL,passwordPersona VARCHAR(25) NOT NULL, estadoPersona VARCHAR(25) NOT NULL,
 	PRIMARY KEY(idPersona));	
 
 create table if not exists tablaSkill(idSkill int AUTO_INCREMENT not NULL, nombreSkill VARCHAR(15) not NULL, 
