@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-01-2019 a las 05:05:17
+-- Tiempo de generación: 12-01-2019 a las 05:32:31
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -30,9 +30,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tablacolaborador` (
   `idColaborador` int(11) NOT NULL,
-  `cedulaColaborador` varchar(25) NOT NULL,
-  `nombreColaborador` varchar(25) NOT NULL,
-  `apellidoColaborador` varchar(25) NOT NULL,
   `idPuestoColaborador` int(11) NOT NULL,
   `tipoColaborador` varchar(25) NOT NULL,
   `passwordColaborador` varchar(25) NOT NULL,
@@ -121,6 +118,7 @@ CREATE TABLE `tablaobjetivoproyecto` (
 
 CREATE TABLE `tablapersona` (
   `idPersona` int(11) NOT NULL,
+  `cedulaPersona` varchar(25) NOT NULL,
   `nombrePersona` int(11) NOT NULL,
   `apellidoPersona` varchar(25) NOT NULL,
   `passwordPersona` varchar(25) NOT NULL,

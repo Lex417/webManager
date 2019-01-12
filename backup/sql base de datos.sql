@@ -1,7 +1,7 @@
 
 
-create table if not exists tablaPersona(idPersona int AUTO_INCREMENT NOT NULL, nombrePersona int not NULL,
-	apellidoPersona VARCHAR(25) NOT NULL,passwordPersona VARCHAR(25) NOT NULL, estadoPersona VARCHAR(25) NOT NULL,
+create table if not exists tablaPersona(idPersona int AUTO_INCREMENT NOT NULL,cedulaPersona VARCHAR(25) not null,
+ nombrePersona int not NULL,apellidoPersona VARCHAR(25) NOT NULL,passwordPersona VARCHAR(25) NOT NULL, estadoPersona VARCHAR(25) NOT NULL,
 	PRIMARY KEY(idPersona));	
 
 create table if not exists tablaSkill(idSkill int AUTO_INCREMENT not NULL, nombreSkill VARCHAR(15) not NULL, 
@@ -30,8 +30,7 @@ PRIMARY KEY(idEquipoTrabajo),FOREIGN KEY (idDepartamento) REFERENCES tablaDepart
 FOREIGN KEY (idTeamManager) REFERENCES tablaTeamManager(idTeamManager));
 
 
-create table if not exists tablaColaborador(idColaborador int AUTO_INCREMENT not null,cedulaColaborador VARCHAR(25) not null,
-nombreColaborador VARCHAR(25) not null,apellidoColaborador VARCHAR(25) not null,
+create table if not exists tablaColaborador(idColaborador int AUTO_INCREMENT not null,
 idPuestoColaborador int not null,tipoColaborador VARCHAR(25) not null,passwordColaborador VARCHAR(25) not null,
 idEquipoTrabajo int not null,estadoColaborador VARCHAR(15) not null,idPersona int NOT NULL,	
 PRIMARY KEY(idColaborador),FOREIGN KEY (idPuestoColaborador) REFERENCES tablaPuesto(idPuesto),
