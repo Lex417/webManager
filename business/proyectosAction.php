@@ -4,9 +4,26 @@
     include "proyectosBusiness.php";
     $accion=$_POST['accion'];
     $business=new proyectosBusiness();
+
+
     if($accion=="obtenerVistaProyectos"){
         echo $business->obtenerVistaPreviaProyecto();
     }
+
+    if($accion=="editarDatosProyecto"){
+      $id=$_POST['id'];
+      echo $business->obtenerProyecto($id);
+  }
+
+  if($accion=="actualizarDatosProyectoBD"){
+    $id_Proyecto=$_POST['id_Proyecto'];
+    $nombre_Proyecto=$_POST['nombre_Proyecto'];
+    $inicio_Proyecto=$_POST['inicio_Proyecto'];
+    $fin_Proyecto=$_POST['fin_Proyecto'];
+    $desc_Proyecto=$_POST['desc_Proyecto'];
+    $estado_Proyecto=$_POST['estado_Proyecto'];
+    echo $business->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto);
+}
 
     if($accion == 'insertarProyecto') {
     $text = null;

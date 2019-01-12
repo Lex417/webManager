@@ -42,6 +42,33 @@
 
       }
 
+      function obtenerProyecto($id){
+   
+        $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,fin_Proyecto,desc_Proyecto,estado_Proyecto 
+        from vista_proyectos_activos where id_Proyecto=?');
+        $stmt->execute([$id]);
+        $listaProyectos=array();
+        while($fila=$stmt->fetch()){
+            $proyecto=array('idProyecto'=>$fila['id_Proyecto'],
+        'nomProyecto'=>$fila['nombre_Proyecto'],
+        'fechaInicio'=>$fila['inicio_Proyecto'],
+        'fechaFinal'=>$fila['fin_Proyecto'],
+        'estado_Proyecto'=>$fila['estado_Proyecto'],
+        'descripProyecto'=>$fila['desc_Proyecto']);
+            array_push($listaProyectos,$proyecto);
+        }
+        return json_encode($listaProyectos);
+       }
+
+       function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto){
+        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombre_Proyecto='$nombre_Proyecto',inicio_Proyecto='$inicio_Proyecto',fin_Proyecto='$fin_Proyecto',desc_Proyecto='$desc_Proyecto',estado_Proyecto='$estado_Proyecto'
+        WHERE id_Proyecto='$id_Proyecto'");
+    
+        echo $stmt->execute(['activo']);
+    
+    
+       }
+
       function cargarDepartamentos(){
           $stmt = $this->objetoConexion->prepare('SELECT id_Departamento, nombre_Departamento from tabla_departamento');
             $stmt->execute();

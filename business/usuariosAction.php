@@ -28,7 +28,10 @@ if($accion == 'insertar_usuario') {
    echo json_encode($text);
 
    
-} else if($accion == 'modificar_usuario') {
+} else if($accion == 'mostrar_usuarios_proyecto') {
+
+    $id=$_POST['id'];
+    $business->obtener_colaboradores_proyecto($id);
 
 
 } else if($accion == 'eliminar_usuario') {
@@ -42,5 +45,3 @@ if($accion == 'insertar_usuario') {
 
 
 } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
-
-

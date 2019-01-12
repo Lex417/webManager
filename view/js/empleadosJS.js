@@ -33,7 +33,7 @@ function insertarUsuario() {
     formData.append('apellido', $('#apellido').val());
     formData.append('pass', $('#pass').val());
     formData.append('puesto', $('#select-puesto option:selected').text());
-    formData.append('tipo', $('#tipo').val());
+    formData.append('tipo', switch_tipo_colaborador($('#tipo').val()));
     formData.append('estado',$('#estado').val());
 
     $.ajax({
@@ -96,6 +96,23 @@ function eliminarUsuario() {
 //funcion de prueba
 function sayHello() {
     alert("holis");
+}
+
+// determina un valor numerico si el usuario es invitado, colaborador o manager
+function switch_tipo_colaborador($tipo) {
+    var res = "";
+    switch($tipo) {
+        case "Invitado":
+            res = "0";
+        break;
+        case "Colaborador":
+            res = "1";
+        break;
+        case "Manager":
+            res = "2";
+        break;
+    }
+return res;
 }
 
 
@@ -164,4 +181,39 @@ function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_bo
 }
 
 
-
+function getQueryVariable() {
+    //ESTE METODO TOMA EL URL DE LA PAGINA Y OBTINE EL VALOR DEL PARAMETRO ID QUE NECESITAMOS PARA BUSCAR EL PROYECTO POR SU ID.
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == "id") {
+            return pair[1];
+        }
+    }
+    return false;
+ }
+function obtenerVistaUsuariosPorProyecto() {
+    var formData = new FormData();
+    formData.append('accion', 'mostrar_usuarios_proyecto');
+     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+    formData.append('id',getQueryVariable());
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+             var json = JSON.parse(respuesta);
+             console.log(json);
+            var t_body = document.getElementById('t_body_empleados_proyecto');
+            for(i=0; i<json.length;i++) {
+                llenar_fila(json, t_body);
+            }
+        }
+    });
+}
