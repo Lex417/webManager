@@ -31,8 +31,8 @@ FOREIGN KEY (idTeamManager) REFERENCES tablaTeamManager(idTeamManager));
 
 
 create table if not exists tablaColaborador(idColaborador int AUTO_INCREMENT not null,
-idPuestoColaborador int not null,tipoColaborador VARCHAR(25) not null,passwordColaborador VARCHAR(25) not null,
-idEquipoTrabajo int not null,estadoColaborador VARCHAR(15) not null,idPersona int NOT NULL,	
+idPuestoColaborador int not null,tipoColaborador VARCHAR(25) not null,
+idEquipoTrabajo int not null,idPersona int NOT NULL,	
 PRIMARY KEY(idColaborador),FOREIGN KEY (idPuestoColaborador) REFERENCES tablaPuesto(idPuesto),
 FOREIGN KEY (idEquipoTrabajo) REFERENCES tablaEquipoTrabajo(idEquipoTrabajo),
 FOREIGN KEY (idPersona) REFERENCES tablaPersona(idPersona));

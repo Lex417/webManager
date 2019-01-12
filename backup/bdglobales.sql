@@ -32,9 +32,7 @@ CREATE TABLE `tablacolaborador` (
   `idColaborador` int(11) NOT NULL,
   `idPuestoColaborador` int(11) NOT NULL,
   `tipoColaborador` varchar(25) NOT NULL,
-  `passwordColaborador` varchar(25) NOT NULL,
   `idEquipoTrabajo` int(11) NOT NULL,
-  `estadoColaborador` varchar(15) NOT NULL,
   `idPersona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
