@@ -195,9 +195,10 @@ function getQueryVariable() {
  }
 function obtenerVistaUsuariosPorProyecto() {
     var formData = new FormData();
+    var id_proyecto = getQueryVariable();
     formData.append('accion', 'mostrar_usuarios_proyecto');
      // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
-    formData.append('id',getQueryVariable());
+    formData.append('id',id_proyecto);
 //AGREGANDO UNA FUNCION
     $.ajax({
         type: "POST",
