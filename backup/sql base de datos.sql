@@ -21,7 +21,7 @@ PRIMARY KEY (idDepartamento));
 
 create table if not exists tablaProyecto(idProyecto int AUTO_INCREMENT not null, 
 	nombreProyecto VARCHAR(25) not null,fechaInicio date not null,fechaFinal date not null,
-	descripcionProyecto VARCHAR(25) not null,estadoProyecto VARCHAR(15) not null, idProjectManager int not null,
+	descripcionProyecto TEXT not null,estadoProyecto VARCHAR(15) not null, idProjectManager int not null,
 PRIMARY KEY(idProyecto),FOREIGN KEY (idProjectManager) REFERENCES tablaProjectManager(idProjectManager));
 
 create table if not exists tablaEquipoTrabajo(idEquipoTrabajo int AUTO_INCREMENT not null,idDepartamento int not null,
@@ -44,7 +44,7 @@ create table if not exists tablaNotificacion(idNotificacion int AUTO_INCREMENT n
   FOREIGN KEY (idManagerAceptacionNotificacion) REFERENCES tablaTeamManager(idTeamManager));
 
 create table if not exists tablaObjetivoProyecto(idObjetivoProyecto int AUTO_INCREMENT not null,idProyecto int not null,
-descripcionObjetivoProyecto varchar(25) not null, estadoObjetivoProyecto varchar(10) not null, PRIMARY KEY(idObjetivoProyecto),
+descripcionObjetivoProyecto TEXT not null, estadoObjetivoProyecto varchar(10) not null, PRIMARY KEY(idObjetivoProyecto),
  FOREIGN KEY (idProyecto) REFERENCES tablaProyecto(idProyecto));
 
 create table if not exists tablaProyectoColaborador(idProyectoColaborador int AUTO_INCREMENT not null, idProyecto int not null,
@@ -64,3 +64,6 @@ passwordNegocio VARCHAR(10) , estadoNegocio VARCHAR(15) , PRIMARY KEY(idNegocio)
 create table if not exists tablaTransaccion(idTransaccion int AUTO_INCREMENT NOT NULL, nTransaccion TEXT NOT NULL, fechaTransacion DATE NOT NULL,
 idNegocio int NOT NULL,digitosTarjetaTransaccion VARCHAR(4) NOT NULL, tipoTarjetaTransaccion VARCHAR (25) NOT NULL, estadoTransaccion VARCHAR(15) NOT NULL, 
 PRIMARY KEY(idTransaccion),FOREIGN KEY (idNegocio) REFERENCES tablaNegocio (idNegocio) );
+
+create table if not exists tablaComentario(idComentario int AUTO_INCREMENT not null, idNegocio int not null, comentario TEXT NOT NULL, 
+fechaComentario date not null, PRIMARY KEY(idComentario),FOREIGN KEY (idNegocio) REFERENCES tablaNegocio (idNegocio) );
