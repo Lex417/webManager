@@ -11,14 +11,15 @@
        } 
 
        function obtenerVistaPreviaProyecto(){
-            $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,desc_Proyecto 
-            from vista_proyectos_activos');
+            $stmt = $this->objetoConexion->prepare('SELECT idProyecto, nombreProyecto,fechaInicio,descripcionProyecto
+            from tablaProyecto where estadoProyecto=?');
+
             $stmt->execute(['activo']);
             $listaProyectos=array();
             while($fila=$stmt->fetch()){
-                $proyecto=array('ideProyecto'=>$fila['id_Proyecto'],
-            'nomProyecto'=>$fila['nombre_Proyecto'],'fechaProyecto'=>$fila['inicio_Proyecto'],
-              'descripProyecto'=>$fila['desc_Proyecto']);
+                $proyecto=array('ideProyecto'=>$fila['idProyecto'],
+            'nomProyecto'=>$fila['nombreProyecto'],'fechaProyecto'=>$fila['fechaInicio'],
+              'descripProyecto'=>$fila['descripcionProyecto']);
                 array_push($listaProyectos,$proyecto);
             }
             return json_encode($listaProyectos);
