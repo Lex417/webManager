@@ -81,9 +81,39 @@ p {
     margin: 0;
 }
 
+input[aria-invalid="true"] {
+    border: 1px solid #f00;
+    box-shadow: 0 0 4px 0 #f00;
+}
+
 .table-responsive {
     padding-right: 1px;
 }
+
+
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+  }
+
+.pagination a.active {
+    background-color: #f09c3a;
+    color: white;
+    border: 1px solid #f09c3a;
+  }
+
+
+
+
 
 .card {
     -webkit-border-radius: 3px;

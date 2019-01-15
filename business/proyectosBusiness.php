@@ -39,4 +39,8 @@
        function agregarColaboradoresProyecto($json,$idProyecto){
         return $this->data->agregarColaboradoresProyecto($json,$idProyecto);
       }
+
+      function contar_usuarios() {
+          return $this->contar_usuarios();
+      }
  }

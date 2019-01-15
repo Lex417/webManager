@@ -7,10 +7,6 @@
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,19 +17,41 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bdglobales`
 --
+DROP DATABASE IF EXISTS `bdglobales` ;
+CREATE  DATABASE  IF NOT EXISTS `bdglobales` CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bdglobales` ;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tablacolaborador`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablacolaborador`;
 
 CREATE TABLE `tablacolaborador` (
   `idColaborador` int(11) NOT NULL,
   `idPuestoColaborador` int(11) NOT NULL,
   `tipoColaborador` varchar(25) NOT NULL,
+  `passwordColaborador` varchar(25) NOT NULL,
   `idEquipoTrabajo` int(11) NOT NULL,
+  `estadoColaborador` varchar(15) NOT NULL,
   `idPersona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tablapersona`
+--
+DROP TABLE IF EXISTS `bdglobales`.`tablapersona`;
+
+CREATE TABLE `tablapersona` (
+  `idPersona` int(11) NOT NULL,
+  `cedulaPersona` varchar(25) NOT NULL,
+  `nombrePersona` varchar(25) NOT NULL,
+  `apellidoPersona` varchar(25) NOT NULL,
+  `passwordPersona` varchar(25) NOT NULL,
+  `estadoPersona` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -41,6 +59,7 @@ CREATE TABLE `tablacolaborador` (
 --
 -- Estructura de tabla para la tabla `tabladepartamento`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tabladepartamento`;
 
 CREATE TABLE `tabladepartamento` (
   `idDepartamento` int(11) NOT NULL,
@@ -52,6 +71,7 @@ CREATE TABLE `tabladepartamento` (
 --
 -- Estructura de tabla para la tabla `tablaequipotrabajo`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaequipotrabajo`;
 
 CREATE TABLE `tablaequipotrabajo` (
   `idEquipoTrabajo` int(11) NOT NULL,
@@ -65,6 +85,7 @@ CREATE TABLE `tablaequipotrabajo` (
 --
 -- Estructura de tabla para la tabla `tablanegocio`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablanegocio`;
 
 CREATE TABLE `tablanegocio` (
   `idNegocio` int(11) NOT NULL,
@@ -85,6 +106,7 @@ CREATE TABLE `tablanegocio` (
 --
 -- Estructura de tabla para la tabla `tablanotificacion`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablanotificacion`;
 
 CREATE TABLE `tablanotificacion` (
   `idNotificacion` int(11) NOT NULL,
@@ -100,6 +122,7 @@ CREATE TABLE `tablanotificacion` (
 --
 -- Estructura de tabla para la tabla `tablaobjetivoproyecto`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaobjetivoproyecto`;
 
 CREATE TABLE `tablaobjetivoproyecto` (
   `idObjetivoProyecto` int(11) NOT NULL,
@@ -110,24 +133,11 @@ CREATE TABLE `tablaobjetivoproyecto` (
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `tablapersona`
---
-
-CREATE TABLE `tablapersona` (
-  `idPersona` int(11) NOT NULL,
-  `cedulaPersona` varchar(25) NOT NULL,
-  `nombrePersona` varchar(25) NOT NULL,
-  `apellidoPersona` varchar(25) NOT NULL,
-  `passwordPersona` varchar(25) NOT NULL,
-  `estadoPersona` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tablaprojectmanager`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaprojectmanager`;
 
 CREATE TABLE `tablaprojectmanager` (
   `idProjectManager` int(11) NOT NULL,
@@ -139,6 +149,7 @@ CREATE TABLE `tablaprojectmanager` (
 --
 -- Estructura de tabla para la tabla `tablaproyecto`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaproyecto`;
 
 CREATE TABLE `tablaproyecto` (
   `idProyecto` int(11) NOT NULL,
@@ -155,6 +166,7 @@ CREATE TABLE `tablaproyecto` (
 --
 -- Estructura de tabla para la tabla `tablaproyectocolaborador`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaproyectocolaborador`;
 
 CREATE TABLE `tablaproyectocolaborador` (
   `idProyectoColaborador` int(11) NOT NULL,
@@ -167,6 +179,7 @@ CREATE TABLE `tablaproyectocolaborador` (
 --
 -- Estructura de tabla para la tabla `tablapuesto`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablapuesto`;
 
 CREATE TABLE `tablapuesto` (
   `idPuesto` int(11) NOT NULL,
@@ -178,6 +191,7 @@ CREATE TABLE `tablapuesto` (
 --
 -- Estructura de tabla para la tabla `tablaskill`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaskill`;
 
 CREATE TABLE `tablaskill` (
   `idSkill` int(11) NOT NULL,
@@ -189,6 +203,7 @@ CREATE TABLE `tablaskill` (
 --
 -- Estructura de tabla para la tabla `tablaskillcolaborador`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablaskillcolaborador`;
 
 CREATE TABLE `tablaskillcolaborador` (
   `idSkillColaborador` int(11) NOT NULL,
@@ -201,6 +216,7 @@ CREATE TABLE `tablaskillcolaborador` (
 --
 -- Estructura de tabla para la tabla `tablateammanager`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablateammanager`;
 
 CREATE TABLE `tablateammanager` (
   `idTeamManager` int(11) NOT NULL,
@@ -212,6 +228,7 @@ CREATE TABLE `tablateammanager` (
 --
 -- Estructura de tabla para la tabla `tablatransaccion`
 --
+DROP TABLE IF EXISTS `bdglobales`.`tablatransaccion`;
 
 CREATE TABLE `tablatransaccion` (
   `idTransaccion` int(11) NOT NULL,
@@ -501,6 +518,184 @@ ALTER TABLE `tablateammanager`
 ALTER TABLE `tablatransaccion`
   ADD CONSTRAINT `tablatransaccion_ibfk_1` FOREIGN KEY (`idNegocio`) REFERENCES `tablanegocio` (`idNegocio`);
 COMMIT;
+
+--
+-- VISTAS
+--
+DROP VIEW IF EXISTS `vista_informacion`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_informacion` AS
+	SELECT `tp`.`cedulaPersona` AS `cedulaPersona`, `tp`.`nombrePersona` AS `nombrePersona`,
+		   `tp`.`apellidoPersona` AS `apellidoPersona`, `tpu`.`nombrePuesto` AS `nombrePuesto`,
+		   `tc`.`estadoColaborador` AS `estadoColaborador`
+		   
+	FROM (`tablapersona` `tp` JOIN `tablacolaborador` `tc` JOIN `tablapuesto` `tpu`)
+	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`);
+
+DROP VIEW IF EXISTS `vista_obtener_colaborador`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_obtener_colaborador` AS
+	SELECT `tp`.`cedulaPersona` AS `cedulaPersona`, `tp`.`nombrePersona` AS `nombrePersona`,
+		   `tp`.`apellidoPersona` AS `apellidoPersona`, `tpu`.`nombrePuesto` AS `nombrePuesto`,
+		   `te`.`nombreEquipoTrabajo` AS `nombreEquipoTrabajo`, `tc`.`tipoColaborador` AS `tipoColaborador`
+		   
+	FROM (`tablapersona` `tp` JOIN `tablapuesto` `tpu` JOIN `tablaequipotrabajo` `te` JOIN `tablacolaborador` `tc`)
+	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`) AND (`te`.`idEquipoTrabajo` = `tc`.`idEquipoTrabajo`);
+	
+	-- tablaequipotrabajo
+--
+-- PROCEDIMIENTOS ALMACENADOS
+--
+
+
+DROP PROCEDURE IF EXISTS `proc_agregar_colaborador`;
+DELIMITER $$
+CREATE PROCEDURE `bdglobales`.`proc_agregar_colaborador`(IN `cedula_usuario` VARCHAR(25), IN `nombre_usuario` VARCHAR(25), IN `apellido_usuario` VARCHAR(25), IN `pass_usuario` VARCHAR(25), IN `puesto_usuario` INT(11), IN `equipo_trabajo` INT(11), IN `tipo_usuario` VARCHAR(25))
+BEGIN
+	DECLARE id_auto_inc_persona INT(11);	
+	INSERT INTO `tablapersona` VALUES(NULL, cedula_usuario, nombre_usuario, apellido_usuario, pass_usuario, 'Activo');
+	SET id_auto_inc_persona = (SELECT idPersona FROM `tablapersona` WHERE cedulaPersona = cedula_usuario);
+	
+	IF tipo_usuario = 'Colaborador' THEN
+		INSERT INTO `tablacolaborador` VALUES (NULL, puesto_usuario, tipo_usuario, pass_usuario, equipo_trabajo,'Activo', id_auto_inc_persona);
+		
+	ELSEIF tipo_usuario = 'Team Manager' THEN
+		INSERT INTO `tablateammanager` VALUES (NULL, id_auto_inc_persona);
+	
+	ELSEIF tipo_usuario = 'Proyect Manager' THEN
+		INSERT INTO `tablaprojectmanager` VALUES (NULL, id_auto_inc_persona);
+	END IF;
+END $$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS `proc_editar_colaborador`;
+DELIMITER $$
+CREATE PROCEDURE `bdglobales`.`proc_editar_colaborador`(IN `cedula_usuario` VARCHAR(25), IN `nombre_usuario` VARCHAR(25), IN `apellido_usuario` VARCHAR(25), IN `puesto_usuario` INT(11), IN `equipo_trabajo` INT(11), IN `tipo_usuario` VARCHAR(25))
+BEGIN
+
+	DECLARE id_auto_inc_persona INT(11);
+	SET id_auto_inc_persona = (SELECT idPersona FROM `tablapersona` WHERE cedulaPersona = cedula_usuario);
+	
+		UPDATE `tablapersona` 
+		SET	cedulaPersona = cedula_usuario,
+			nombrePersona = nombre_usuario,
+			apellidoPersona = apellido_usuario
+		WHERE idPersona = id_auto_inc_persona;
+		
+		UPDATE `tablacolaborador`
+		SET idPuestoColaborador = puesto_usuario,
+			tipoColaborador = tipo_usuario,
+			idEquipoTrabajo = equipo_trabajo
+		WHERE idPersona = id_auto_inc_persona;
+		
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS `proc_eliminar_colaborador`;
+DELIMITER $$
+CREATE PROCEDURE `bdglobales`.`proc_eliminar_colaborador`(IN `cedula_usuario` VARCHAR(25))
+BEGIN
+	DECLARE id_auto_inc_persona INT(11);
+	SET id_auto_inc_persona = (SELECT idPersona FROM `tablapersona` WHERE cedulaPersona = cedula_usuario);
+	
+	UPDATE `tablapersona`
+	SET estadoPersona = 'Inactivo'
+	WHERE idPersona = id_auto_inc_persona;
+	
+	UPDATE `tablacolaborador`
+	SET estadoColaborador = 'Inactivo'
+	WHERE idPersona = id_auto_inc_persona;
+	
+END $$
+DELIMITER ;
+
+
+
+--
+-- INSERCIONES
+--
+
+-- ------------------DEPARTAMENTOS--------------------------------
+INSERT INTO `tabladepartamento` VALUES(NULL, 'Desarrollo');
+INSERT INTO `tabladepartamento` VALUES(NULL, 'Soporte Técnico');
+INSERT INTO `tabladepartamento` VALUES(NULL, 'Quality Assurance');
+INSERT INTO `tabladepartamento` VALUES(NULL, 'Team Leadership');
+-- ----------------------------------------------------------------
+
+-- --------------------PUESTOS------------------------------------
+INSERT INTO `tablapuesto` VALUES(NULL,'Desarrollador Front End');
+INSERT INTO `tablapuesto` VALUES(NULL, 'Soportista');
+INSERT INTO `tablapuesto` VALUES(NULL, 'Ingeniero QA');
+INSERT INTO `tablapuesto` VALUES(NULL,'Desarrollador Back End');
+INSERT INTO `tablapuesto` VALUES(NULL, 'Team Leader');
+-- ---------------------------------------------------------------
+
+
+-- --------------------SKILLS--------------------------------------
+INSERT INTO `tablaskill` VALUES(NULL,'C++');
+INSERT INTO `tablaskill` VALUES(NULL,'C');
+INSERT INTO `tablaskill` VALUES(NULL,'C#');
+INSERT INTO `tablaskill` VALUES(NULL,'Java');
+INSERT INTO `tablaskill` VALUES(NULL,'Python');
+INSERT INTO `tablaskill` VALUES(NULL,'Javascript');
+INSERT INTO `tablaskill` VALUES(NULL,'Typescript');
+INSERT INTO `tablaskill` VALUES(NULL,'Ruby');
+INSERT INTO `tablaskill` VALUES(NULL,'Scheme');
+INSERT INTO `tablaskill` VALUES(NULL,'Prolog');
+INSERT INTO `tablaskill` VALUES(NULL,'PHP');
+INSERT INTO `tablaskill` VALUES(NULL,'SQL');
+-- ----------------------------------------------------------------
+
+-- ------------------------------TEAM MANAGERS-----------------------------------------------
+INSERT INTO `tablapersona` VALUES(NULL, '121340567', 'Robin', 'Wallace', 'man1', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '134350983', 'Marthin', 'Gonz', 'man2', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '140098323', 'Roberth', 'Smith', 'man3', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '159877662', 'Laura', 'Mendoza', 'man4', 'Activo');
+
+INSERT INTO `tablateammanager` VALUE(NULL,1);
+INSERT INTO `tablateammanager` VALUE(NULL,2);
+INSERT INTO `tablateammanager` VALUE(NULL,3);
+INSERT INTO `tablateammanager` VALUE(NULL,4);
+-- -----------------------------------------------------------------------------------------------
+-- ----------------------------PERSONAS-COLABORADORES---------------------------------------------
+INSERT INTO `tablapersona` VALUES(NULL, '116290648', 'Eithan', 'Mendez Mendez', 'qwsa', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '120934505', 'Jack', 'Williams', 'wqsa1223', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '102930934', 'Adam', 'Johnson', 'ssdder', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '234454556', 'Aaron', 'Garcia', 'gbnhju8', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '133344566', 'Ahmed', 'Rodriguez', 'sdwe234', 'Activo');
+INSERT INTO `tablapersona` VALUES(NULL, '343456654', 'Alexander', 'Miller', 'd4f55', 'Activo');
+-- -----------------------------------------------------------------------------------------------
+
+-- ---------------------------EQUIPOS-DE-TRABAJO---------------------------------------------------
+INSERT INTO `tablaequipotrabajo` VALUES(NULL,1,'Develop-Team',1);
+INSERT INTO `tablaequipotrabajo` VALUES(NULL,2,'Support-Team',2);
+INSERT INTO `tablaequipotrabajo` VALUES(NULL,3,'QA-Team',3);
+INSERT INTO `tablaequipotrabajo` VALUES(NULL,4,'TL-Team',4);
+-- -------------------------------------------------------------------------------------------------
+
+-- ----------------------------COLABORADORES--------------------------------------------------------
+INSERT INTO `tablacolaborador` VALUES(NULL,1,'Team Manager','man1',1,'Activo',1);
+INSERT INTO `tablacolaborador` VALUES(NULL,2,'Team Manager','man2',2,'Activo',2);
+INSERT INTO `tablacolaborador` VALUES(NULL,3,'Team Manager','man3',3,'Activo',3);
+INSERT INTO `tablacolaborador` VALUES(NULL,4,'Team Manager','man4',4,'Activo',4);
+
+INSERT INTO `tablacolaborador` VALUES(NULL,1,'Colaborador','qwsa',1,'Activo',5);
+INSERT INTO `tablacolaborador` VALUES(NULL,1,'Colaborador','wqsa1223',1,'Activo',6);
+INSERT INTO `tablacolaborador` VALUES(NULL,2,'Colaborador','ssdder',2,'Activo',7);
+INSERT INTO `tablacolaborador` VALUES(NULL,2,'Colaborador','gbnhju8',2,'Activo',8);
+INSERT INTO `tablacolaborador` VALUES(NULL,2,'Colaborador','sdwe234',2,'Activo',9);
+INSERT INTO `tablacolaborador` VALUES(NULL,3,'Colaborador','d4f55',3,'Activo',10);
+-- --------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

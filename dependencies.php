@@ -14,6 +14,7 @@
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
     <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    
 
     <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
     <script src="vendor/counter-up/jquery.counterup.min.js">
@@ -26,5 +27,8 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <!-- JS de clases-->
     <script src="js/proyectosJs.js"></script>
     <script src="js/empleadosJs.js"></script>
+    <!-- Pagination.js-->
+    <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
