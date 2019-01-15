@@ -14,10 +14,10 @@ if($accion == 'insertar_usuario') {
        isset($_POST['apellido']) &&
        isset($_POST['pass']) &&
        isset($_POST['puesto']) &&
-       isset($_POST['tipo']) &&
-       isset($_POST['estado'])) {
+       isset($_POST['equipo']) &&
+       isset($_POST['tipo'])) {
 
-        if($business->insertar_usuario($_POST['cedula'], $_POST['nombre'], $_POST['apellido'], $_POST['pass'], $_POST['puesto'], $_POST['tipo'], $_POST['estado'])) {
+        if($business->insertar_usuario($_POST['cedula'], $_POST['nombre'], $_POST['apellido'], $_POST['pass'], $_POST['puesto'], $_POST['equipo'], $_POST['tipo'])) {
             $text = array('status' => "true", 'error'=>"");
         } else {
             $text = array('status' => "false", 'error'=>"Error al insertar en la bd");
@@ -35,7 +35,25 @@ if($accion == 'insertar_usuario') {
 
 
 } else if($accion == 'eliminar_usuario') {
+        $text = null;
+        if($business->eliminar_usuario($_POST['id'])){
+                $text = array('status' => "true", 'error'=>""); 
+        } else {
+                $text = array('status' => "false", 'error'=>"Error al eliminar en la bd"); 
+        }
+        echo json_encode($text);
 
+} else if($accion == 'editar_usuario') {
+        $text = null;
+        if($business->editar_usuario($_POST['id'], $_POST['nombre'], $_POST['apellido'], $_POST['puesto'], $_POST['equipo'], $_POST['tipo'])){
+                $text = array('status' => "true", 'error'=>"");   
+        } else {
+                $text = array('status' => "false", 'error'=>"Error al modificar en la bd");
+        }
+        echo json_encode($text);
+
+} else if($accion == 'obtener_usuario') {
+        $business->obtener_usuario($_POST['id']);
 
 } else if ($accion == 'mostrar_vista_colaborador_manager') {
         $business->mostrar_vista_colaborador_manager();
@@ -43,5 +61,22 @@ if($accion == 'insertar_usuario') {
 } else if($accion == 'mostrar_usuario') {
         $business->mostrar_usuarios();
 
+
+} else if($accion == 'count_usuarios') {
+        $business->contar_usuarios();
+
+} else if($accion == 'cambio_pagina') {
+        if(isset($_POST['pagina'])&&isset($_POST['limite'])) {
+            $business->cambiar_pagina($_POST['pagina'], $_POST['limite']);
+    } 
+
+} else if($accion == 'filtrar') {
+        $business->busqueda_por_filtro($_POST['palabra'], $_POST['tip_filtro']);
+
+} else if($accion == 'obtener_puestos') {
+        $business->obtener_puestos();
+
+} else if($accion == 'obtener_equipos') {
+        $business->obtener_equipos();
 
 } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}

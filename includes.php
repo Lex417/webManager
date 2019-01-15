@@ -29,4 +29,9 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
     
+    <!-- Filter input -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- pagination-->
+    <link href="css/simplePagination.css" rel="stylesheet" style="text/css">
+    
     
