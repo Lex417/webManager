@@ -16,7 +16,9 @@ class usuariosData {
         $sql = $this->objetoConexion->prepare('CALL proc_agregar_colaborador(?,?,?,?,?,?,?)');
         if($sql->execute([$cedula, $nombre, $apellido, $pass, $puesto, $equipo, $tipo])) {
             return true;
-        } else {return false;}
+        } else {
+            return false;
+        }
     }
 
 // EDITA UN USUARIO EN LA BD
