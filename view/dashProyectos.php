@@ -14,7 +14,7 @@
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <?php include "header.php"?> 
+            <?php include "header.php"?>
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -29,8 +29,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="chart-container">
+                          <canvas id="mycanvas" width="600px" height="auto"></canvas>
+                        </div>
                         <div class="row" id="proyectoC">
-                            
+
                         </div>
                         <div class="row">
                             <div class="col-md-12">

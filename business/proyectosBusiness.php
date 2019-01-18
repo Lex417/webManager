@@ -1,7 +1,7 @@
-<?php 
+<?php
 
     class proyectosBusiness{
-        
+
         private $data;
 
         function __construct(){
@@ -12,7 +12,10 @@
             return $this->data->obtenerVistaPreviaProyecto();
 
         }
-         function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, 
+        function obtenerDatosGrafica(){
+          return $this->data->obtenerGraficaProyectos();
+        }
+         function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,
             $estado_Proyecto, $id_Proyect_Manager) {
             return $this->data->insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
         }

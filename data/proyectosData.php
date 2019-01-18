@@ -1,14 +1,14 @@
-<?php 
+<?php
 
     class proyectosData{
-       
+
        private $objetoConexion;
-       
+
        function __construct(){
-           include "conexion.php"; 
+           include "conexion.php";
            $conexion=new conexion();
            $this->objetoConexion=$conexion->crearConexion();
-       } 
+       }
 
        function obtenerVistaPreviaProyecto(){
             $stmt = $this->objetoConexion->prepare('SELECT idProyecto, nombreProyecto,fechaInicio,descripcionProyecto
@@ -33,9 +33,35 @@
               return false;
           }
       }*/
+
+      function obtenerGraficaProyectos(){
+          $stmt = $this->objetoConexion->prepare('SELECT  TMP.idProyecto, TMP.nombreProyecto, TMP.objetivosFinalizados, COUNT(O.idProyecto) AS "totalObjetivos"
+              FROM (
+                  SELECT OB.idProyecto, PR.nombreProyecto, COUNT(OB.estadoObjetivoProyecto) AS "objetivosFinalizados"
+                  FROM tablaProyecto AS PR
+                  INNER JOIN tablaobjetivoproyecto AS OB ON PR.idProyecto = OB.idProyecto
+                  WHERE PR.estadoProyecto="activo" AND OB.estadoObjetivoProyecto="finalizado"
+                  GROUP BY  OB.idProyecto
+              ) AS TMP
+              INNER JOIN tablaobjetivoproyecto AS O ON TMP.idProyecto = O.idProyecto
+              GROUP BY O.idProyecto'
+          );
+          $stmt->execute(['activo']);
+          $listaProyectos=array();
+          while($fila=$stmt->fetch()){
+              $proyecto=array('ideProyecto'=>$fila['idProyecto'],
+              'nomProyecto'=>$fila['nombreProyecto'],
+              'objFinalizados'=>$fila['objetivosFinalizados'],
+              'totalObj'=>$fila['totalObjetivos'],
+              'porcentaje'=>$fila['objetivosFinalizados'] / $fila['totalObjetivos'] * 100);
+              array_push($listaProyectos,$proyecto);
+          }
+          return json_encode($listaProyectos);
+      }
+
        function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager) {
-        $sql = $this->objetoConexion->prepare('INSERT INTO tabla_proyecto(id_Proyecto, nombre_Proyecto, inicio_Proyecto, fin_Proyecto, desc_Proyecto, estado_Proyecto, id_Proyect_Manager) VALUES(?,?,?,?,?,?,?)');
-        if($sql->execute([$id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager])) {
+        $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyecto(nombreProyecto, fechaInicio, fechaFinal, descripcionProyecto, estadoProyecto, idProyectManager) VALUES(?,?,?,?,?,?)');
+        if($sql->execute([$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager])) {
             return true;
         } else {
           return false;
@@ -44,10 +70,17 @@
       }
 
       function obtenerProyecto($id){
+<<<<<<< Updated upstream
    
         $stmt = $this->objetoConexion->prepare("SELECT idProyecto, nombreProyecto,fechaInicio,fechaFinal,descripcionProyecto,estadoProyecto 
         from vista_proyectos_activos where idProyecto='$id'");
         $stmt->execute(['activo']);
+=======
+
+        $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,fin_Proyecto,desc_Proyecto,estado_Proyecto
+        from vista_proyectos_activos where id_Proyecto=?');
+        $stmt->execute([$id]);
+>>>>>>> Stashed changes
         $listaProyectos=array();
         while($fila=$stmt->fetch()){
             $proyecto=array('idProyecto'=>$fila['idProyecto'],
@@ -62,12 +95,18 @@
        }
 
        function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto){
+<<<<<<< Updated upstream
         $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombreProyecto='$nombre_Proyecto',fechaInicio='$inicio_Proyecto',fechaFinal='$fin_Proyecto',descripcionProyecto='$desc_Proyecto',estadoProyecto='$estado_Proyecto'
         WHERE idProyecto='$id_Proyecto'");
     
+=======
+        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombre_Proyecto='$nombre_Proyecto',inicio_Proyecto='$inicio_Proyecto',fin_Proyecto='$fin_Proyecto',desc_Proyecto='$desc_Proyecto',estado_Proyecto='$estado_Proyecto'
+        WHERE id_Proyecto='$id_Proyecto'");
+
+>>>>>>> Stashed changes
         echo $stmt->execute(['activo']);
-    
-    
+
+
        }
 
       function cargarDepartamentos(){
@@ -83,7 +122,7 @@
             return json_encode($listaDepartamentos);
 
       }
-        
+
 
       function cargarHabilidades(){
           $stmt = $this->objetoConexion->prepare('SELECT idSkill,nombreSkill from tablaskill');
@@ -96,7 +135,7 @@
                 array_push($listaHabilidades,$habilidad);
             }
             return json_encode($listaHabilidades);
-        
+
       }
 
       function cargarColaboradoresFiltro($nombre,$departamento,$habilidad){
@@ -148,6 +187,7 @@
         }
         $listaColaboradores=array();
         while($fila=$stmt->fetch()){
+<<<<<<< Updated upstream
             $stmt2=$this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaTeamManager.idTeamManager from tablaEquipoTrabajo inner join tablaTeamManager on tablaTeamManager.idTeamManager =tablaEquipoTrabajo.idTeamManager inner join tablaPersona on tablaPersona.idPersona= tablaTeamManager.idPersona where tablaEquipoTrabajo.idEquipoTrabajo=?');
             $stmt2->execute([$fila['idEquipoTrabajo']]);
             $nombreManager="";
@@ -160,6 +200,12 @@
         'apeUsu'=>$fila['apellidoPersona'],'idUsu'=>$fila['idColaborador'],
           'nomD'=>$fila['nombreDepartamento'],'nomM'=>$nombreManager,'apeM'=>$apellidoManager,'nomS'=>$fila['nombreSkill']);
             
+=======
+            $colaboradores=array('nomUsu'=>$fila['nombre_Usuario'],
+        'apeUsu'=>$fila['apellido_Usuario'],'idUsu'=>$fila['id_Usuario'],
+          'nomD'=>$fila['nombre_Departamento'],'nomM'=>$fila['nombre_Manager'],'apeM'=>$fila['apellido_Manager'],'nomS'=>$fila['nombre_Skill']);
+
+>>>>>>> Stashed changes
             array_push($listaColaboradores,$colaboradores);
         }
         return json_encode($listaColaboradores);
@@ -171,6 +217,7 @@
         foreach ($json as $val) {
           $sql1=$this->objetoConexion->prepare('SELECT idProyecto,idColaborador from tablaProyectoColaborador Where idProyecto=? AND idColaborador=?');
           $idUsu = $val['idUsu'];
+<<<<<<< Updated upstream
           $sql1->execute([$idProyecto,$idUsu]);
           if($sql1->fetch()){
             $data = array();
@@ -198,6 +245,16 @@
           }
           
         }
+=======
+          echo $idUsu;
+          if(!$sql->execute([$idUsu,$idProyecto,"40"])) {
+            $bandera=false;
+            echo "no inserto";
+            echo 'Error occurred:'.implode(":",$this->objetoConexion->errorInfo());
+          }
+        }
+         return $bandera;
+>>>>>>> Stashed changes
       }
 
       function cargarTodosProyectos(){
@@ -232,6 +289,3 @@
 
     }
 ?>
-
-	
-	
