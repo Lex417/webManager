@@ -171,7 +171,8 @@ DROP TABLE IF EXISTS `bdglobales`.`tablaproyectocolaborador`;
 CREATE TABLE `tablaproyectocolaborador` (
   `idProyectoColaborador` int(11) NOT NULL,
   `idProyecto` int(11) NOT NULL,
-  `idColaborador` int(11) NOT NULL
+  `idColaborador` int(11) NOT NULL,
+  `estadoProyectoColaborador` VARCHAR(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
