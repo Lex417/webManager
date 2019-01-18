@@ -70,17 +70,10 @@
       }
 
       function obtenerProyecto($id){
-<<<<<<< Updated upstream
-   
-        $stmt = $this->objetoConexion->prepare("SELECT idProyecto, nombreProyecto,fechaInicio,fechaFinal,descripcionProyecto,estadoProyecto 
+
+        $stmt = $this->objetoConexion->prepare("SELECT idProyecto, nombreProyecto,fechaInicio,fechaFinal,descripcionProyecto,estadoProyecto
         from vista_proyectos_activos where idProyecto='$id'");
         $stmt->execute(['activo']);
-=======
-
-        $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,fin_Proyecto,desc_Proyecto,estado_Proyecto
-        from vista_proyectos_activos where id_Proyecto=?');
-        $stmt->execute([$id]);
->>>>>>> Stashed changes
         $listaProyectos=array();
         while($fila=$stmt->fetch()){
             $proyecto=array('idProyecto'=>$fila['idProyecto'],
@@ -95,15 +88,9 @@
        }
 
        function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto){
-<<<<<<< Updated upstream
         $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombreProyecto='$nombre_Proyecto',fechaInicio='$inicio_Proyecto',fechaFinal='$fin_Proyecto',descripcionProyecto='$desc_Proyecto',estadoProyecto='$estado_Proyecto'
         WHERE idProyecto='$id_Proyecto'");
-    
-=======
-        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombre_Proyecto='$nombre_Proyecto',inicio_Proyecto='$inicio_Proyecto',fin_Proyecto='$fin_Proyecto',desc_Proyecto='$desc_Proyecto',estado_Proyecto='$estado_Proyecto'
-        WHERE id_Proyecto='$id_Proyecto'");
 
->>>>>>> Stashed changes
         echo $stmt->execute(['activo']);
 
 
@@ -157,7 +144,7 @@
             $stmt->execute([$habilidad]);
 
         }else if(!empty($nombre)&& $departamento=="0" && $habilidad!="0"){
-            $stmt = $this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaColaborador.idColaborador,tablaDepartamento.nombreDepartamento,tablaSkill.nombreSkill, tablaEquipoTrabajo.idEquipoTrabajo from tablaPersona inner join tablaColaborador on tablaPersona.idPersona = tablaColaborador.idPersona inner join tablaEquipoTrabajo on tablaColaborador.idEquipotrabajo = tablaEquipoTrabajo.idEquipotrabajo inner join tablaDepartamento on tablaDepartamento.idDepartamento = tablaEquipoTrabajo.idDepartamento inner join tablaSkillColaborador on tablaColaborador.idColaborador = tablaSkillColaborador.idColaborador inner join tablaSkill on tablaSkill.idSkill=tablaSkillColaborador.idSkill where tablaPersona.nombrePersona like ? and tablaPersona.apellidoPersona like ? and tablaSkill.idSkill=?'); 
+            $stmt = $this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaColaborador.idColaborador,tablaDepartamento.nombreDepartamento,tablaSkill.nombreSkill, tablaEquipoTrabajo.idEquipoTrabajo from tablaPersona inner join tablaColaborador on tablaPersona.idPersona = tablaColaborador.idPersona inner join tablaEquipoTrabajo on tablaColaborador.idEquipotrabajo = tablaEquipoTrabajo.idEquipotrabajo inner join tablaDepartamento on tablaDepartamento.idDepartamento = tablaEquipoTrabajo.idDepartamento inner join tablaSkillColaborador on tablaColaborador.idColaborador = tablaSkillColaborador.idColaborador inner join tablaSkill on tablaSkill.idSkill=tablaSkillColaborador.idSkill where tablaPersona.nombrePersona like ? and tablaPersona.apellidoPersona like ? and tablaSkill.idSkill=?');
             $stmt->execute(["%".$nom."%","%".$ape."%",$habilidad]);
 
         }else if(empty($nombre)&& $departamento!="0" && $habilidad!="0"){
@@ -178,7 +165,7 @@
 
         }else if(!empty($nombre)&& $departamento=="0" && $habilidad=="0"){
            $stmt=$this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaColaborador.idColaborador,tablaDepartamento.nombreDepartamento,tablaSkill.nombreSkill, tablaEquipoTrabajo.idEquipoTrabajo from tablaPersona inner join tablaColaborador on tablaPersona.idPersona = tablaColaborador.idPersona inner join tablaEquipoTrabajo on tablaColaborador.idEquipotrabajo = tablaEquipoTrabajo.idEquipotrabajo inner join tablaDepartamento on tablaDepartamento.idDepartamento = tablaEquipoTrabajo.idDepartamento inner join tablaSkillColaborador on tablaColaborador.idColaborador = tablaSkillColaborador.idColaborador inner join tablaSkill on tablaSkill.idSkill=tablaSkillColaborador.idSkill where tablaPersona.nombrePersona like ? and tablaPersona.apellidoPersona like ?');
-            
+
             $stmt->execute(["%".$nom."%","%".$ape."%"]);
 
         }else if(!empty($nombre)&& $departamento!="0" && $habilidad!="0"){
@@ -187,7 +174,6 @@
         }
         $listaColaboradores=array();
         while($fila=$stmt->fetch()){
-<<<<<<< Updated upstream
             $stmt2=$this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaTeamManager.idTeamManager from tablaEquipoTrabajo inner join tablaTeamManager on tablaTeamManager.idTeamManager =tablaEquipoTrabajo.idTeamManager inner join tablaPersona on tablaPersona.idPersona= tablaTeamManager.idPersona where tablaEquipoTrabajo.idEquipoTrabajo=?');
             $stmt2->execute([$fila['idEquipoTrabajo']]);
             $nombreManager="";
@@ -199,25 +185,18 @@
             $colaboradores=array('nomUsu'=>$fila['nombrePersona'],
         'apeUsu'=>$fila['apellidoPersona'],'idUsu'=>$fila['idColaborador'],
           'nomD'=>$fila['nombreDepartamento'],'nomM'=>$nombreManager,'apeM'=>$apellidoManager,'nomS'=>$fila['nombreSkill']);
-            
-=======
-            $colaboradores=array('nomUsu'=>$fila['nombre_Usuario'],
-        'apeUsu'=>$fila['apellido_Usuario'],'idUsu'=>$fila['id_Usuario'],
-          'nomD'=>$fila['nombre_Departamento'],'nomM'=>$fila['nombre_Manager'],'apeM'=>$fila['apellido_Manager'],'nomS'=>$fila['nombre_Skill']);
 
->>>>>>> Stashed changes
             array_push($listaColaboradores,$colaboradores);
         }
         return json_encode($listaColaboradores);
       }
 
       function agregarColaboradoresProyecto($json,$idProyecto){
-        
+
        // print_r($json);
         foreach ($json as $val) {
           $sql1=$this->objetoConexion->prepare('SELECT idProyecto,idColaborador from tablaProyectoColaborador Where idProyecto=? AND idColaborador=?');
           $idUsu = $val['idUsu'];
-<<<<<<< Updated upstream
           $sql1->execute([$idProyecto,$idUsu]);
           if($sql1->fetch()){
             $data = array();
@@ -234,7 +213,7 @@
                $text = array('status' => "error", 'mensaje'=>"No insertó correctamente");
                array_push($data, $text);
                echo json_encode($data);
-              
+
               //echo 'Error occurred:'.implode(":",$this->objetoConexion->errorInfo());
             } else{
                $data = array();
@@ -243,18 +222,8 @@
                echo json_encode($data);
             }
           }
-          
+
         }
-=======
-          echo $idUsu;
-          if(!$sql->execute([$idUsu,$idProyecto,"40"])) {
-            $bandera=false;
-            echo "no inserto";
-            echo 'Error occurred:'.implode(":",$this->objetoConexion->errorInfo());
-          }
-        }
-         return $bandera;
->>>>>>> Stashed changes
       }
 
       function cargarTodosProyectos(){
@@ -280,7 +249,7 @@
          /* $proyectos=array('nomP'=>$resultado['nombreProyecto'],
         'fechIP'=>$resultado['fechaInicio'],'fechFP'=>$resultado['fechaFinal'],
           ,'nomM'=>$resultado['nombrePersona'],'apeM'=>$resultado['apellidoPersona'],'progreso'=>$porcentaje);*/
-            
+
             array_push($listaProyectos,$proyectos);
         }
         return json_encode($listaProyectos);
