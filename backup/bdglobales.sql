@@ -531,6 +531,10 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 		   
 	FROM (`tablapersona` `tp` JOIN `tablacolaborador` `tc` JOIN `tablapuesto` `tpu`)
 	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`);
+	
+	
+	
+	
 
 DROP VIEW IF EXISTS `vista_obtener_colaborador`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_obtener_colaborador` AS
@@ -541,7 +545,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 	FROM (`tablapersona` `tp` JOIN `tablapuesto` `tpu` JOIN `tablaequipotrabajo` `te` JOIN `tablacolaborador` `tc`)
 	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`) AND (`te`.`idEquipoTrabajo` = `tc`.`idEquipoTrabajo`);
 	
-	-- tablaequipotrabajo
+	
 --
 -- PROCEDIMIENTOS ALMACENADOS
 --
@@ -575,6 +579,7 @@ CREATE PROCEDURE `bdglobales`.`proc_editar_colaborador`(IN `cedula_usuario` VARC
 BEGIN
 
 	DECLARE id_auto_inc_persona INT(11);
+	DECLARE tipo_anterior VARCHAR(25);
 	SET id_auto_inc_persona = (SELECT idPersona FROM `tablapersona` WHERE cedulaPersona = cedula_usuario);
 	
 		UPDATE `tablapersona` 
@@ -633,7 +638,7 @@ INSERT INTO `tablapuesto` VALUES(NULL, 'Team Leader');
 -- ---------------------------------------------------------------
 
 
--- --------------------SKILLS--------------------------------------
+-- --------------------SKILLS---------------------------------------------------------------
 INSERT INTO `tablaskill` VALUES(NULL,'C++');
 INSERT INTO `tablaskill` VALUES(NULL,'C');
 INSERT INTO `tablaskill` VALUES(NULL,'C#');
@@ -646,19 +651,22 @@ INSERT INTO `tablaskill` VALUES(NULL,'Scheme');
 INSERT INTO `tablaskill` VALUES(NULL,'Prolog');
 INSERT INTO `tablaskill` VALUES(NULL,'PHP');
 INSERT INTO `tablaskill` VALUES(NULL,'SQL');
--- ----------------------------------------------------------------
+-- --------------------------------------------------------------------------------------------
 
--- ------------------------------TEAM MANAGERS-----------------------------------------------
+-- ---------------------------------PERSONAS---------------------------------------------------
 INSERT INTO `tablapersona` VALUES(NULL, '121340567', 'Robin', 'Wallace', 'man1', 'Activo');
 INSERT INTO `tablapersona` VALUES(NULL, '134350983', 'Marthin', 'Gonz', 'man2', 'Activo');
 INSERT INTO `tablapersona` VALUES(NULL, '140098323', 'Roberth', 'Smith', 'man3', 'Activo');
 INSERT INTO `tablapersona` VALUES(NULL, '159877662', 'Laura', 'Mendoza', 'man4', 'Activo');
-
+INSERT INTO `tablapersona` VALUES(NULL, '120059873', 'Alfonzo', 'Cascante', 'prom1', 'Activo');
+-- ------------------------------TEAM MANAGERS-------------------------------------------------
 INSERT INTO `tablateammanager` VALUE(NULL,1);
 INSERT INTO `tablateammanager` VALUE(NULL,2);
 INSERT INTO `tablateammanager` VALUE(NULL,3);
 INSERT INTO `tablateammanager` VALUE(NULL,4);
 -- -----------------------------------------------------------------------------------------------
+-- -----------------------------PROJECT MANAGERS--------------------------------------------------
+INSERT INTO `tablaprojectmanager` VALUE(NULL,5);
 -- ----------------------------PERSONAS-COLABORADORES---------------------------------------------
 INSERT INTO `tablapersona` VALUES(NULL, '116290648', 'Eithan', 'Mendez Mendez', 'qwsa', 'Activo');
 INSERT INTO `tablapersona` VALUES(NULL, '120934505', 'Jack', 'Williams', 'wqsa1223', 'Activo');
@@ -676,10 +684,10 @@ INSERT INTO `tablaequipotrabajo` VALUES(NULL,4,'TL-Team',4);
 -- -------------------------------------------------------------------------------------------------
 
 -- ----------------------------COLABORADORES--------------------------------------------------------
-INSERT INTO `tablacolaborador` VALUES(NULL,1,'Team Manager','man1',1,'Activo',1);
-INSERT INTO `tablacolaborador` VALUES(NULL,2,'Team Manager','man2',2,'Activo',2);
-INSERT INTO `tablacolaborador` VALUES(NULL,3,'Team Manager','man3',3,'Activo',3);
-INSERT INTO `tablacolaborador` VALUES(NULL,4,'Team Manager','man4',4,'Activo',4);
+INSERT INTO `tablacolaborador` VALUES(NULL,5,'Team Manager','man1',1,'Activo',1);
+INSERT INTO `tablacolaborador` VALUES(NULL,5,'Team Manager','man2',2,'Activo',2);
+INSERT INTO `tablacolaborador` VALUES(NULL,5,'Team Manager','man3',3,'Activo',3);
+INSERT INTO `tablacolaborador` VALUES(NULL,5,'Project Manager','man4',4,'Activo',4);
 
 INSERT INTO `tablacolaborador` VALUES(NULL,1,'Colaborador','qwsa',1,'Activo',5);
 INSERT INTO `tablacolaborador` VALUES(NULL,1,'Colaborador','wqsa1223',1,'Activo',6);
@@ -688,6 +696,36 @@ INSERT INTO `tablacolaborador` VALUES(NULL,2,'Colaborador','gbnhju8',2,'Activo',
 INSERT INTO `tablacolaborador` VALUES(NULL,2,'Colaborador','sdwe234',2,'Activo',9);
 INSERT INTO `tablacolaborador` VALUES(NULL,3,'Colaborador','d4f55',3,'Activo',10);
 -- --------------------------------------------------------------------------------------------------
+
+-- ------------------------------PROYECTOS-----------------------------------------------------------
+INSERT INTO `tablaproyecto` VALUES(NULL, 'PFE', '2019-01-03', '2019-03-30', 'Proyecto de Factura Elect', 'activo',1);
+INSERT INTO `tablaproyecto` VALUES(NULL, 'PPV', '2019-02-16', '2019-03-31', 'Proyecto de Punto de Vent', 'activo',1);
+-- ---------------------------OBJETIVOS PROYECTO-----------------------------------------------------
+INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,1,'Realizar conexion con hacienda', 'activo');
+INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,1,'Crear formulario de inscripcion', 'activo');
+INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,2,'Conectarse a la Base de Datos', 'activo');
+INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,2,'Hacer las ventanas responsive', 'activo');
+-- ---------------------------------------------------------------------------------------------------
+-- -----------------------COLABORADORES DE PROYECTO---------------------------------------------------
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,1);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,5);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,6);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,2);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,7);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,8);
+-- ------------------------SKILL DE COLABORADORES--------------------------------------------------------
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,1,3);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,12,5);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,7,6);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,7,7);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,8,8);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,9,9);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,1,1);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,2,2);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,4,2);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,6,7);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,9,2);
+INSERT INTO `tablaskillcolaborador` VALUES(NULL,1,5);
 
 
 
