@@ -71,7 +71,7 @@
         $json=$_POST['json']; 
         $json = json_decode($json,true);
         $idProyecto = $_POST['idProyecto'];
-        echo $business->agregarColaboradoresProyecto($json,$idProyecto);
+        $business->agregarColaboradoresProyecto($json,$idProyecto);
       }
 
 
