@@ -41,6 +41,10 @@
       }
 
       function contar_usuarios() {
-          return $this->contar_usuarios();
+          return $this->data->contar_usuarios();
+      }
+
+       function cargarTodosProyectos() {
+          return $this->data->cargarTodosProyectos();
       }
  }

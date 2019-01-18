@@ -199,6 +199,37 @@
           
         }
       }
+
+      function cargarTodosProyectos(){
+        $listaProyectos=array();
+        $stmt=$this->objetoConexion->prepare('SELECT tablaProyecto.idProyecto, tablaProyecto.nombreProyecto, tablaProyecto.fechaInicio, tablaProyecto.fechaFinal, tablaPersona.nombrePersona, tablaPersona.apellidoPersona from tablaProyecto inner join tablaProjectManager on tablaProyecto.idProjectManager=tablaProjectManager.idProjectManager inner join tablaPersona on  tablaPersona.idPersona=tablaProjectManager.idPersona');
+        $stmt->execute();
+        while($resultado=$stmt->fetch()){
+          $stmt2=$this->objetoConexion->prepare('SELECT tablaObjetivoProyecto.estadoObjetivoProyecto from tablaObjetivoProyecto where tablaObjetivoProyecto.idProyecto=?');
+          $stmt2->execute([$resultado['idProyecto']]);
+          $contObjetivos=0;
+          $contObjetivosCompletos=0;
+          while($resultado2=$stmt2->fetch()){
+              $contObjetivos++;
+              if($resultado2['estadoObjetivoProyecto']=="completo"){
+                  $contObjetivosCompletos++;
+              }
+          }
+          if($contObjetivos==0){
+            $contObjetivos = 1;
+          }
+          $porcentaje=($contObjetivosCompletos*100)/$contObjetivos;
+          $proyectos = array('nomP'=>$resultado['nombreProyecto'],'fechIP'=>$resultado['fechaInicio'],'fechFP'=>$resultado['fechaFinal'],'nomM'=>$resultado['nombrePersona'],'apeM'=>$resultado['apellidoPersona'],'progreso'=>$porcentaje);
+         /* $proyectos=array('nomP'=>$resultado['nombreProyecto'],
+        'fechIP'=>$resultado['fechaInicio'],'fechFP'=>$resultado['fechaFinal'],
+          ,'nomM'=>$resultado['nombrePersona'],'apeM'=>$resultado['apellidoPersona'],'progreso'=>$porcentaje);*/
+            
+            array_push($listaProyectos,$proyectos);
+        }
+        return json_encode($listaProyectos);
+
+      }
+
     }
 ?>
 

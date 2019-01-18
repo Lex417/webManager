@@ -499,10 +499,8 @@ function redireccionarAñadirColaboradores(idProyecto){
 
 function verTodosProyectosTabla(){
      var formData = new FormData();
-    formData.append('accion','cargarColaboradoresFiltro');
-    formData.append('nombreUsuario', $('#nombreU').val());
-    formData.append('departamento', $('#departamentoSelect').val()); 
-    formData.append('habilidad', $('#habilidadSelect').val()); 
+    formData.append('accion','cargarTodosProyectos');
+ 
     $.ajax({                        
         type: "POST",                 
         url: "../business/proyectosAction.php",                     
@@ -515,12 +513,11 @@ function verTodosProyectosTabla(){
         success: function(data)             
         {
             console.log(data);
-            json = JSON.parse(data);
+            listaProyectos = JSON.parse(data);
             html=""; 
-            listaProyectos.push(json);
    
             for(i=0; i<listaProyectos.length;i++){
-                 html += '<tr><td>'+listaProyectos[i].nomP+'</td><td>'+listaProyectos[i].fechIP+'</td><td>'+listaProyectos[i].fechaFP+'</td><td>'+listaProyectos[i].nomM+'</td><td>'+listaProyectos[i].progreso+'</td></tr>';
+                 html += '<tr><td>'+listaProyectos[i].nomP+'</td><td>'+listaProyectos[i].fechIP+'</td><td>'+listaProyectos[i].fechFP+'</td><td>'+listaProyectos[i].nomM+'</td><td>'+listaProyectos[i].progreso+'</td></tr>';
                                                                 
             }  
             $("#tablaProyectos").html(html);

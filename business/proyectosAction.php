@@ -74,5 +74,9 @@
         $business->agregarColaboradoresProyecto($json,$idProyecto);
       }
 
+      if($accion=="cargarTodosProyectos"){
+        echo $business->cargarTodosProyectos();
+      }
+
 
 ?>
