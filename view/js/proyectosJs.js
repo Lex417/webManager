@@ -128,10 +128,6 @@ function editarDatosProyecto(){
     estado_Proyecto_select.appendChild(estado_activo);
     estado_Proyecto_select.appendChild(estado_inactivo);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 23e2596c733981fffcedc94c907a4676a4d573eb
     var formData = new FormData();
     formData.append('accion','editarDatosProyecto');
     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
