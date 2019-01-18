@@ -81,11 +81,11 @@
 																		<div class="col-9 col-sm-9 col-md-9 col-xs-12" style="display: flex;padding: 0;">
 																			<div class="col-6 col-sm-6 col-md-6 col-xs-6" style="display: flex;">
 																				<label class="text-inline-block" for="inicio_Proyecto" style="display: inline-block;padding-right: 10px;">Fecha inicio: </label>
-																				<input  type="text" class="form-control" disabled name="inicio_Proyecto" id="inicio_Proyecto" style="max-width: 50%;">
+																				<input  type="date" class="form-control" disabled name="inicio_Proyecto" id="inicio_Proyecto" style="max-width: 50%;">
 																			</div>
 																			<div class="col-6 col-sm-6 col-md-6 col-xs-6" style="display: flex;">
 																				<label class="text-inline-block"  for="fin_Proyecto"style="display: inline-block;padding-right: 10px;">Fecha Final: </label>
-																				<input  type="text" class="form-control" disabled name="fin_Proyecto" id="fin_Proyecto" style="max-width: 50%;">
+																				<input  type="date" class="form-control" disabled name="fin_Proyecto" id="fin_Proyecto" style="max-width: 50%;">
 																			</div>
 																		</div>
 																		<div class="col-3 col-sm-3 col-md-3 col-xs-12">

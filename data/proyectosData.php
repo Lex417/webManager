@@ -45,25 +45,25 @@
 
       function obtenerProyecto($id){
    
-        $stmt = $this->objetoConexion->prepare('SELECT id_Proyecto, nombre_Proyecto,inicio_Proyecto,fin_Proyecto,desc_Proyecto,estado_Proyecto 
-        from vista_proyectos_activos where id_Proyecto=?');
-        $stmt->execute([$id]);
+        $stmt = $this->objetoConexion->prepare("SELECT idProyecto, nombreProyecto,fechaInicio,fechaFinal,descripcionProyecto,estadoProyecto 
+        from vista_proyectos_activos where idProyecto='$id'");
+        $stmt->execute(['activo']);
         $listaProyectos=array();
         while($fila=$stmt->fetch()){
-            $proyecto=array('idProyecto'=>$fila['id_Proyecto'],
-        'nomProyecto'=>$fila['nombre_Proyecto'],
-        'fechaInicio'=>$fila['inicio_Proyecto'],
-        'fechaFinal'=>$fila['fin_Proyecto'],
-        'estado_Proyecto'=>$fila['estado_Proyecto'],
-        'descripProyecto'=>$fila['desc_Proyecto']);
+            $proyecto=array('idProyecto'=>$fila['idProyecto'],
+        'nomProyecto'=>$fila['nombreProyecto'],
+        'fechaInicio'=>$fila['fechaInicio'],
+        'fechaFinal'=>$fila['fechaFinal'],
+        'estado_Proyecto'=>$fila['estadoProyecto'],
+        'descripProyecto'=>$fila['descripcionProyecto']);
             array_push($listaProyectos,$proyecto);
         }
         return json_encode($listaProyectos);
        }
 
        function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto){
-        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombre_Proyecto='$nombre_Proyecto',inicio_Proyecto='$inicio_Proyecto',fin_Proyecto='$fin_Proyecto',desc_Proyecto='$desc_Proyecto',estado_Proyecto='$estado_Proyecto'
-        WHERE id_Proyecto='$id_Proyecto'");
+        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombreProyecto='$nombre_Proyecto',fechaInicio='$inicio_Proyecto',fechaFinal='$fin_Proyecto',descripcionProyecto='$desc_Proyecto',estadoProyecto='$estado_Proyecto'
+        WHERE idProyecto='$id_Proyecto'");
     
         echo $stmt->execute(['activo']);
     
