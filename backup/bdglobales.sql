@@ -596,7 +596,35 @@ BEGIN
 		
 END $$
 DELIMITER ;
+/*  -----------------------------------------------------------------*/
 
+DROP PROCEDURE IF EXISTS `add_collaborator_proyect_notification`;
+DELIMITER $$
+
+CREATE PROCEDURE `bdglobales`. `add_collaborator_proyect_notification` (IN `pproyect_id` INT(11), IN `pcolaborador_id` INT(11)) 
+ BEGIN
+     SET @exist = IFNULL((SELECT idNotificacion FROM tablanotificacion WHERE idProyectoNotificacion=pproyect_id AND idColaboradorNotificacion=pcolaborador_id LIMIT 1), 0);
+
+     IF @exist = 0 THEN
+  INSERT INTO tablanotificacion (idManagerPeticionNotificacion,idColaboradorNotificacion,idProyectoNotificacion,idManagerAceptacionNotificacion, estadoNotificacion)
+    
+  SELECT DISTINCT pm.idProjectManager, pcolaborador_id, pproyect_id, tm.idTeamManager, 'Pendiente'
+  FROM tablacolaborador AS co
+
+  INNER JOIN tablaequipotrabajo AS et ON co.idEquipoTrabajo = et.idEquipoTrabajo
+  INNER JOIN tablateammanager AS tm ON et.idTeamManager = tm.idTeamManager
+  INNER JOIN tablapersona AS p1 ON tm.idPersona= p1.idPersona
+
+  INNER JOIN tablaproyecto AS pro ON pro.idProyecto = pproyect_id
+  INNER JOIN tablaprojectmanager AS pm ON pro.idProjectManager= pm.idProjectManager
+  INNER JOIN tablapersona AS per ON pm.idPersona = per.idPersona
+
+  INNER JOIN tablapersona AS p2 ON co.idPersona = p2.idPersona
+  WHERE co.idColaborador = pcolaborador_id;
+     END IF;
+END$$
+DELIMITER;
+/* ----------------------------------------------------------------*/
 
 DROP PROCEDURE IF EXISTS `proc_eliminar_colaborador`;
 DELIMITER $$

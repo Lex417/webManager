@@ -32,7 +32,7 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="verProyectosActivos.php">
                                                         <i class="zmdi zmdi-account"></i>Ver Perfil</a>
                                                 </div>
                                             </div>
