@@ -90,8 +90,7 @@ function obtenerVistaUsuariosPorProyecto() {
                // llenar_fila(json, t_body);
                var fila = t_body.insertRow(-1);
                //fila.setAttribute("scope", "row");
-
-               
+               //se personalizan las celdas               
 
                var celda_cedula = fila.insertCell(-1);
                celda_cedula.style="width:118px;";
