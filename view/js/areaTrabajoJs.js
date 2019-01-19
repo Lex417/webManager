@@ -346,8 +346,20 @@ function filtro_equipo() {
 function reordenar_filas() {
     var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
     $('#tabla-areas-trabajo tbody').empty(); // limpia completamente la tabla
-    countDepartamentos();
-    mostrarDepDesarrollo(pag_actual);
+    if(seleccion_actual == 1) {
+        countDesarrollo();
+        mostrarDepDesarrollo(pag_actual);
+
+    } else if(seleccion_actual == 2) {
+        countSoporte();
+        mostrarDepSoporte(pag_actual);
+    } else if(seleccion_actual == 3) {
+        countQa();
+        mostrarDepQa(pag_actual);
+    } else if(seleccion_actual == 4) {
+        countLeadership();
+        mostrarDepTeamLeader(pag_actual);
+    }
 }
 
 function desplegar_dep_desarrollo() {

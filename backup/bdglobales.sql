@@ -735,12 +735,12 @@ INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,2,'Conectarse a la Base de Datos
 INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,2,'Hacer las ventanas responsive', 'activo');
 -- ---------------------------------------------------------------------------------------------------
 -- -----------------------COLABORADORES DE PROYECTO---------------------------------------------------
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,1);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,5);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,6);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,2);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,7);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,8);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,1,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,5,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,6,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,2,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,7,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,8,'Activo');
 -- ------------------------SKILL DE COLABORADORES--------------------------------------------------------
 INSERT INTO `tablaskillcolaborador` VALUES(NULL,1,3);
 INSERT INTO `tablaskillcolaborador` VALUES(NULL,12,5);
