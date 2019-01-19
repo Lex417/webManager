@@ -26,14 +26,12 @@
     $fin_Proyecto=$_POST['fin_Proyecto'];
     $desc_Proyecto=$_POST['desc_Proyecto'];
     $estado_Proyecto=$_POST['estado_Proyecto'];
-<<<<<<< HEAD
     echo $business->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto);
 }//////////////////////////////////////
  
      if($accion == 'insertarProyecto') {
       $result = 0;
     if( isset($_POST['nombre_Proyecto']) &&
-=======
     $manager_Id=$_POST['manager_Id'];
     echo $business->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto,$manager_Id);
 }
@@ -42,7 +40,6 @@
     $text = null;
     if(isset($_POST['id_Proyecto']) &&
        isset($_POST['nombre_Proyecto']) &&
->>>>>>> 3100b450f5964ac31e2000685035c4d8f7682f3e
        isset($_POST['inicio_Proyecto']) &&
        isset($_POST['fin_Proyecto']) &&
        isset($_POST['desc_Proyecto']) &&
