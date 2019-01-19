@@ -41,35 +41,31 @@
                 <!-- Aqui va el cuerpo de la pantalla -->
                 </div>
                 <div class=" table-responsive m-b-40">
-                    <div class="form-check-inline form-check">
-                        <input type="text" id="input-busqueda" class="search form-control" style="width: 200px;" placeholder="Buscar...">&nbsp;
-                        <label for="inline-radio1" class="form-check-label ">
-                            <input type="radio" id="inline-radio1" name="inline-radios" value="id" class="form-check-input">ID
-                        </label>
-                        <label for="inline-radio2" class="form-check-label ">
-                            <input type="radio" id="inline-radio2" name="inline-radios" value="nombre" class="form-check-input">NOMBRE
-                        </label>
-                        <label for="inline-radio3" class="form-check-label ">
-                            <input type="radio" id="inline-radio3" name="inline-radios" value="puesto" class="form-check-input">PUESTO
-                        </label>&nbsp;
+                    <div class="row" style="padding: 0px 15px 0px;">
+                        <div class="col-3">
+                            <input type="text" id="input-busqueda-id" class="search form-control" style="width: 240px;" placeholder="Buscar ID..">&nbsp;
+                        </div>
+                        <div class="col-3">
+                        <input type="text" id="input-busqueda-nombre" class="search form-control" style="width: 240px;" placeholder="Buscar Nombre..">&nbsp;
+                        </div>
+                        <div class="col-4">
+                        <input type="text" id="input-busqueda-puesto" class="search form-control" style="width: 240px;" placeholder="Buscar Puesto..">&nbsp;
+                        </div>
                         <label class="control-label mb-1">
-                            <select name="select" id="select-resultados" onchange="reordenar_filas();" class="form-control">
+                            <select name="select" style="width: 70px;" id="select-resultados" onchange="reordenar_filasCol();" class="form-control">
                                 <option value="0">2</option>
                                 <option value="1"selected>5</option>
                                 <option value="2">10</option>
                             </select>
                         </label>
                     </div>
-                    <script type="text/javascript"> $("#inline-radio1").prop('checked', true); </script>
-
-                            <table width="50" id ="tabla_colaboradores" class="table table-hover">
+                            <table  id ="tabla_colaboradores" class="table table-borderless table-striped table-earning">
                                 <thead>
                                     <th width="5%">ID</th>
                                     <th width="5%">Nombre</th>
                                     <th width="5%">Apellido</th>
                                     <th width="5%">Puesto</th>
                                     <th width="5%">Estado</th>
-                                    <th width="2%"></th>
                                     <th width="2%"></th>
                                     <th width="2%"></th>
                                 </thead>

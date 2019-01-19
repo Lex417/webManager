@@ -27,30 +27,32 @@
     $desc_Proyecto=$_POST['desc_Proyecto'];
     $estado_Proyecto=$_POST['estado_Proyecto'];
     echo $business->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto);
-}
+}//////////////////////////////////////
 
     if($accion == 'insertarProyecto') {
-    $text = null;
-    if(isset($_POST['id_Proyecto']) &&
-       isset($_POST['nombre_Proyecto']) &&
+      $result = 0;
+    if( isset($_POST['nombre_Proyecto']) &&
        isset($_POST['inicio_Proyecto']) &&
        isset($_POST['fin_Proyecto']) &&
        isset($_POST['desc_Proyecto']) &&
        isset($_POST['estado_Proyecto']) &&
        isset($_POST['id_Proyect_Manager'])) {
 
-        if($business->insertarProyecto($_POST['id_Proyecto'], $_POST['nombre_Proyecto'], $_POST['inicio_Proyecto'], $_POST['fin_Proyecto'], $_POST['desc_Proyecto'], $_POST['estado_Proyecto'], $_POST['id_Proyect_Manager'])) {
-            $text = array('status' => "true", 'error'=>"");
+        $tempResult = $business->insertarProyecto($_POST['nombre_Proyecto'], $_POST['inicio_Proyecto'], $_POST['fin_Proyecto'], $_POST['desc_Proyecto'], $_POST['estado_Proyecto'], $_POST['id_Proyect_Manager']);
+
+        if($tempResult > 0) {
+            $result = $tempResult;
         } else {
-            $text = array('status' => "false", 'error'=>"Error al insertar en la bd");
+            $result = 0;
         }
 
-       } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
+        } else {
+          $result = -1;
+        }
 
-       echo json_encode($text);
-      } else if($accion == 'modificar_usuario') {
-
-      } else if($accion == 'eliminar_usuario') {
+        header('Content-Type: application/json');
+        //Devolvemos el array pasado a JSON como objeto
+        echo json_encode($result, JSON_FORCE_OBJECT);
 
       } else if($accion == 'mostrar_usuario') {
               $business->mostrar_usuarios();

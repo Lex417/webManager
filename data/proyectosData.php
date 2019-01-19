@@ -93,16 +93,38 @@
           }
           return json_encode($listaProyectos);
       }
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-       function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager) {
-        $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyecto(nombreProyecto, fechaInicio, fechaFinal, descripcionProyecto, estadoProyecto, idProyectManager) VALUES(?,?,?,?,?,?)');
-        if($sql->execute([$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager])) {
-            return true;
-        } else {
-          return false;
-        }
+          function insertarProyecto($nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto,
+           $id_Proyect_Manager) {
+           $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyecto(nombreProyecto, fechaInicio, fechaFinal, descripcionProyecto, estadoProyecto, idProjectManager) VALUES(?,?,?,?,?,?)');
+             if($sql->execute([$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager])) {
+                $sql2 = $this->objetoConexion->prepare('SELECT LAST_INSERT_ID() AS last_id');
 
-      }
+                if($sql2->execute()){
+                 while($rest=$sql2->fetch()){
+                      return (int)$rest['last_id'];
+                  }
+                } else {
+
+                 return 0;
+               }
+            } else {
+              return false;
+            }
+
+         }
+
+
+          function insertarNotificacion ($proyect_id, $col_id) {
+            $sql = $this->objetoConexion->prepare('CALL add_collaborator_proyect_notification(?,?)');                
+            if($sql->execute([$proyect_id, $col_id])) {
+              return true;
+            } else {
+                return false;
+            }
+          }
+         //////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -124,8 +146,8 @@
         return json_encode($listaProyectos);
        }
 
-       function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto){
-        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombreProyecto='$nombre_Proyecto',fechaInicio='$inicio_Proyecto',fechaFinal='$fin_Proyecto',descripcionProyecto='$desc_Proyecto',estadoProyecto='$estado_Proyecto'
+       function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto,$manager_Id){
+        $stmt = $this->objetoConexion->prepare("UPDATE vista_proyectos_activos SET  nombreProyecto='$nombre_Proyecto',fechaInicio='$inicio_Proyecto',fechaFinal='$fin_Proyecto',descripcionProyecto='$desc_Proyecto',estadoProyecto='$estado_Proyecto',idProjectManager='$manager_Id'
         WHERE idProyecto='$id_Proyecto'");
 
         echo $stmt->execute(['activo']);
@@ -253,13 +275,13 @@
 
               //echo 'Error occurred:'.implode(":",$this->objetoConexion->errorInfo());
             } else{
-               $data = array();
-               $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
-               array_push($data, $text);
-               echo json_encode($data);
+                $data = array();
+                $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
+                array_push($data, $text);
+                echo json_encode($data);
             }
           }
-
+          self::insertarNotificacion($idProyecto, $idUsu);
         }
       }
 

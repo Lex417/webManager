@@ -26,7 +26,11 @@
 <script src="vendor/select2/select2.min.js">
 </script>
 
-<!-- Main JS-->
-<script src="js/main.js"></script>
-<script src="js/proyectosJs.js"></script>
-<script src="js/empleadosJs.js"></script>
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+    <!-- JS de clases-->
+    <script src="js/proyectosJs.js"></script>
+    <script src="js/empleadosJs.js"></script>
+    <script src="js/areaTrabajoJs.js"></script>
+    <!-- Pagination.js-->
+    <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
