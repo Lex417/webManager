@@ -12,13 +12,13 @@ class usuariosBusiness {
     function getFiltro($palabra) {
         $res = "";
         switch($palabra) {
-        case "id":
+        case "1":
             $res = "cedulaPersona";
             break;
-        case "nombre":
+        case "2":
             $res = "nombrePersona";
             break;
-        case "puesto":
+        case "3":
             $res = "nombrePuesto";
             break;
         }
