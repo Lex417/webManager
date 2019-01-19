@@ -24,6 +24,41 @@
             }
             return json_encode($listaProyectos);
        }
+
+       function cargarObjetivos($id){
+         $stmt = $this->objetoConexion->prepare('SELECT * FROM tablaobjetivoproyecto WHERE idProyecto=?');
+         $stmt->execute([$id]);
+         $listaObjetivos=array();
+           while($fila=$stmt->fetch()){
+             $objetivo=array('ideObjProyecto'=>$fila['idObjetivoProyecto'],
+                             'descripObjetivoProyecto'=>$fila['descripcionObjetivoProyecto'],
+                             'estadoObjetivo'=>$fila['estadoObjetivoProyecto']);
+             array_push($listaObjetivos, $objetivo);
+           }
+
+           return json_encode($listaObjetivos);
+
+       }
+
+       function insertarObjetivo($idProy, $descripcionObjtv, $estadoObjtv){
+         $query2 = $this->objetoConexion->prepare('INSERT INTO tablaobjetivoproyecto(idProyecto, descripcionObjetivoProyecto, estadoObjetivoProyecto) VALUES(?,?,?)');
+         if($query2->execute([$idProy, $descripcionObjtv, $estadoObjtv])) {
+           return true;
+         } else {
+           return false;
+         }
+
+       }
+
+       function borrarObjetivo($id){
+         $query = $this->objetoConexion->prepare('DELETE FROM tablaobjetivoproyecto WHERE idObjetivoProyecto = ?');
+         if($query->execute([$id])) {
+           return true;
+         } else {
+           return false;
+         }
+
+       }
       /*function insertar($parametro1,$parametro2){
 
           $stmt = $this->objetoConexion->prepare('Insert into tb_prueba(columna1, columna2) values (?,?)');
@@ -58,21 +93,45 @@
           }
           return json_encode($listaProyectos);
       }
+      ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-       function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager) {
-        $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyecto(nombreProyecto, fechaInicio, fechaFinal, descripcionProyecto, estadoProyecto, idProyectManager) VALUES(?,?,?,?,?,?)');
-        if($sql->execute([$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager])) {
-            return true;
-        } else {
-          return false;
-        }
+          function insertarProyecto($nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto,
+           $id_Proyect_Manager) {
+           $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyecto(nombreProyecto, fechaInicio, fechaFinal, descripcionProyecto, estadoProyecto, idProjectManager) VALUES(?,?,?,?,?,?)');
+             if($sql->execute([$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, $estado_Proyecto, $id_Proyect_Manager])) {
+                $sql2 = $this->objetoConexion->prepare('SELECT LAST_INSERT_ID() AS last_id');
 
-      }
+                if($sql2->execute()){
+                 while($rest=$sql2->fetch()){
+                      return (int)$rest['last_id'];
+                  }
+                } else {
+
+                 return 0;
+               }
+            } else {
+              return false;
+            }
+
+         }
+
+
+          function insertarNotificacion ($proyect_id, $col_id) {
+            $sql = $this->objetoConexion->prepare('CALL add_collaborator_proyect_notification(?,?)');                
+            if($sql->execute([$proyect_id, $col_id])) {
+              return true;
+            } else {
+                return false;
+            }
+          }
+         //////////////////////////////////////////////////////////////////////////////////
+
+
 
       function obtenerProyecto($id){
 
         $stmt = $this->objetoConexion->prepare("SELECT idProyecto, nombreProyecto,fechaInicio,fechaFinal,descripcionProyecto,estadoProyecto
-        from vista_proyectos_activos where idProyecto='$id'");
+        from tablaProyecto where idProyecto='$id'");
         $stmt->execute(['activo']);
         $listaProyectos=array();
         while($fila=$stmt->fetch()){
@@ -216,13 +275,13 @@
 
               //echo 'Error occurred:'.implode(":",$this->objetoConexion->errorInfo());
             } else{
-               $data = array();
-               $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
-               array_push($data, $text);
-               echo json_encode($data);
+                $data = array();
+                $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
+                array_push($data, $text);
+                echo json_encode($data);
             }
           }
-
+          self::insertarNotificacion($idProyecto, $idUsu);
         }
       }
 

@@ -2,7 +2,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="main.html">
                             <img src="images/logo/logo.png" width="120px" height="30px" alt="WebManager" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -17,7 +17,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
-                            <a href="index.php">
+                            <a href="main.php">
                                 <i class="fas fa-chart-bar"></i>Inicio</a>
                         </li>
                         <li>
@@ -32,12 +32,12 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
 
                             <ul id="proyectoMM"class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                
+
                             </ul>
-                        
-                        
-                        
-                        
+
+
+
+
                     </ul>
                 </div>
             </nav>
@@ -54,9 +54,9 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        
+
                         <li>
-                            <a href="index.php">
+                            <a href="main.php">
                                 <i class="fas fa-chart-bar"></i>Inicio</a>
                         </li>
                         <li>
@@ -71,13 +71,13 @@
                             <a class="js-arrow" href="dashProyectos.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <ul id="proyectoMD" class="list-unstyled navbar__sub-list js-sub-list">
-                                
+
                             </ul>
                         </li>
-                        
-                        
-                        
-                       
+
+
+
+
                     </ul>
                 </nav>
             </div>

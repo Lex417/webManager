@@ -15,10 +15,11 @@
         function obtenerDatosGrafica(){
           return $this->data->obtenerGraficaProyectos();
         }
-         function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,
-            $estado_Proyecto, $id_Proyect_Manager) {
-            return $this->data->insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
-        }
+        function insertarProyecto($nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, 
+              $estado_Proyecto, $id_Proyect_Manager) {
+              return $this->data->insertarProyecto($nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
+          }
+
 
         function obtenerProyecto($id){
             return $this->data->obtenerProyecto($id);
@@ -49,5 +50,14 @@
 
        function cargarTodosProyectos() {
           return $this->data->cargarTodosProyectos();
+      }
+      function cargarObjetivos($id){
+          return $this->data->cargarObjetivos($id);
+      }
+      function insertarObjetivo($id, $descripcionObjtv, $estadoObjtv){
+          return $this->data->insertarObjetivo($id, $descripcionObjtv, $estadoObjtv);
+      }
+      function borrarObjetivo($id){
+          return $this->data->borrarObjetivo($id);
       }
  }

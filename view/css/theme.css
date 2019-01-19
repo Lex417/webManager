@@ -310,7 +310,28 @@ section {
 .page-wrapper {
     overflow: hidden;
 }
+#tablaObj  {
+  background-color: #268080 !important;
+}
+#objThead {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 0;
+}
+#columnaTabla {
 
+  display: block;
+  max-height: 439px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+}
+#objThead {
+  background-color: #f09c3a !important;
+}
 .page-container {
     background: #e5e5e5;
     padding-left: 300px;
