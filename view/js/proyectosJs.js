@@ -429,7 +429,8 @@ function actualizarDatosProyectoBD(){
     var estado_Proyecto = estado_Proyecto_select.options[estado_Proyecto_select.selectedIndex].value;
 
 
-
+    var selectNombresManagers = document.getElementById("selectNombresManagers");
+    var manager_Id = selectNombresManagers.options[selectNombresManagers.selectedIndex].id;
 
     var formData = new FormData();
     formData.append('accion','actualizarDatosProyectoBD');
@@ -440,6 +441,7 @@ function actualizarDatosProyectoBD(){
     formData.append('fin_Proyecto',fin_Proyecto);
     formData.append('desc_Proyecto',desc_Proyecto);
     formData.append('estado_Proyecto',estado_Proyecto);
+    formData.append('manager_Id',manager_Id);
 
 
 

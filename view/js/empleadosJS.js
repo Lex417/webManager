@@ -89,43 +89,109 @@ function obtenerVistaUsuariosPorProyecto() {
             for(i=0; i<json.length;i++) {
                // llenar_fila(json, t_body);
                var fila = t_body.insertRow(-1);
+               //fila.setAttribute("scope", "row");
+               //se personalizan las celdas               
 
                var celda_cedula = fila.insertCell(-1);
+               celda_cedula.style="width:118px;";
                celda_cedula.innerText = json[i].id_Usuario;
 
                var celda_nombre = fila.insertCell(-1);
+               celda_nombre.style="width:135px;";
                celda_nombre.innerText = json[i].nombre_Usuario;
 
                
                var celda_apellido = fila.insertCell(-1);
+               celda_apellido.style="width:140px;";
                celda_apellido.innerText = json[i].apellido_Usuario;
 
                var celda_puesto = fila.insertCell(-1);
+               celda_puesto.style="width:115px;";
                celda_puesto.innerText = json[i].puesto_Usuario;
 
                var celda_tipo = fila.insertCell(-1);
+               celda_tipo.style="width:155px;";
                celda_tipo.innerText = json[i].tipo_Usuario;
 
                var celda_estado = fila.insertCell(-1);
+               celda_estado.style="width:100px;";
                celda_estado.innerText = json[i].estado_Usuario;
-
-
-
-
-
             }
         }
     });
 }
-function llenarTablaColaborarores(json){
+function obtenerNombresManagers() {
+    var formData = new FormData();
+    formData.append('accion', 'obtenerNombresManagers');
+     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+    //formData.append('id',getQueryVariable());
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+             var json = JSON.parse(respuesta);
+             console.log(json);
+             var selectNombresManagers = document.getElementById("selectNombresManagers");
+             selectNombresManagers.innerHTML="";
+
+            for(i=0; i<json.length;i++) {
+               agragarOption(json[i].nombreManager,json[i].idManager,selectNombresManagers);
+            }
+        }
+    });
+}
+
+function agragarOption(nombre,managerId,selectNombresManagers){
    
+   if(selectNombresManagers){
+       var optionAux = document.createElement("OPTION");
+       optionAux.innerText = nombre;
+       optionAux.setAttribute("id",managerId);
+       selectNombresManagers.appendChild(optionAux);
 
-    
-
+   }
+   
+}
+function obtenerNombreManagerActual(){
+    var formData = new FormData();
+    formData.append('accion', 'obtenerNombreManagerActual');
+     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+     var id = getQueryVariable();
+    formData.append('idProyecto',getQueryVariable());
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+             var json = JSON.parse(respuesta);
+             console.log(json);
+            for(i=0; i<json.length;i++) {
+                var selectNombresManagers = document.getElementById("selectNombresManagers");
+                if(selectNombresManagers){
+                    var optionAux = document.createElement("OPTION");
+                    optionAux.innerText = json[i].nombreManager;
+                    optionAux.setAttribute("id",json[i].idManager);
+                    selectNombresManagers.appendChild(optionAux);
+             
+                }
+            }
+        }
+    });
 }
 
 // buscara elementos en la BD que cumplan con el filtro especificado
-function busquedaFiltro(palabra, tipoFiltro) {
+function busquedaFiltroCol(palabra, tipoFiltro) {
     formData = new FormData();
     formData.append('accion','filtrar');
     formData.append('palabra', palabra);
@@ -383,7 +449,7 @@ function obtenerEquiposDisponibles() {
 /*************************** METODOS ADICIONALES*******************************/
 
 // funcion que hace que se ordenen las filas de acuerdo al combo box seleccionado
-function reordenar_filas() {
+function reordenar_filasCol() {
     var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
     $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
     countUsuarios();
@@ -399,7 +465,10 @@ function desplegar_modal_eliminar(id) {
 // esta funcion encapsula los metodos iniciales importantes para informacion.php (paginacion, filtros, tabla, etc)
 function desplegar_metodos() {
     inicializar_variables_globales();
-    filtro_tabla_usuarios();
+    filtro_tabla_id();
+    filtro_tabla_nombre();
+    filtro_tabla_puesto();
+
     limpiar_form();
     limpiar_form_agregar();
     countUsuarios();
@@ -503,15 +572,35 @@ function limpiar_form_agregar() {
 
 
 //Filtra la tabla de usuarios, puede buscar cualqueir campo de la tabla.
-function filtro_tabla_usuarios() {
+function filtro_tabla_id() {
 
-    $('.search').on('keyup',function() {
+    $('#input-busqueda-id').on('keyup',function() {
         $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
         var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
-        var cond_filtro = $('input[name="inline-radios"]:checked').val(); //obtiene el value de los radios
-        var search = $('#input-busqueda').val(); //obtenemos el valor del imput
+        var search = $('#input-busqueda-id').val(); //obtenemos el valor del imput
         if(search == "") { cambia_pag(pag_actual);}
-         else { busquedaFiltro(search,cond_filtro);}
+         else { busquedaFiltroCol(search,1);
+        }
+    });
+}
+
+function filtro_tabla_nombre() {
+    $('#input-busqueda-nombre').on('keyup',function() {
+        $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
+        var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
+        var search = $('#input-busqueda-nombre').val(); //obtenemos el valor del imput
+        if(search == "") { cambia_pag(pag_actual);}
+         else { busquedaFiltroCol(search,2);}
+    });
+}
+
+function  filtro_tabla_puesto() {
+    $('#input-busqueda-puesto').on('keyup',function() {
+        $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
+        var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
+        var search = $('#input-busqueda-puesto').val(); //obtenemos el valor del imput
+        if(search == "") { cambia_pag(pag_actual);}
+         else { busquedaFiltroCol(search,3);}
     });
 }
 
@@ -529,50 +618,6 @@ function agregar_eventos() {
 
 
 // llena las filas de las areas de trabajo para mostrarlas en las tablas (Modificar con base nueva)
-function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_body4) {
-    switch(json[i].id_Departamento) {
-        case "1": //area de Desarrollo 
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body2.appendChild(tr);
-        break;
-
-        case "2": // area de Aseguramiento de Calidad (QA)
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body1.appendChild(tr);
-        break;
-
-        case "3": // Area de Liderazgo (Tech Leader)
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body4.appendChild(tr);
-        break;
-
-        case "4": //Area de Soporte
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body3.appendChild(tr);
-        break;
-    }
-
-}
 
 /***********************MENSAJES*****************************/
     function ocultar_mensaje_agregar() {

@@ -170,6 +170,29 @@ function cambiar_pagina($newNum, $limite) {
         }
         echo json_encode($lista_equipos);
     }
+    function obtenerNombresManagers(){
+        $sql = $this->objetoConexion->prepare("SELECT nombrePersona,pm.idProjectManager from tablapersona per inner join tablaprojectmanager pm on per.idPersona = pm.idPersona;");
+        $sql->execute(['activo']);
+        $lista_equipos=array();
+        while($fila=$sql->fetch()) {
+            $equipo=array('nombreManager'=>$fila['nombrePersona'],
+            'idManager'=>$fila['idProjectManager']);
+        array_push($lista_equipos,$equipo);
+        }
+        echo json_encode($lista_equipos);
+    }
+    function obtenerNombreManagerActual($idProyecto){
+        $sql = $this->objetoConexion->prepare("SELECT per.nombrePersona,tpm.idProjectManager from tablapersona per inner join tablaprojectmanager tpm on tpm.idPersona = per.idPersona inner join tablaproyecto tp on tp.idProjectManager = tpm.idProjectManager where idProyecto = '$idProyecto';");
+        $sql->execute(['activo']);
+        $lista_equipos=array();
+        while($fila=$sql->fetch()) {
+            $equipo=array('nombreManager'=>$fila['nombrePersona'],
+            'idManager'=>$fila['idProjectManager']);
+        array_push($lista_equipos,$equipo);
+        }
+        echo json_encode($lista_equipos);
+
+    }
 
 }
 

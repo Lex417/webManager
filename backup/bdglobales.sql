@@ -520,6 +520,21 @@ ALTER TABLE `tablatransaccion`
   ADD CONSTRAINT `tablatransaccion_ibfk_1` FOREIGN KEY (`idNegocio`) REFERENCES `tablanegocio` (`idNegocio`);
 COMMIT;
 
+
+--
+-- FUNCIONES
+--
+DROP FUNCTION IF EXISTS obtener_manager;
+DELIMITER //
+
+CREATE FUNCTION obtener_manager(id INT(11)) RETURNS VARCHAR(20)
+BEGIN
+	DECLARE res VARCHAR(20);
+	SET res = (SELECT CONCAT(`tp`.`nombrePersona`,' ',`tp`.`apellidoPersona`) AS `Manager` FROM (`tablapersona` `tp`) WHERE (id = `tp`.`idPersona`));
+	RETURN res;
+END //
+DELIMITER ;
+
 --
 -- VISTAS
 --
@@ -545,6 +560,19 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 	FROM (`tablapersona` `tp` JOIN `tablapuesto` `tpu` JOIN `tablaequipotrabajo` `te` JOIN `tablacolaborador` `tc`)
 	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`) AND (`te`.`idEquipoTrabajo` = `tc`.`idEquipoTrabajo`);
 	
+
+  DROP VIEW IF EXISTS `vista_departamentos`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_departamentos` AS
+    SELECT `tp`.`nombrePersona` AS `nombrePersona`,`tp`.`apellidoPersona` AS `apellidoPersona`,
+		   `tet`.`nombreEquipoTrabajo` AS `nombreEquipoTrabajo`,`td`.`nombreDepartamento` AS `nombreDepartamento`,
+		   obtener_manager(`tet`.`idTeamManager`) AS `Manager`
+		   
+	FROM(`tablapersona` `tp` JOIN `tablacolaborador` `tc` JOIN `tablaequipotrabajo` `tet` JOIN `tabladepartamento` `td`)
+	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) 
+	AND (`tet`.`idEquipoTrabajo` = `tc`.`idEquipoTrabajo`) 
+	AND (`tet`.`idDepartamento` = `td`.`idDepartamento`)
+	AND (`tc`.`tipoColaborador`<> 'Team Manager')
+	AND (`tc`.`tipoColaborador`<> 'Project Manager');
 	
 --
 -- PROCEDIMIENTOS ALMACENADOS
@@ -735,12 +763,12 @@ INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,2,'Conectarse a la Base de Datos
 INSERT INTO `tablaobjetivoproyecto` VALUES(NULL,2,'Hacer las ventanas responsive', 'activo');
 -- ---------------------------------------------------------------------------------------------------
 -- -----------------------COLABORADORES DE PROYECTO---------------------------------------------------
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,1);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,5);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,6);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,2);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,7);
-INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,8);
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,1,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,5,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,1,6,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,2,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,7,'Activo');
+INSERT INTO `tablaproyectocolaborador` VALUES(NULL,2,8,'Activo');
 -- ------------------------SKILL DE COLABORADORES--------------------------------------------------------
 INSERT INTO `tablaskillcolaborador` VALUES(NULL,1,3);
 INSERT INTO `tablaskillcolaborador` VALUES(NULL,12,5);
