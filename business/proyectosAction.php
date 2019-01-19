@@ -30,9 +30,8 @@
 }//////////////////////////////////////
 
     if($accion == 'insertarProyecto') {
-    $text = null;
-    if(isset($_POST['id_Proyecto']) &&
-       isset($_POST['nombre_Proyecto']) &&
+      $result = 0;
+    if( isset($_POST['nombre_Proyecto']) &&
        isset($_POST['inicio_Proyecto']) &&
        isset($_POST['fin_Proyecto']) &&
        isset($_POST['desc_Proyecto']) &&
