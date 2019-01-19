@@ -603,3 +603,111 @@ function mensajeSweetAlert(titulo, estado){
       button: "Aceptar",
     });
 }
+
+function borrarObjetivo(id){
+   console.log(id);
+  $('#mi-modal').modal('show');
+
+  var modalConfirm = function(callback){
+    $("#modal-btn-si").on("click", function(){
+      callback(true);
+      $("#mi-modal").modal('hide');
+    });
+
+    $("#modal-btn-no").on("click", function(){
+      callback(false);
+      $("#mi-modal").modal('hide');
+    });
+  };
+
+  modalConfirm(function(confirm){
+    if(confirm){
+      //Acciones si el usuario confirma
+      formData = new FormData();
+      formData.append('accion', 'eliminarObjetivo');
+      formData.append('id', id);
+      $.ajax({
+          type: "POST",
+          url:  "../business/proyectosAction.php",
+          data: formData,
+          dataType: "html",
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(respuesta) {
+              console.log(respuesta);
+              var json = JSON.parse(respuesta);
+              if(json.status == "true") {
+                console.log();
+                  //alert("Se ha eliminado correctamente");
+                  despliegaObjetivos();
+              }
+          }
+      });
+    }else{
+      return;
+    }
+  });
+}
+
+
+function despliegaObjetivos(){
+    var formData = new FormData();
+    formData.append('accion','cargarObjetivos');
+    formData.append('id',getQueryVariable());
+    $.ajax({
+        type: "POST",
+        url: "../business/proyectosAction.php",
+        data: formData,
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)
+        {
+            console.log(data);
+            listaObjetivos= JSON.parse(data);
+            html1="<tr><th>Objetivo</th><th>Estado</th><th><button type=\'button\' class=\'au-btn btn-sm\' data-toggle=\'modal\' data-target=\'#modalAgregar\'><i class=\'zmdi zmdi-plus\'></i>Agregar</th></tr>";
+            html2="";
+
+            for(i=0; i<listaObjetivos.length;i++){
+
+                 html2 += '<tr><td>'+listaObjetivos[i].descripObjetivoProyecto+'</td><td>'+listaObjetivos[i].estadoObjetivo+'</td><td><a href=\'#\' style=\'color: #ffffff\' onclick=\'borrarObjetivo('+listaObjetivos[i].ideObjProyecto+'); return false;\'><i class=\'zmdi zmdi-delete\'></i> eliminar</a></td></tr>';
+
+            }
+            $("#objThead").html(html1);
+            $("#tablaObjetivos").html(html2);
+        }
+    });
+}
+
+function insertarObjetivo(){
+  var formData = new FormData();
+  formData.append('accion','insertarObjetivo');
+  formData.append('descripcionObjetivo', $('#descripcion').val());
+  formData.append('estadoObjetivo', $('#select-estado option:selected').text());
+  formData.append('id',getQueryVariable());
+  $.ajax({
+      type: "POST",
+      url:  "../business/proyectosAction.php",
+      data: formData,
+      cache: false,
+      dataType: "html",
+      contentType: false,
+      processData: false,
+      success :function (respuesta) {
+          console.log(respuesta);
+          json = JSON.parse(respuesta);
+          if(json.status == "true") {
+               despliegaObjetivos();
+              //localStorage.setItem("idProyecto",$('#id_Proyecto').val());
+              //location.href="añadirColaboradoresProyecto.php";
+              console.log('se añadió correctamente');
+
+          } else {
+            alert(json.error + " No se pudo agregar correctamente!");
+          }
+      }
+    });
+  }

@@ -24,6 +24,41 @@
             }
             return json_encode($listaProyectos);
        }
+
+       function cargarObjetivos($id){
+         $stmt = $this->objetoConexion->prepare('SELECT * FROM tablaobjetivoproyecto WHERE idProyecto=?');
+         $stmt->execute([$id]);
+         $listaObjetivos=array();
+           while($fila=$stmt->fetch()){
+             $objetivo=array('ideObjProyecto'=>$fila['idObjetivoProyecto'],
+                             'descripObjetivoProyecto'=>$fila['descripcionObjetivoProyecto'],
+                             'estadoObjetivo'=>$fila['estadoObjetivoProyecto']);
+             array_push($listaObjetivos, $objetivo);
+           }
+
+           return json_encode($listaObjetivos);
+
+       }
+
+       function insertarObjetivo($idProy, $descripcionObjtv, $estadoObjtv){
+         $query2 = $this->objetoConexion->prepare('INSERT INTO tablaobjetivoproyecto(idProyecto, descripcionObjetivoProyecto, estadoObjetivoProyecto) VALUES(?,?,?)');
+         if($query2->execute([$idProy, $descripcionObjtv, $estadoObjtv])) {
+           return true;
+         } else {
+           return false;
+         }
+
+       }
+
+       function borrarObjetivo($id){
+         $query = $this->objetoConexion->prepare('DELETE FROM tablaobjetivoproyecto WHERE idObjetivoProyecto = ?');
+         if($query->execute([$id])) {
+           return true;
+         } else {
+           return false;
+         }
+
+       }
       /*function insertar($parametro1,$parametro2){
 
           $stmt = $this->objetoConexion->prepare('Insert into tb_prueba(columna1, columna2) values (?,?)');
@@ -69,10 +104,12 @@
 
       }
 
+
+
       function obtenerProyecto($id){
 
         $stmt = $this->objetoConexion->prepare("SELECT idProyecto, nombreProyecto,fechaInicio,fechaFinal,descripcionProyecto,estadoProyecto
-        from vista_proyectos_activos where idProyecto='$id'");
+        from tablaProyecto where idProyecto='$id'");
         $stmt->execute(['activo']);
         $listaProyectos=array();
         while($fila=$stmt->fetch()){

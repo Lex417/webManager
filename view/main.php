@@ -22,19 +22,16 @@
                         <div class="site-index">
                             <div class="jumbotron">
                                 <img src="images/logo/logo.png"  alt="WebManager" />
-                                <h2>Welcome!</h2>
-                                <p class="lead">The tool for every team and project manager.</p>
-                                <p><a class="au-btn  au-btn--blue" href="https://github.com/dennisbonilla/web-manager">Tool's Github</a></p>
+                                <h2>Bienvenido!</h2>
+                                <p class="lead">La herramienta para cada Líder de Proyectos.</p>
+                                <p><a class="au-btn  au-btn--blue" href="https://github.com/dennisbonilla/web-manager">Github</a></p>
                             </div>
                             <div class="body-content">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <h3>Description</h3>
-                                        <p>A powerful tool to control the creation of new projects within a company, managers would be able to request
-                                        workers that better suit the needs of an emergent project based on the skills required for each position,
-                                        the user also would have the information of all employees categorized by their disciplinaries areas,
-                                        each worker would have a presentation card with all the projects they have participated, an skillset and basic information.</p>
-                                        <p><a class="btn btn-default" href="https://github.com/dennisbonilla/web-manager"> Documentation </a></p>
+                                        <h3>Descripción</h3>
+                                        <p>Web Manager es un sistema cuya finalidad es permitirle a una organización mantener un control de los proyectos activos, manejar el recurso humano y su debido tiempo dentro de cada proyecto, además de poder visualizar la estructura de sus colaboradores según áreas disciplinarias y equipos de trabajo. Esta herramienta está dirigida a Managers de equipo, Project Managers y Líderes técnicos. El programa como tal se ajusta al tamaño de la empresa, ya que    puede ser utilizado por una PYME y al mismo tiempo una organización con una mayor estructura y recurso humano, la idea principal es organizar entré líderes de proyectos a los colaboradores participantes en estos, tener un control de fechas, objetivos cumplidos y demás logística entre los proyectos que se lleven a cabo dentro de la organización.</p>
+                                        <p><a class="btn btn-default" href="https://github.com/dennisbonilla/web-manager"> Documentación </a></p>
                                     </div>
                                 </div>
                             </div>

@@ -81,6 +81,40 @@
       if($accion=="cargarTodosProyectos"){
         echo $business->cargarTodosProyectos();
       }
+      if($accion=="cargarObjetivos"){
+        $id=$_POST['id'];
+        echo $business->cargarObjetivos($id);
+      }
+      if($accion=="insertarObjetivo"){
+        $text = null;
+        if(isset($_POST['descripcionObjetivo']) &&
+           isset($_POST['estadoObjetivo']) &&
+           $_POST['descripcionObjetivo']) {
+
+             $id=$_POST['id'];
+             $descripcionObjtv=$_POST['descripcionObjetivo'];
+             $estadoObjtv=$_POST['estadoObjetivo'];
+             if($business->insertarObjetivo($id, $descripcionObjtv, $estadoObjtv)){
+               $text = array('status' => "true", 'error'=>"");
+             } else {
+               $text = array('status' => "false", 'error'=>"Error al insertar en la bd.");
+             }
+        }else{
+          $text = array('status' => "false", 'error'=>"Error, faltan datos.");
+        }
+        echo json_encode($text);
+      }
+      if($accion=="eliminarObjetivo"){
+        $id=$_POST['id'];
+        $text=null;
+        
+        if($business->borrarObjetivo($id)){
+          $text = array('status' => "true", 'error'=>"");
+        } else{
+          $text = array('status' => "false", 'error'=>"Error al borrar de la bd.");
+        }
+        echo json_encode($text);
+      }
 
 
 ?>
