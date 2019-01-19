@@ -118,6 +118,7 @@
 																  
 																				<select  name="selectNombresManagers"	id="selectNombresManagers" class="custom-select mr-sm-2" id="">
 																					<!-- se agregan las opciones desde javascript  -->
+																					
 																				</select>
 																			</div>
 																			<div class="col-3 col-sm-3 col-md-3 col-xs-12">
@@ -169,18 +170,30 @@
 														</div>
 														<div class="card-body background-white">
 														<div class="table-responsive">
-														<table class="table">
+														<table class=" text-center   table table-striped table table-bordered table-hover " >
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">Cédula</th>
 																	<th scope="col">Nombre</th>
 																	<th scope="col">Apellido</th>
 																	<th scope="col">Puesto</th>
-																	<th scope="col">Tipo</th>
+																	<th scope="col" style="width:123px;">Tipo</th>
 																	<th scope="col">Estado</th>
+																	<th scope="col" style="padding: 0px; width: 16px;">&nbsp;</th>
 																</tr>
 															</thead>
-															<tbody id="t_body_empleados_proyecto">
+															<tbody id="">
+																<tr>
+																	<td colspan="7" style="padding: 0px; border: none;">
+																		<div style="height: 298px; overflow: auto;">
+																			<table id="">
+																				<tbody id="t_body_empleados_proyecto">
+
+																				</tbody>
+																			</table>
+																		</div>
+																	</td>
+																</tr>
 
 															</tbody>
 														</table>

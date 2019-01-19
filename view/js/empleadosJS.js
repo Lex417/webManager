@@ -89,24 +89,33 @@ function obtenerVistaUsuariosPorProyecto() {
             for(i=0; i<json.length;i++) {
                // llenar_fila(json, t_body);
                var fila = t_body.insertRow(-1);
+               //fila.setAttribute("scope", "row");
+
+               
 
                var celda_cedula = fila.insertCell(-1);
+               celda_cedula.style="width:118px;";
                celda_cedula.innerText = json[i].id_Usuario;
 
                var celda_nombre = fila.insertCell(-1);
+               celda_nombre.style="width:135px;";
                celda_nombre.innerText = json[i].nombre_Usuario;
 
                
                var celda_apellido = fila.insertCell(-1);
+               celda_apellido.style="width:140px;";
                celda_apellido.innerText = json[i].apellido_Usuario;
 
                var celda_puesto = fila.insertCell(-1);
+               celda_puesto.style="width:115px;";
                celda_puesto.innerText = json[i].puesto_Usuario;
 
                var celda_tipo = fila.insertCell(-1);
+               celda_tipo.style="width:155px;";
                celda_tipo.innerText = json[i].tipo_Usuario;
 
                var celda_estado = fila.insertCell(-1);
+               celda_estado.style="width:100px;";
                celda_estado.innerText = json[i].estado_Usuario;
             }
         }
@@ -133,17 +142,18 @@ function obtenerNombresManagers() {
              selectNombresManagers.innerHTML="";
 
             for(i=0; i<json.length;i++) {
-               agragarOption(json[i].nombreManager,selectNombresManagers);
+               agragarOption(json[i].nombreManager,json[i].idManager,selectNombresManagers);
             }
         }
     });
 }
 
-function agragarOption(nombre,selectNombresManagers){
+function agragarOption(nombre,managerId,selectNombresManagers){
    
    if(selectNombresManagers){
        var optionAux = document.createElement("OPTION");
        optionAux.innerText = nombre;
+       optionAux.setAttribute("id",managerId);
        selectNombresManagers.appendChild(optionAux);
 
    }
@@ -172,6 +182,7 @@ function obtenerNombreManagerActual(){
                 if(selectNombresManagers){
                     var optionAux = document.createElement("OPTION");
                     optionAux.innerText = json[i].nombreManager;
+                    optionAux.setAttribute("id",json[i].idManager);
                     selectNombresManagers.appendChild(optionAux);
              
                 }
