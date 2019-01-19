@@ -108,20 +108,76 @@ function obtenerVistaUsuariosPorProyecto() {
 
                var celda_estado = fila.insertCell(-1);
                celda_estado.innerText = json[i].estado_Usuario;
-
-
-
-
-
             }
         }
     });
 }
-function llenarTablaColaborarores(json){
+function obtenerNombresManagers() {
+    var formData = new FormData();
+    formData.append('accion', 'obtenerNombresManagers');
+     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+    //formData.append('id',getQueryVariable());
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+             var json = JSON.parse(respuesta);
+             console.log(json);
+             var selectNombresManagers = document.getElementById("selectNombresManagers");
+             selectNombresManagers.innerHTML="";
+
+            for(i=0; i<json.length;i++) {
+               agragarOption(json[i].nombreManager,selectNombresManagers);
+            }
+        }
+    });
+}
+
+function agragarOption(nombre,selectNombresManagers){
    
+   if(selectNombresManagers){
+       var optionAux = document.createElement("OPTION");
+       optionAux.innerText = nombre;
+       selectNombresManagers.appendChild(optionAux);
 
-    
-
+   }
+   
+}
+function obtenerNombreManagerActual(){
+    var formData = new FormData();
+    formData.append('accion', 'obtenerNombreManagerActual');
+     // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
+     var id = getQueryVariable();
+    formData.append('idProyecto',getQueryVariable());
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+             var json = JSON.parse(respuesta);
+             console.log(json);
+            for(i=0; i<json.length;i++) {
+                var selectNombresManagers = document.getElementById("selectNombresManagers");
+                if(selectNombresManagers){
+                    var optionAux = document.createElement("OPTION");
+                    optionAux.innerText = json[i].nombreManager;
+                    selectNombresManagers.appendChild(optionAux);
+             
+                }
+            }
+        }
+    });
 }
 
 // buscara elementos en la BD que cumplan con el filtro especificado
