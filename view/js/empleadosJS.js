@@ -67,6 +67,89 @@ function obtenerColaboradorManager() {
     });
 }
 
+//  ESTA FUNCION LO QUE HACE ES AGREGAR DIV QUE CONTINEN LAS NOTIFICACIONES PARA MOSTRARLAS EN LE MODAL.
+function mostrarNotificaciones(){
+    var modalAllNotificaciones = document.getElementById("modalAllNotificaciones");
+
+    if(modalAllNotificaciones){
+        modalAllNotificaciones.innerHTML="";
+
+        var notifi_title_div = document.createElement("DIV");
+        notifi_title_div.setAttribute("class","notifi__title");
+
+        var notifi_title  =document.createElement("p");
+        notifi_title.innerText="Usted tiene 5 notificaciones";
+            
+        //agregamos el titulo
+        notifi_title_div.appendChild(notifi_title);
+        modalAllNotificaciones.appendChild(notifi_title_div);
+
+
+        for (var i=0; i<4; i++){ 
+            
+            var notifi_item =  document.createElement("DIV");
+            notifi_item.setAttribute("class","notifi__item");
+
+            var notifi_icon =  document.createElement("DIV");
+            notifi_icon.setAttribute("class","bg-c1 img-cir img-40");
+            
+            var icon =document.createElement("i");
+            icon.setAttribute("class","zmdi zmdi-email-open");
+            icon.setAttribute("data-toggle","modal");
+            icon.setAttribute("data-target","#mediumModal");
+
+            //agregamos un ucono
+            notifi_icon.appendChild(icon);
+
+            //agregamos el icono padre al div
+            notifi_item.appendChild(notifi_icon);
+
+            var content =document.createElement("DIV");
+            content.setAttribute("class","content");
+            
+
+
+
+
+            
+
+
+
+            var text_notifi  =document.createElement("p");
+            text_notifi.innerText="Un usuario a solicitado unirse a un proyecto";
+
+            var fecha =document.createElement("span");
+            fecha.setAttribute("class","date");
+            fecha.innerText="Enero 19, 2019 16:58";
+
+            //agregamos el testo del contenido
+            content.appendChild(text_notifi);
+            content.appendChild(fecha);
+
+            //agregamos el contenido de la notificacion
+            notifi_item.appendChild(content);
+
+            var notifi__footer = document.createElement("DIV");
+            notifi__footer.setAttribute("class","notifi__footer");
+
+            
+
+
+            modalAllNotificaciones.appendChild(notifi_item);
+            
+        }
+        var action = document.createElement("a");
+        action.href = "informacion.php";
+        action.innerText="Ver todas";
+        action.style="margin-left:80px;";
+        modalAllNotificaciones.appendChild(action);
+
+    }
+
+}
+
+
+
 // obtiene la vista para ver los usuarios por proyecto (Modificar con base nueva)
 function obtenerVistaUsuariosPorProyecto() {
     var formData = new FormData();
