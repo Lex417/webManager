@@ -1,5 +1,5 @@
-<?php 
-    
+<?php
+
 
     include "proyectosBusiness.php";
     $accion=$_POST['accion'];
@@ -8,6 +8,10 @@
 
     if($accion=="obtenerVistaProyectos"){
         echo $business->obtenerVistaPreviaProyecto();
+    }
+
+    if($accion=="obtenerDatosGrafica"){
+      echo $business->obtenerDatosGrafica();
     }
 
     if($accion=="editarDatosProyecto"){
@@ -42,7 +46,7 @@
         }
 
        } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
-       
+
        echo json_encode($text);
       } else if($accion == 'modificar_usuario') {
 
@@ -61,17 +65,21 @@
       }
 
       if($accion=="cargarColaboradoresFiltro"){
-        $nombre=$_POST['nombreUsuario']; 
-       $departamento=$_POST['departamento']; 
-       $habilidad=$_POST['habilidad']; 
+        $nombre=$_POST['nombreUsuario'];
+       $departamento=$_POST['departamento'];
+       $habilidad=$_POST['habilidad'];
         echo $business->cargarColaboradoresFiltro($nombre,$departamento,$habilidad);
       }
 
       if($accion=="agregarColaboradoresProyecto"){
-        $json=$_POST['json']; 
+        $json=$_POST['json'];
         $json = json_decode($json,true);
         $idProyecto = $_POST['idProyecto'];
-        echo $business->agregarColaboradoresProyecto($json,$idProyecto);
+        $business->agregarColaboradoresProyecto($json,$idProyecto);
+      }
+
+      if($accion=="cargarTodosProyectos"){
+        echo $business->cargarTodosProyectos();
       }
 
 

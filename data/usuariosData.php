@@ -113,17 +113,17 @@ function cambiar_pagina($newNum, $limite) {
 
 // obtiene los colaboradores por area de trabajo (Modificar con base nueva)
     function obtener_colaboradores_proyecto($id_Proyecto) {
-        $sql = $this->objetoConexion->prepare("SELECT uP.id_Usuario, nombre_Usuario, password, apellido_Usuario, puesto_Usuario, tipo_Usuario, estado_Usuario FROM tabla_Usuario tU,tabla_usuario_proyecto uP WHERE tU.id_Usuario=uP.id_Usuario AND id_Proyecto='$id_Proyecto'");
+        $sql = $this->objetoConexion->prepare("select distinct per.cedulaPersona, nombrePersona, apellidoPersona,nombrePuesto, tipoColaborador ,estadoPersona  from tablapersona per ,tablaproyectocolaborador tpcolb, tablapuesto,tablacolaborador tcol where tpcolb.idProyecto = '$id_Proyecto' and tpcolb.idProyectoColaborador = tcol.idColaborador and per.idPersona = tcol.idColaborador;
+        ");
         $sql->execute(['activo']);
         $lista_usuarios=array();
         while($fila=$sql->fetch()){
-            $usuario=array('id_Usuario'=>$fila['id_Usuario'],
-                           'nombre_Usuario'=>$fila['nombre_Usuario'],
-                           'password'=>$fila['password'],
-                           'apellido_Usuario'=>$fila['apellido_Usuario'],
-                           'puesto_Usuario'=>$fila['puesto_Usuario'],
-                           'tipo_Usuario'=>$fila['tipo_Usuario'],
-                           'estado_Usuario'=>$fila['estado_Usuario']);
+            $usuario=array('id_Usuario'=>$fila['cedulaPersona'],
+                           'nombre_Usuario'=>$fila['nombrePersona'],
+                           'apellido_Usuario'=>$fila['apellidoPersona'],
+                           'puesto_Usuario'=>$fila['nombrePuesto'],
+                           'tipo_Usuario'=>$fila['tipoColaborador'],
+                           'estado_Usuario'=>$fila['estadoPersona']);
             array_push($lista_usuarios,$usuario);
         }
          echo json_encode($lista_usuarios);
@@ -169,6 +169,27 @@ function cambiar_pagina($newNum, $limite) {
         array_push($lista_equipos,$equipo);
         }
         echo json_encode($lista_equipos);
+    }
+    function obtenerNombresManagers(){
+        $sql = $this->objetoConexion->prepare("SELECT nombrePersona from tablapersona per inner join tablaprojectmanager pm on per.idPersona = pm.idPersona;");
+        $sql->execute(['activo']);
+        $lista_equipos=array();
+        while($fila=$sql->fetch()) {
+            $equipo=array('nombreManager'=>$fila['nombrePersona']);
+        array_push($lista_equipos,$equipo);
+        }
+        echo json_encode($lista_equipos);
+    }
+    function obtenerNombreManagerActual($idProyecto){
+        $sql = $this->objetoConexion->prepare("SELECT per.nombrePersona from tablapersona per inner join tablaprojectmanager tpm on tpm.idPersona = per.idPersona inner join tablaproyecto tp on tp.idProjectManager = tpm.idProjectManager where idProyecto = '$idProyecto';");
+        $sql->execute(['activo']);
+        $lista_equipos=array();
+        while($fila=$sql->fetch()) {
+            $equipo=array('nombreManager'=>$fila['nombrePersona']);
+        array_push($lista_equipos,$equipo);
+        }
+        echo json_encode($lista_equipos);
+
     }
 
 }

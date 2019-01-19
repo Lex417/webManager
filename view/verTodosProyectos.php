@@ -39,7 +39,7 @@
 		
 		
 	</head>
-	<body onload="cargarSkills();cargarDepartamentos()">
+	<body onload="verTodosProyectosTabla()">
  		<div class="page-wrapper">
         <!-- HEADER MOBILE-->
 	        <?php include "menu.php"?>
@@ -48,128 +48,42 @@
 	        <div class="page-container">
 	            <!-- HEADER DESKTOP-->
 	            <?php include "header.php"?> 
-	        <br>
-			<br>
-			<br>
-			<div class="container">
-			<!-- Content here -->
-				<div class="row">
-					<div class="col-12 col-sm-12 col-md-12 col-xs-12 mtb-5p">
-						<div class="card text-white bg-primary">
-							<div class="card-body background-white">
-								<div class="col-12 col-sm-12 col-md-12 col-xs-12 mb-5p">
-								<div class="col-12 col-sm-12 col-md-12 col-xs-12 no-padding">
+		        <br>
+				<br>
+				<br>
+				<div class="container">
+				<!-- Content here -->
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-xs-12 mtb-5p">
+							<div class="card text-white bg-primary">
+								<div class="card-body background-white">
 								
-									<div class="row"
-										<div class="col-9 col-sm-9 col-md-9 col-xs-12">
-										<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-											<div class="card text-white bg-primary mb-5p">
-												<div class="card-header text-center">
-													Busqueda de colaboradores
-												</div>
-												<div class="card-body background-white" >
-													<form class="form-inline">
-													
-														<div class="row"> 
-
-															<div class="col-14 col-sm-14 col-md-14 col-xs-14" style="padding: 30;">
-																<div class="row">
-
-																	<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="display: flex;">
-																		<label class="text-inline-block" style="display: inline-block;padding-right: 2px;padding-top: 5px;padding-left: 5px;">Nombre</label>
-																		<input type="text" class="form-control width-100"  aria-label="Recipient's username" id="nombreU"aria-describedby="button-addon2">
-																		<label class="text-inline-block" style="display: inline-block;padding-right: 2px;padding-top: 5px;padding-left: 5px">Departamento</label>
-																		<select class="custom-select mr-sm-2" id="departamentoSelect" >
-																	
-																		
-																		
-																	    </select>
-																		<label class="text-inline-block" style="display: inline-block;padding-right: 2px;padding-top: 5px;padding-left: 5px">Habilidad </label>
-																		<select class="custom-select mr-sm-2" id="habilidadSelect" >
-																		
-																		
-																		
-																		</select>
-																		<button type="button" class="btn btn-outline-success" onclick="cargarColaboradoresFiltro()">Buscar</button>
-																		
-																	</div>
-																
-																</div>
-															
-															</div>
-															
-														</div>
-															<div class="row">
-																<div class="col-12 col-sm-12 col-md-12 col-xs-12 text-left">
-																	
-																	
-																</div>
-
-															</div>
-														</form>
-													</div>
-													</div>
-												</div>
-										    </div>
-											 <div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-												<div class="card text-white bg-primary mb-5p">
-												<div class="card-header text-center">
-													Recursos Afines
-												</div>
-												<div class="card-body background-white">
-													<div class="table-responsive">
-														<table class="table">
-															<thead class="thead-light">
-																<tr>
-																	<th scope="col">Nombre</th>
-																	<th scope="col">Departamento</th>
-																	<th scope="col">Habilidad</th>
-																	<th scope="col">Manager</th>
-																	<th scope="col">Acciones</th>
-																</tr>
-															</thead>
-															<tbody id="tablaPosibles">
-																
-																
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
+									<div class="col-lg-12">
+										<div class="card-header text-center"  >
+											Proyectos
 										</div>
-										<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-												<div class="card text-white bg-primary mb-5p">
-												<div class="card-header text-center">
-													Colaboradores Agregados
-												</div>
-												<div class="card-body background-white">
-													<div class="table-responsive">
-														<table class="table">
-															<thead class="thead-light">
-																<tr>
-																	<th scope="col">Nombre</th>
-																	<th scope="col">Departamento</th>
-																	<th scope="col">Habilidad</th>
-																	<th scope="col">Manager</th>
-																	<th scope="col">Acciones</th>
-																</tr>
-															</thead>
-															<tbody id="tablaAgregados"></tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-										<button type="button" onclick="agregarColaboradoresProyecto()" class="btn btn-outline-success" style=" margin-left: 90%">Agregar</button>
-									   </div>
+										<table class="table table-borderless table-striped table-earning">
+											<thead>
+												<tr>
+													<th>Nombre de Proyecto</th>
+													<th>Fecha de Inicio</th>
+													<th>Fecha final</th>
+													<th class="text-right">Manager</th>
+													<th class="text-right">Progreso</th>
+												</tr>
+											</thead>
+											<tbody id="tablaProyectos"></tbody>
+										</table>
 									</div>
-								 </div>
+									
+										 
 								</div>
-						  </div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -243,8 +157,8 @@
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+    
+
 
     <!-- Main JS-->
     <script src="js/main.js"></script>

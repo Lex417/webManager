@@ -242,6 +242,10 @@ strong {
     margin-bottom: 10px;
 }
 
+#chart-container {
+  height: 400px;
+}
+
 /* ----- Links ----- */
 a {
     display: inline-block;
@@ -494,7 +498,7 @@ section {
 input[type=submit]:focus {
     background-color: #d88c34;
     border-color: #d88c34;
-  } 
+  }
 .au-btn:hover {
     color: #fff;
     background: #d88c34;
@@ -14685,4 +14689,3 @@ input[type=submit]:focus {
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
 }
-

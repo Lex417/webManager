@@ -28,7 +28,11 @@ if($accion == 'insertar_usuario') {
    echo json_encode($text);
 
    
-} else if($accion == 'mostrar_usuarios_proyecto') {
+} else if($accion == 'obtenerNombreManagerActual'){
+        $idProyecto=$_POST['idProyecto'];
+        $business->obtenerNombreManagerActual($idProyecto);
+
+}else if($accion == 'mostrar_usuarios_proyecto') {
 
     $id=$_POST['id'];
     $business->obtener_colaboradores_proyecto($id);
@@ -70,6 +74,9 @@ if($accion == 'insertar_usuario') {
             $business->cambiar_pagina($_POST['pagina'], $_POST['limite']);
     } 
 
+}else if($accion == 'obtenerNombresManagers'){
+        $business->obtenerNombresManagers();
+        
 } else if($accion == 'filtrar') {
         $business->busqueda_por_filtro($_POST['palabra'], $_POST['tip_filtro']);
 

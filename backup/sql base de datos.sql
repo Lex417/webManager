@@ -48,7 +48,7 @@ descripcionObjetivoProyecto TEXT not null, estadoObjetivoProyecto varchar(10) no
  FOREIGN KEY (idProyecto) REFERENCES tablaProyecto(idProyecto));
 
 create table if not exists tablaProyectoColaborador(idProyectoColaborador int AUTO_INCREMENT not null, idProyecto int not null,
-idColaborador int not null, PRIMARY KEY(idProyectoColaborador),FOREIGN KEY (idColaborador) REFERENCES tablaColaborador(idColaborador),
+idColaborador int not null, estadoProyectoColaborador VARCHAR(25) NOT NULL, PRIMARY KEY(idProyectoColaborador),FOREIGN KEY (idColaborador) REFERENCES tablaColaborador(idColaborador),
 FOREIGN KEY (idProyecto) REFERENCES tablaProyecto(idProyecto));
 
 create table if not exists tablaSkillColaborador(idSkillColaborador int AUTO_INCREMENT not null,idSkill int not null, 

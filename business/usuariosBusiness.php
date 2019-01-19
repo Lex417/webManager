@@ -60,6 +60,9 @@ class usuariosBusiness {
     function obtener_colaboradores_proyecto($id){
         return $this->data->obtener_colaboradores_proyecto($id);
     }
+    function obtenerNombresManagers(){
+        return $this->data->obtenerNombresManagers();
+    }
 
     function contar_usuarios() {
         return $this->data->contar_usuarios();
@@ -75,5 +78,10 @@ class usuariosBusiness {
         $filtro = $this->getFiltro($filtro);
         return $this->data->busqueda_filtrada($palabra, $filtro);
     }
+    function obtenerNombreManagerActual($idProyecto){
+        return  $this->data->obtenerNombreManagerActual($idProyecto);
+
+    }
+     
 }
 ?>
