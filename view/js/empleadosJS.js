@@ -192,7 +192,7 @@ function obtenerNombreManagerActual(){
 }
 
 // buscara elementos en la BD que cumplan con el filtro especificado
-function busquedaFiltro(palabra, tipoFiltro) {
+function busquedaFiltroCol(palabra, tipoFiltro) {
     formData = new FormData();
     formData.append('accion','filtrar');
     formData.append('palabra', palabra);
@@ -450,7 +450,7 @@ function obtenerEquiposDisponibles() {
 /*************************** METODOS ADICIONALES*******************************/
 
 // funcion que hace que se ordenen las filas de acuerdo al combo box seleccionado
-function reordenar_filas() {
+function reordenar_filasCol() {
     var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
     $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
     countUsuarios();
@@ -466,7 +466,10 @@ function desplegar_modal_eliminar(id) {
 // esta funcion encapsula los metodos iniciales importantes para informacion.php (paginacion, filtros, tabla, etc)
 function desplegar_metodos() {
     inicializar_variables_globales();
-    filtro_tabla_usuarios();
+    filtro_tabla_id();
+    filtro_tabla_nombre();
+    filtro_tabla_puesto();
+
     limpiar_form();
     limpiar_form_agregar();
     countUsuarios();
@@ -570,15 +573,35 @@ function limpiar_form_agregar() {
 
 
 //Filtra la tabla de usuarios, puede buscar cualqueir campo de la tabla.
-function filtro_tabla_usuarios() {
+function filtro_tabla_id() {
 
-    $('.search').on('keyup',function() {
+    $('#input-busqueda-id').on('keyup',function() {
         $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
         var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
-        var cond_filtro = $('input[name="inline-radios"]:checked').val(); //obtiene el value de los radios
-        var search = $('#input-busqueda').val(); //obtenemos el valor del imput
+        var search = $('#input-busqueda-id').val(); //obtenemos el valor del imput
         if(search == "") { cambia_pag(pag_actual);}
-         else { busquedaFiltro(search,cond_filtro);}
+         else { busquedaFiltroCol(search,1);
+        }
+    });
+}
+
+function filtro_tabla_nombre() {
+    $('#input-busqueda-nombre').on('keyup',function() {
+        $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
+        var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
+        var search = $('#input-busqueda-nombre').val(); //obtenemos el valor del imput
+        if(search == "") { cambia_pag(pag_actual);}
+         else { busquedaFiltroCol(search,2);}
+    });
+}
+
+function  filtro_tabla_puesto() {
+    $('#input-busqueda-puesto').on('keyup',function() {
+        $('#tabla_colaboradores tbody').empty(); // limpia completamente la tabla
+        var pag_actual = $('#pagination a.active').attr('id'); //obtenemos el id del <a tag> activo
+        var search = $('#input-busqueda-puesto').val(); //obtenemos el valor del imput
+        if(search == "") { cambia_pag(pag_actual);}
+         else { busquedaFiltroCol(search,3);}
     });
 }
 
@@ -596,50 +619,6 @@ function agregar_eventos() {
 
 
 // llena las filas de las areas de trabajo para mostrarlas en las tablas (Modificar con base nueva)
-function llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_body4) {
-    switch(json[i].id_Departamento) {
-        case "1": //area de Desarrollo 
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body2.appendChild(tr);
-        break;
-
-        case "2": // area de Aseguramiento de Calidad (QA)
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body1.appendChild(tr);
-        break;
-
-        case "3": // Area de Liderazgo (Tech Leader)
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body4.appendChild(tr);
-        break;
-
-        case "4": //Area de Soporte
-            var tr = document.createElement('tr');
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Usuario;
-            var x = tr.insertCell(-1);
-            x.innerHTML = json[i].nombre_Manager;
-
-            t_body3.appendChild(tr);
-        break;
-    }
-
-}
 
 /***********************MENSAJES*****************************/
     function ocultar_mensaje_agregar() {
