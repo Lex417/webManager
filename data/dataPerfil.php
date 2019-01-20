@@ -34,6 +34,31 @@ class dataPerfil {
             echo json_encode($lista);
         }
     }
+
+
+    function mostrarPerfil($ced) {
+        $sql = $this->objetoConexion->prepare("SELECT cedulaPersona, nombrePersona, apellidoPersona, passwordPersona, estadoPersona, Manager FROM vista_perfil_usuario WHERE cedulaPersona = '".$ced."'");
+        $sql->execute(['activo']);
+        $lista=array();
+        while($valor=$sql->fetch()) {
+            $usuario=array('cedulaPersona'=>$valor['cedulaPersona'],
+                           'nombrePersona'=>$valor['nombrePersona'],
+                           'apellidoPersona'=>$valor['apellidoPersona'],
+                           'passwordPersona'=>$valor['passwordPersona'],
+                           'estadoPersona'=>$valor['estadoPersona'],
+                           'Manager'=>$valor['Manager'],);
+            array_push($lista,$usuario);
+        }
+        echo json_encode($lista);
+    }
+
+    function modificarPerfil($ced, $nombre, $apellido, $pass, $estado) {
+        $sql = $this->objetoConexion->prepare('CALL proc_editar_perfil(?,?,?,?,?)');
+        if($sql->execute([$ced, $nombre, $apellido, $pass, $estado])){
+            return true;
+        } else { return false;}
+
+    }
 }
 
 

@@ -10,30 +10,29 @@
                                 
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
+                                        <div class="image"> <!--IMAGEN DE USUARIO-->
                                             <img src="images/user.ico" alt="User" />
                                         </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">User</a>
+                                        <div class="content"> <!--NOMBRE DEL USUARIO-->
+                                            <a id ="id-usuario" class="js-acc-btn" href="#">116290648</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/user.ico" alt="User" />
+                                                        <img src="images/user.ico" alt="User" /> <!--IMAGEN DEL USUARIO EN COLAPSE-->
                                                     </a>
                                                 </div>
                                                 <div class="content">
-                                                    <h5 class="name">
+                                                    <h5 class="name"> <!--NOMBRE DEL USUARIO EN COLAPSE-->
                                                         <a href="#">User</a>
                                                     </h5>
-                                                    <span class="email">user@example.com</span>
+                                                    <span class="email">user@example.com</span> <!--EMAIL DEL USUARIO EN COLAPSE-->
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="verProyectosActivos.php">
-                                                        <i class="zmdi zmdi-account"></i>Ver Perfil</a>
+                                                    <a href="verProyectosActivos.php"><i class="zmdi zmdi-account"></i>Ver Perfil</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">

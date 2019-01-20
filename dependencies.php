@@ -32,5 +32,6 @@
     <script src="js/proyectosJs.js"></script>
     <script src="js/empleadosJs.js"></script>
     <script src="js/areaTrabajoJs.js"></script>
+    <script src="js/proyectosActivos.js"></script>
     <!-- Pagination.js-->
     <script type="text/javascript" src="js/chosen.jquery.min.js"></script>

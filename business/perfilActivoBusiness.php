@@ -9,6 +9,13 @@ class perfilActivoBusiness {
         $this->data=new dataPerfil();
     }
 
+    function mostrarPerfil($ced) {
+        return $this->data->mostrarPerfil($ced);
+    }
+
+    function editarPerfil($cedula, $nombre, $apellido, $pass, $estado) {
+        return $this->data->modificarPerfil($cedula, $nombre, $apellido, $pass, $estado);
+    }
 
     
     function mostrarProyectosActivos() {

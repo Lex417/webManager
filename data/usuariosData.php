@@ -52,20 +52,6 @@ class usuariosData {
         else{return false;}
     }
 
-// BUSCA UNA VISTA 'vista_colaborador_manager' EN LA BD (Modificar con base nueva)
-    function vista_colaborador_manager() {
-        $sql = $this->objetoConexion->prepare('SELECT nombre_Usuario, nombre_Manager, id_Departamento FROM  vista_colaborador_manager');
-        $sql->execute(['activo']);
-        $lista=array();
-        while($valor=$sql->fetch()) {
-            $objeto=array('nombre_Usuario'=>$valor['nombre_Usuario'],
-                          'nombre_Manager'=>$valor['nombre_Manager'],
-                          'id_Departamento'=>$valor['id_Departamento']);
-            array_push($lista,$objeto);
-        }
-        echo json_encode($lista);
-    }
-
 // cuenta la cantidad de registros de tabla_usuarios
     function contar_usuarios() {
         $sql = $this->objetoConexion->prepare('SELECT COUNT(*) FROM vista_informacion');
@@ -94,22 +80,6 @@ function cambiar_pagina($newNum, $limite) {
     echo json_encode($lista_usuarios);
 }
 
-// cumple la funcion de un SELECT *
-    function select_all_usuarios() {
-        $sql = $this->objetoConexion->prepare('SELECT id_Usuario, nombre_Usuario, password, apellido_Usuario, puesto_Usuario, estado_Usuario FROM tabla_Usuario');
-        $sql->execute(['activo']);
-        $lista_usuarios=array();
-        while($fila=$sql->fetch()){
-            $usuario=array('id_Usuario'=>$fila['id_Usuario'],
-                           'nombre_Usuario'=>$fila['nombre_Usuario'],
-                           'password'=>$fila['password'],
-                           'apellido_Usuario'=>$fila['apellido_Usuario'],
-                           'puesto_Usuario'=>$fila['puesto_Usuario'],
-                           'estado_Usuario'=>$fila['estado_Usuario']);
-        array_push($lista_usuarios,$usuario);
-    }
-    echo json_encode($lista_usuarios);
-}
 
 // obtiene los colaboradores por area de trabajo (Modificar con base nueva)
     function obtener_colaboradores_proyecto($id_Proyecto) {

@@ -40,33 +40,6 @@ function insertarUsuario() {
 }
 
 
-// va a llamar a 'vista_colaborador_manager' (Modificar con base nueva)
-function obtenerColaboradorManager() {
-    var formData = new FormData();
-    formData.append('accion','mostrar_vista_colaborador_manager');
-
-    $.ajax({
-        type: "POST",
-        url:  "../business/usuariosAction.php",
-        data: formData,
-        dataType: "html",
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(respuesta) {
-            var json = JSON.parse(respuesta);
-            console.log(json);
-            var t_body1 = document.getElementById('area_trabajo_uno');
-            var t_body2 = document.getElementById('area_trabajo_dos');
-            var t_body3 = document.getElementById('area_trabajo_tres');
-            var t_body4 = document.getElementById('area_trabajo_cuatro');
-            for(i = 0; i < json.length; i++) {
-                llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_body4);
-            }
-        }
-    });
-}
-
 // obtiene la vista para ver los usuarios por proyecto (Modificar con base nueva)
 function obtenerVistaUsuariosPorProyecto() {
     var formData = new FormData();

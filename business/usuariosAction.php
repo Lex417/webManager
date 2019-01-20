@@ -59,9 +59,6 @@ if($accion == 'insertar_usuario') {
 } else if($accion == 'obtener_usuario') {
         $business->obtener_usuario($_POST['id']);
 
-} else if ($accion == 'mostrar_vista_colaborador_manager') {
-        $business->mostrar_vista_colaborador_manager();
-
 } else if($accion == 'mostrar_usuario') {
         $business->mostrar_usuarios();
 

@@ -548,8 +548,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`);
 	
 	
-	
-	
 
 DROP VIEW IF EXISTS `vista_obtener_colaborador`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_obtener_colaborador` AS
@@ -560,8 +558,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 	FROM (`tablapersona` `tp` JOIN `tablapuesto` `tpu` JOIN `tablaequipotrabajo` `te` JOIN `tablacolaborador` `tc`)
 	WHERE(`tp`.`idPersona` = `tc`.`idPersona`) AND (`tpu`.`idPuesto` = `tc`.`idPuestoColaborador`) AND (`te`.`idEquipoTrabajo` = `tc`.`idEquipoTrabajo`);
 	
+	
 
-  DROP VIEW IF EXISTS `vista_departamentos`;
+DROP VIEW IF EXISTS `vista_departamentos`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_departamentos` AS
     SELECT `tp`.`nombrePersona` AS `nombrePersona`,`tp`.`apellidoPersona` AS `apellidoPersona`,
 		   `tet`.`nombreEquipoTrabajo` AS `nombreEquipoTrabajo`,`td`.`nombreDepartamento` AS `nombreDepartamento`,
@@ -573,6 +572,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 	AND (`tet`.`idDepartamento` = `td`.`idDepartamento`)
 	AND (`tc`.`tipoColaborador`<> 'Team Manager')
 	AND (`tc`.`tipoColaborador`<> 'Project Manager');
+	
+	
+DROP VIEW IF EXISTS `vista_perfil_usuario`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_perfil_usuario` AS
+	SELECT `tp`.`cedulaPersona` AS `cedulaPersona`, `tp`.`nombrePersona` AS `nombrePersona`,
+		   `tp`.`apellidoPersona` AS `apellidoPersona`, `tp`.`passwordPersona` AS `passwordPersona`,
+		   `tp`.`estadoPersona` AS `estadoPersona`, obtener_manager(`tet`.`idTeamManager`) AS `Manager`
+		   
+	FROM (`tablapersona` `tp` JOIN `tablacolaborador` `tc` JOIN `tablaequipotrabajo` `tet` JOIN `tabladepartamento` `td`)
+	WHERE (`tp`.`idPersona` = `tc`.`idPersona`)
+	AND (`tet`.`idEquipoTrabajo` = `tc`.`idEquipoTrabajo`) 
+	AND (`tet`.`idDepartamento` = `td`.`idDepartamento`);
 	
 --
 -- PROCEDIMIENTOS ALMACENADOS
@@ -667,6 +678,30 @@ BEGIN
 	
 	UPDATE `tablacolaborador`
 	SET estadoColaborador = 'Inactivo'
+	WHERE idPersona = id_auto_inc_persona;
+	
+END $$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS `proc_editar_perfil`;
+DELIMITER $$
+CREATE PROCEDURE `bdglobales`.`proc_editar_perfil`(IN `cedula_usuario` VARCHAR(25), IN `nombre_usuario` VARCHAR(25), IN `apellido_usuario` VARCHAR(25), IN `pass_usuario` VARCHAR(25), IN `estado_usuario` VARCHAR(25))
+BEGIN
+	DECLARE id_auto_inc_persona INT(11);
+	SET id_auto_inc_persona = (SELECT idPersona FROM `tablapersona` WHERE cedulaPersona = cedula_usuario);
+	
+	UPDATE `tablapersona`
+	SET nombrePersona = nombre_usuario,
+		apellidoPersona = apellido_usuario,
+		passwordPersona = pass_usuario,
+		estadoPersona = estado_usuario
+	WHERE idPersona = id_auto_inc_persona;
+	
+		UPDATE `tablacolaborador`
+	SET estadoColaborador = estado_usuario,
+		passwordColaborador = pass_usuario
 	WHERE idPersona = id_auto_inc_persona;
 	
 END $$
