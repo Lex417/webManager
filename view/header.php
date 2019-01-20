@@ -12,7 +12,7 @@
                                    <!--  NOTIFICACIONES ICONO -->
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications" onclick="mostrarNotificaciones();"></i>
-                                        <span class="quantity">5</span>
+                                        <span class="quantity" id="numNotificaciones"></span>
                                         <div class="notifi-dropdown js-dropdown"   id="modalAllNotificaciones">
                                            <!--
                                            DESDE JAVASCRIPT SE AGREGAN LAS NOTIFICACIONES AQUÍ.

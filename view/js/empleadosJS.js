@@ -109,6 +109,8 @@ function agregarItemsNotificaciones(jsonRequests, cantidadRequests){
 
     if(modalAllNotificaciones){
         modalAllNotificaciones.innerHTML="";
+        var numNotificaciones = document.getElementById("numNotificaciones");
+        numNotificaciones.innerText=jsonRequests.length;
 
         var notifi_title_div = document.createElement("DIV");
         notifi_title_div.setAttribute("class","notifi__title");

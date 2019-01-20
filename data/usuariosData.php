@@ -113,8 +113,7 @@ function cambiar_pagina($newNum, $limite) {
 
 // obtiene los colaboradores por area de trabajo (Modificar con base nueva)
     function obtener_colaboradores_proyecto($id_Proyecto) {
-        $sql = $this->objetoConexion->prepare("select distinct per.cedulaPersona, nombrePersona, apellidoPersona,nombrePuesto, tipoColaborador ,estadoPersona  from tablapersona per ,tablaproyectocolaborador tpcolb, tablapuesto,tablacolaborador tcol where tpcolb.idProyecto = '$id_Proyecto' and tpcolb.idProyectoColaborador = tcol.idColaborador and per.idPersona = tcol.idColaborador;
-        ");
+        $sql = $this->objetoConexion->prepare("SELECT  per.cedulaPersona, nombrePersona, apellidoPersona,nombrePuesto, tipoColaborador ,estadoPersona from tablapersona per inner join tablacolaborador tcol  on per.idPersona = tcol.idPersona inner join tablaproyectocolaborador tpcolb on tpcolb.idColaborador = tcol.idColaborador inner join tablapuesto pu on tcol.idPuestoColaborador = pu.idPuesto where tpcolb.idProyecto = '$id_Proyecto';");
         $sql->execute(['activo']);
         $lista_usuarios=array();
         while($fila=$sql->fetch()){
