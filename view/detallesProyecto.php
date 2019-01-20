@@ -168,11 +168,17 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <h2 class="title-1">Colaboradores</h2>
-                                    <button onclick="location.href='informacion.php' ;"class="au-btn au-btn-icon au-btn--blue">
+                                    <button onclick=" modificarColaboradores();"class="au-btn au-btn-icon au-btn--blue">
 									Editar colaboradores</i></button>
 
                                 </div>
                             </div>
+
+
+							
+							
+
+
 
 				<div class="container">
 					<div class="row">

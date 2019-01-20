@@ -51,6 +51,20 @@
        function cargarTodosProyectos() {
           return $this->data->cargarTodosProyectos();
       }
+
+
+      function verTodosLosColaboradoresProyecto($idProyecto){
+        return $this->data->verTodosLosColaboradoresProyecto($idProyecto);
+      }
+
+      function eliminarColaboradorProyecto($idProyectoColaborador){
+        return $this->data->eliminarColaboradorProyecto($idProyectoColaborador);
+      }
+
+      function agregarColaboradorProyectoModificar($idColaborador,$idProyecto){
+        return $this->data->agregarColaboradorProyectoModificar($idColaborador,$idProyecto);
+    }
+
       function cargarObjetivos($id){
           return $this->data->cargarObjetivos($id);
       }

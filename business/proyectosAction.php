@@ -118,5 +118,19 @@
         echo json_encode($text);
       }
 
+      if($accion=="verTodosLosColaboradoresProyecto"){
+        $idProyecto = $_POST['idProyecto'];
+        echo $business->verTodosLosColaboradoresProyecto($idProyecto);
+      }
 
+      if($accion=="eliminarColaboradorProyecto"){
+        $idProyectoColaborador = $_POST['idProyectoColaborador'];
+        echo $business->eliminarColaboradorProyecto($idProyectoColaborador);
+      }
+
+      if($accion=="agregarColaboradorProyectoModificar"){
+        $idProyecto = $_POST['idProyecto'];
+        $idColaborador = $_POST['idColaborador'];
+        echo $business->agregarColaboradorProyectoModificar($idColaborador,$idProyecto);
+      }
 ?>

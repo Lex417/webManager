@@ -23,17 +23,21 @@ function obtenerVistaPreviaProyecto(){
             html="";
             generarGrafico();
             for(i=0; i<json.length;i++){
+                contLista++;
 //<<<<<<< Updated upstream
+            if(contLista <13){
                 html += '<div class="col-lg-6"><div  class="au-card recent-report"><div class="au-card-inner"><h3 class="title-2">'+json[i].nomProyecto+'</h3><div style="padding: 20px"  class="chart-info"><div class="chart-info__left"><div  class="chart-note"><span class="dot dot--blue"></span><span>Nombre del Proyecto:</span></div><div class="chart-note mr-0"><span class="dot dot--green"></span><span>Fecha de Inicio:</span></div></div><div class="chart-info__right"><div class="chart-statis"><span class="label">'+json[i].nomProyecto+'</span></div><div class="chart-statis mr-0"><span class="label">'+json[i].fechaProyecto+'</span></div></div></div><div class="centrarBoton"><center><button onclick="mostrarFormularioEditaProyecto('+json[i].ideProyecto+');" type="button" class="btn btn-primary">Ver detalles</button><button style="margin:20px " onclick="redireccionarAñadirColaboradores('+json[i].ideProyecto+');" type="button" class="btn btn-primary">Añadir Colaborador</button></center></div></div></div></div>';
 //=======
                 //html += '<div class="col-lg-6"><div  class="au-card recent-report"><div class="au-card-inner"><h3 class="title-2">'+json[i].nomProyecto+'</h3><div style="padding: 20px"  class="chart-info"><div class="chart-info__left"><div  class="chart-note"><span class="dot dot--blue"></span><span>Nombre del Proyecto:</span></div><div class="chart-note mr-0"><span class="dot dot--green"></span><span>Fecha de Inicio:</span></div></div><div class="chart-info__right"><div class="chart-statis"><span class="label">'+json[i].nomProyecto+'</span></div><div class="chart-statis mr-0"><span class="label">'+json[i].fechaProyecto+'</span></div></div></div><div class="centrarBoton"><center><button onclick="mostrarFormularioEditaProyecto('+json[i].ideProyecto+');" type="button" class="btn btn-primary">Ver detalles</button></center></div></div></div></div>';
 //>>>>>>> Stashed changes
                 htmlM+='<li><a href="#">'+json[i].nomProyecto+'</a></li>'
             }
-
+            }
+            
             $("#proyectoC").html(html);
             $("#proyectoMM").html(htmlM);
             $("#proyectoMD").html(htmlM);
+            
             agregarEventos();
         }
     });
@@ -676,6 +680,130 @@ function mensajeSweetAlert(titulo, estado){
     });
 }
 
+
+function verTodosLosColaboradoresProyecto(){
+    //localStorage.setItem("idProyecto",idProyecto);
+    var formData = new FormData();
+    formData.append('accion','verTodosLosColaboradoresProyecto');
+    formData.append('idProyecto',localStorage.getItem("idProyecto"));
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            html="";            
+            for(i=0; i<json.length;i++){
+                //variables = '"'+json[i].nomUsu+" "+json[i].apeUsu+',"'+json[i].nomD+'"';
+                localStorage.setItem(i.toString(),JSON.stringify(json[i]))
+                html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="eliminarColaboradorProyecto('+json[i].idProyectoColaborador+')">Eliminar</button></td></tr>';
+                                                                
+            }  
+            $("#tablaAgregados").html(html);
+            
+        }
+    });
+
+}
+
+function eliminarColaboradorProyecto(idProyectoColaborador){
+    var formData = new FormData();
+    formData.append('accion','eliminarColaboradorProyecto');
+    formData.append('idProyectoColaborador',idProyectoColaborador);
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+           console.log(data);
+           verTodosLosColaboradoresProyecto();
+            
+        }
+    });
+    
+
+}
+
+function cargarColaboradoresFiltroModificar(){
+
+    var formData = new FormData();
+    formData.append('accion','cargarColaboradoresFiltro');
+    formData.append('nombreUsuario', $('#nombreU').val());
+    formData.append('departamento', $('#departamentoSelect').val()); 
+    formData.append('habilidad', $('#habilidadSelect').val()); 
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            html="";            
+            for(i=0; i<json.length;i++){
+                //variables = '"'+json[i].nomUsu+" "+json[i].apeUsu+',"'+json[i].nomD+'"';
+                localStorage.setItem(i.toString(),JSON.stringify(json[i]))
+                html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="agregarColaboradorProyectoModificar('+json[i].idUsu+')">Agregar</button></td></tr>';
+                                                                
+            }  
+            $("#tablaPosibles").html(html);
+            
+        }
+    });
+}
+
+function agregarColaboradorProyectoModificar(idColaborador){
+    var formData = new FormData();
+    formData.append('accion','agregarColaboradorProyectoModificar');
+    formData.append('idColaborador',idColaborador);
+    formData.append('idProyecto', localStorage.getItem("idProyecto"));
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json=JSON.parse(data);
+            mensajeSweetAlert(json[0].mensaje, json[0].status);
+            verTodosLosColaboradoresProyecto();
+            
+        }
+    });
+}
+
+function modificarColaboradores(){
+    alert (getQueryVariable());
+    localStorage.setItem("idProyecto",getQueryVariable());
+    location.href="modificarColaboradoresAgregados.php";
+
+    
+}
+
+
 function borrarObjetivo(id){
    console.log(id);
   $('#mi-modal').modal('show');
@@ -731,11 +859,13 @@ function despliegaObjetivos(){
         type: "POST",
         url: "../business/proyectosAction.php",
         data: formData,
+
         dataType: "html",
         data: formData,
         cache: false,
         contentType: false,
         processData: false,
+
         success: function(data)
         {
             console.log(data);
@@ -750,9 +880,13 @@ function despliegaObjetivos(){
             }
             $("#objThead").html(html1);
             $("#tablaObjetivos").html(html2);
+
         }
     });
 }
+
+
+
 
 function insertarObjetivo(){
   var formData = new FormData();
@@ -783,3 +917,4 @@ function insertarObjetivo(){
       }
     });
   }
+

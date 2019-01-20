@@ -83,8 +83,7 @@ function cambiar_pagina($newNum, $limite) {
 
 // obtiene los colaboradores por area de trabajo (Modificar con base nueva)
     function obtener_colaboradores_proyecto($id_Proyecto) {
-        $sql = $this->objetoConexion->prepare("select distinct per.cedulaPersona, nombrePersona, apellidoPersona,nombrePuesto, tipoColaborador ,estadoPersona  from tablapersona per ,tablaproyectocolaborador tpcolb, tablapuesto,tablacolaborador tcol where tpcolb.idProyecto = '$id_Proyecto' and tpcolb.idProyectoColaborador = tcol.idColaborador and per.idPersona = tcol.idColaborador;
-        ");
+        $sql = $this->objetoConexion->prepare("SELECT  per.cedulaPersona, nombrePersona, apellidoPersona,nombrePuesto, tipoColaborador ,estadoPersona from tablapersona per inner join tablacolaborador tcol  on per.idPersona = tcol.idPersona inner join tablaproyectocolaborador tpcolb on tpcolb.idColaborador = tcol.idColaborador inner join tablapuesto pu on tcol.idPuestoColaborador = pu.idPuesto where tpcolb.idProyecto = '$id_Proyecto';");
         $sql->execute(['activo']);
         $lista_usuarios=array();
         while($fila=$sql->fetch()){
@@ -153,6 +152,18 @@ function cambiar_pagina($newNum, $limite) {
     }
     function obtenerNombreManagerActual($idProyecto){
         $sql = $this->objetoConexion->prepare("SELECT per.nombrePersona,tpm.idProjectManager from tablapersona per inner join tablaprojectmanager tpm on tpm.idPersona = per.idPersona inner join tablaproyecto tp on tp.idProjectManager = tpm.idProjectManager where idProyecto = '$idProyecto';");
+        $sql->execute(['activo']);
+        $lista_equipos=array();
+        while($fila=$sql->fetch()) {
+            $equipo=array('nombreManager'=>$fila['nombrePersona'],
+            'idManager'=>$fila['idProjectManager']);
+        array_push($lista_equipos,$equipo);
+        }
+        echo json_encode($lista_equipos);
+
+    }
+    function mostrarNotificaciones(){
+        $sql = $this->objetoConexion->prepare("SELECT nombrePersona,pm.idProjectManager from tablapersona per inner join tablaprojectmanager pm on per.idPersona = pm.idPersona;");
         $sql->execute(['activo']);
         $lista_equipos=array();
         while($fila=$sql->fetch()) {

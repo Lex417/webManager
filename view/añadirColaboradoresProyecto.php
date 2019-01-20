@@ -63,7 +63,7 @@
 									<div class="row"
 										<div class="col-9 col-sm-9 col-md-9 col-xs-12">
 										<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-											<div class="card text-white bg-primary mb-5p">
+											<div class="table-responsive table--no-card m-b-30">
 												<div class="card-header text-center">
 													Busqueda de colaboradores
 												</div>
@@ -99,26 +99,20 @@
 															</div>
 															
 														</div>
-															<div class="row">
-																<div class="col-12 col-sm-12 col-md-12 col-xs-12 text-left">
-																	
-																	
-																</div>
-
-															</div>
+															
 														</form>
 													</div>
 													</div>
 												</div>
 										    </div>
 											 <div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-												<div class="card text-white bg-primary mb-5p">
+												<div class="table-responsive table--no-card m-b-30">
 												<div class="card-header text-center">
 													Recursos Afines
 												</div>
 												<div class="card-body background-white">
 													<div class="table-responsive">
-														<table class="table">
+														<table class="table table-borderless table-striped table-earning">
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">Nombre</th>
@@ -138,13 +132,13 @@
 											</div>
 										</div>
 										<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
-												<div class="card text-white bg-primary mb-5p">
+												<div class="table-responsive table--no-card m-b-30">
 												<div class="card-header text-center">
 													Colaboradores Agregados
 												</div>
 												<div class="card-body background-white">
-													<div class="table-responsive">
-														<table class="table">
+													<div >
+														<table class="table table-borderless table-striped table-earning">
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">Nombre</th>
