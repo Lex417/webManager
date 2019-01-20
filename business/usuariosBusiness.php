@@ -82,6 +82,9 @@ class usuariosBusiness {
         return  $this->data->obtenerNombreManagerActual($idProyecto);
 
     }
+    function mostrarNotificaciones(){
+        return $this->data->mostrarNotificaciones();
+    }
      
 }
 ?>

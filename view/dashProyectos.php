@@ -47,7 +47,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Rechazar</button>
-                                <button type="button" class="btn btn-primary">Aceptar</button>
+                                <button type="button" class="btn btn-primary" onclick="aceptarRequestColaborador();">Aceptar</button>
                             </div>
                         </div>
                     </div>
