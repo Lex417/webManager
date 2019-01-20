@@ -110,6 +110,7 @@ function llenar_fila(json, t_body) {
 
 function ocultar_modal_mensaje() {
     $('#mensaje-editar-perfil').modal('hide');
+    obtenerInfoUsuario();
 }
 
 
