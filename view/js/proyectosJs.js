@@ -796,7 +796,6 @@ function agregarColaboradorProyectoModificar(idColaborador){
 }
 
 function modificarColaboradores(){
-    alert (getQueryVariable());
     localStorage.setItem("idProyecto",getQueryVariable());
     location.href="modificarColaboradoresAgregados.php";
 

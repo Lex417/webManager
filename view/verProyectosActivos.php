@@ -8,6 +8,7 @@
  $(document).ready(function(){
   obtenerVistaPerfil();
   obtenerInfoUsuario();
+  obtenerSkillUsuario();
 
  });
 </script>
@@ -30,7 +31,7 @@
                       <div class="row" style = "padding: 20px">
                         <div class="col-md-12">
                           <div class="overview-wrap">
-                            <h2 class="title-1">Proyectos Activos</h2>
+                            <h2 class="title-1">Perfil</h2>
                             <!-- Button trigger modal -->
                             <button type="button" class="au-btn au-btn--blue" data-toggle="modal" data-target="#modalEditarUsuario">
                             <i class="far fa-edit"></i> Editar Perfil
@@ -87,6 +88,21 @@
                           </table>
                       </div>
                     </div>
+
+                  </div>
+                  <div class="row" style="padding: 10px 20px 0px;">
+                    <div class="col">
+                      <div class=" table-responsive m-b-40">
+                          <table  class="table table-borderless table-striped table-earning">
+                            <thead>
+                              <th>Habilidad</th>
+                              <th>Acciones</th>
+                            </thead>
+                            <tbody id="t_Skill"></tbody>
+                          </table>
+                      </div>
+                    </div>
+                
                   </div>
                 </div>
                 <!-- <div class="modal fade" id="modalVerUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

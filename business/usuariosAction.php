@@ -86,4 +86,12 @@ if($accion == 'insertar_usuario') {
 } else if($accion == 'obtener_equipos') {
         $business->obtener_equipos();
 
+}else if($accion=='obtenerSkillUsuario'){
+    $cedUsuario = $_POST['cedUsuario'];
+    echo $business->obtenerSkillUsuario($cedUsuario);
 } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
+
+
+
+
+

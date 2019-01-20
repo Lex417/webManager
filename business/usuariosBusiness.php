@@ -77,6 +77,10 @@ class usuariosBusiness {
     function mostrarNotificaciones(){
         return $this->data->mostrarNotificaciones();
     }
-     
+    
+    function obtenerSkillUsuario($cedUsuario){
+        return $this->data->obtenerSkillUsuario($cedUsuario);
+    }
+
 }
 ?>

@@ -39,11 +39,126 @@ function insertarUsuario() {
 
 }
 
+// va a llamar a 'vista_colaborador_manager' (Modificar con base nueva)
+function obtenerColaboradorManager() {
+    var formData = new FormData();
+    formData.append('accion','mostrar_vista_colaborador_manager');
+
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            var json = JSON.parse(respuesta);
+            console.log(json);
+            var t_body1 = document.getElementById('area_trabajo_uno');
+            var t_body2 = document.getElementById('area_trabajo_dos');
+            var t_body3 = document.getElementById('area_trabajo_tres');
+            var t_body4 = document.getElementById('area_trabajo_cuatro');
+            for(i = 0; i < json.length; i++) {
+                llenar_filas_tablas_areas_trabajo(json, t_body1, t_body2, t_body3, t_body4);
+            }
+        }
+    });
+}
+function verDetallesNotificacion(){
+   // alert("hola");
+
+    $('#mediumModal').modal('show'); // abrir
+}
+//  ESTA FUNCION LO QUE HACE ES AGREGAR DIV QUE CONTINEN LAS NOTIFICACIONES PARA MOSTRARLAS EN LE MODAL.
+function mostrarNotificaciones(){
+    var modalAllNotificaciones = document.getElementById("modalAllNotificaciones");
+
+    if(modalAllNotificaciones){
+        modalAllNotificaciones.innerHTML="";
+
+        var notifi_title_div = document.createElement("DIV");
+        notifi_title_div.setAttribute("class","notifi__title");
+
+        var notifi_title  =document.createElement("p");
+        notifi_title.innerText="Usted tiene 5 notificaciones";
+            
+        //agregamos el titulo
+        notifi_title_div.appendChild(notifi_title);
+        modalAllNotificaciones.appendChild(notifi_title_div);
+
+
+        for (var i=0; i<5; i++){ 
+            
+            var notifi_item =  document.createElement("DIV");
+            notifi_item.setAttribute("class","notifi__item");
+
+            var notifi_icon =  document.createElement("DIV");
+            notifi_icon.setAttribute("class","bg-c1 img-cir img-40");
+            
+            var icon =document.createElement("i");
+            icon.setAttribute("class","zmdi zmdi-email-open");
+
+            icon.setAttribute("data-modal","modal");
+            icon.setAttribute("data-target","#mediumModal");
+                        
+
+            //agregamos un ucono
+            notifi_icon.appendChild(icon);
+
+            //agregamos el icono padre al div
+            notifi_item.appendChild(notifi_icon);
+
+            var content =document.createElement("DIV");
+            content.setAttribute("class","content");
+            
+
+            var text_notifi  =document.createElement("p");
+            text_notifi.innerText="Un usuario a solicitado unirse a un proyecto";
+
+            var fecha =document.createElement("span");
+            fecha.setAttribute("class","date");
+            fecha.innerText="Enero 19, 2019 16:58";
+
+            //agregamos el testo del contenido
+            content.appendChild(text_notifi);
+            content.appendChild(fecha);
+
+            //agregamos el contenido de la notificacion
+            notifi_item.appendChild(content);
+
+
+
+            //IMPORTANTE AGREGAMOS UN EVENTO AL DIV DE CADA NOTIFICACION PARA ABRIR MODAL QUE MUESTRA LOS
+            //DETALLES DE CADA CANOFICACION
+            notifi_item.addEventListener("click",verDetallesNotificacion,true);
+            
+            modalAllNotificaciones.appendChild(notifi_item);
+
+            
+            
+        }
+        var notifi__footer = document.createElement("DIV");
+        notifi__footer.setAttribute("class","notifi__footer");
+        
+
+        var action = document.createElement("a");
+
+        
+        action.href = "informacion.php";
+        action.innerText="Ver todas";
+        action.style="margin-left:80px;";
+        modalAllNotificaciones.appendChild(action);
+
+    }
+
+}
+
 
 // obtiene la vista para ver los usuarios por proyecto (Modificar con base nueva)
 function obtenerVistaUsuariosPorProyecto() {
     var formData = new FormData();
-    formData.append('accion', 'mostrar_usuarios_proyecto');
+    formData.append('accion', '_usuarios_proyecto');
      // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
     formData.append('id',getQueryVariable());
 //AGREGANDO UNA FUNCION
@@ -690,3 +805,39 @@ function instantValidation(field) {
     }
   }
  /******************************VALIDACIONES************************************/
+
+function obtenerSkillUsuario(){
+  setTimeout(function(){ 
+    cedUsuario=document.getElementById("cedula-perfil").value;
+    
+    formData = new FormData();
+    formData.append('accion', 'obtenerSkillUsuario');
+    formData.append('cedUsuario',cedUsuario);
+  //AGREGANDO UNA FUNCION
+      $.ajax({
+          type: "POST",
+          url:  "../business/usuariosAction.php",
+          data: formData,
+          dataType: "html",
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) {
+            console.log(data);
+              var json = JSON.parse(data);
+              
+              html="";
+              for(i=0; i<json.length;i++){
+                html += '<tr><td>'+json[i].nomSkill+ '</td><td><button type="button" class="btn btn-outline-success" onclick="eliminarSkillColaborador('+json[i].idSkillColaborador+')">Eliminar</button></td></tr>';
+              }
+              $("#t_Skill").html(html);
+          }
+      });
+   }, 1000);
+  
+
+}
+
+function eliminarSkillColaborador(idColab){
+
+}

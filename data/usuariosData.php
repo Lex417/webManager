@@ -175,6 +175,21 @@ function cambiar_pagina($newNum, $limite) {
 
     }
 
+    function obtenerSkillUsuario($cedUsuario){
+        $stmt=$this->objetoConexion->prepare('SELECT tablaSkillColaborador.idSkillColaborador, tablaSkill.nombreSkill from tablaSkillColaborador inner join tablaColaborador on tablaColaborador.idColaborador=tablaSkillColaborador.idColaborador inner join tablaPersona on tablaColaborador.idPersona=tablaPersona.idPersona inner join tablaSkill on tablaSkill.idSkill = tablaSkillColaborador.idSkill where tablaPersona.cedulaPersona=?');
+        $stmt->execute([$cedUsuario]);
+        $Skills=array();
+        while($fila=$stmt->fetch()){
+                $listaSkills=array('idSkiCol'=>$fila['idSkillColaborador'],'nomSkill'=>$fila['nombreSkill']);
+                
+                array_push($Skills,$listaSkills);
+        }
+        
+        
+        return json_encode($Skills);
+
+    }
+
 }
 
 ?>
