@@ -71,8 +71,40 @@ function verDetallesNotificacion(){
 
     $('#mediumModal').modal('show'); // abrir
 }
+function aceptarRequestColaborador(){
+    $('#mediumModal').modal('hide'); // cerrar
+    console.log("aceptarRequestColaborador");
+
+}
+
+
+
+
 //  ESTA FUNCION LO QUE HACE ES AGREGAR DIV QUE CONTINEN LAS NOTIFICACIONES PARA MOSTRARLAS EN LE MODAL.
 function mostrarNotificaciones(){
+    var formData = new FormData();
+    formData.append('accion','mostrarNotificaciones');
+
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            var json = JSON.parse(respuesta);
+    
+            agregarItemsNotificaciones(json,json.length);
+
+        }
+    });
+
+}
+
+function agregarItemsNotificaciones(jsonRequests, cantidadRequests){
+
     var modalAllNotificaciones = document.getElementById("modalAllNotificaciones");
 
     if(modalAllNotificaciones){
@@ -88,8 +120,7 @@ function mostrarNotificaciones(){
         notifi_title_div.appendChild(notifi_title);
         modalAllNotificaciones.appendChild(notifi_title_div);
 
-
-        for (var i=0; i<5; i++){ 
+        for (var i=0; i<cantidadRequests; i++){ 
             
             var notifi_item =  document.createElement("DIV");
             notifi_item.setAttribute("class","notifi__item");
@@ -103,7 +134,6 @@ function mostrarNotificaciones(){
             icon.setAttribute("data-modal","modal");
             icon.setAttribute("data-target","#mediumModal");
                         
-
             //agregamos un ucono
             notifi_icon.appendChild(icon);
 
@@ -113,9 +143,8 @@ function mostrarNotificaciones(){
             var content =document.createElement("DIV");
             content.setAttribute("class","content");
             
-
             var text_notifi  =document.createElement("p");
-            text_notifi.innerText="Un usuario a solicitado unirse a un proyecto";
+            text_notifi.innerText=jsonRequests[i].nombreManager;
 
             var fecha =document.createElement("span");
             fecha.setAttribute("class","date");
@@ -128,31 +157,22 @@ function mostrarNotificaciones(){
             //agregamos el contenido de la notificacion
             notifi_item.appendChild(content);
 
-
-
             //IMPORTANTE AGREGAMOS UN EVENTO AL DIV DE CADA NOTIFICACION PARA ABRIR MODAL QUE MUESTRA LOS
             //DETALLES DE CADA CANOFICACION
             notifi_item.addEventListener("click",verDetallesNotificacion,true);
             
             modalAllNotificaciones.appendChild(notifi_item);
-
-            
-            
+ 
         }
         var notifi__footer = document.createElement("DIV");
         notifi__footer.setAttribute("class","notifi__footer");
         
-
         var action = document.createElement("a");
-
-        
         action.href = "informacion.php";
         action.innerText="Ver todas";
         action.style="margin-left:80px;";
         modalAllNotificaciones.appendChild(action);
-
     }
-
 }
 
 

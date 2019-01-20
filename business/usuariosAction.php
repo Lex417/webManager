@@ -28,7 +28,10 @@ if($accion == 'insertar_usuario') {
    echo json_encode($text);
 
    
-} else if($accion == 'obtenerNombreManagerActual'){
+} else if($accion == 'mostrarNotificaciones'){
+        $business->mostrarNotificaciones();
+
+}else if($accion == 'obtenerNombreManagerActual'){
         $idProyecto=$_POST['idProyecto'];
         $business->obtenerNombreManagerActual($idProyecto);
 
