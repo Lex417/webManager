@@ -534,3 +534,116 @@ function mensajeSweetAlert(titulo, estado){
     });
 }  
 
+function verTodosLosColaboradoresProyecto(){
+    //localStorage.setItem("idProyecto",idProyecto);
+    var formData = new FormData();
+    formData.append('accion','verTodosLosColaboradoresProyecto');
+    formData.append('idProyecto',localStorage.getItem("idProyecto"));
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            html="";            
+            for(i=0; i<json.length;i++){
+                //variables = '"'+json[i].nomUsu+" "+json[i].apeUsu+',"'+json[i].nomD+'"';
+                localStorage.setItem(i.toString(),JSON.stringify(json[i]))
+                html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="eliminarColaboradorProyecto('+json[i].idProyectoColaborador+')">Eliminar</button></td></tr>';
+                                                                
+            }  
+            $("#tablaAgregados").html(html);
+            
+        }
+    });
+
+}
+
+function eliminarColaboradorProyecto(idProyectoColaborador){
+    var formData = new FormData();
+    formData.append('accion','eliminarColaboradorProyecto');
+    formData.append('idProyectoColaborador',idProyectoColaborador);
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+           console.log(data);
+           verTodosLosColaboradoresProyecto();
+            
+        }
+    });
+    
+
+}
+
+function agregarColaboradorProyectoModificar(idColaborador){
+    var formData = new FormData();
+    formData.append('accion','agregarColaboradorProyectoModificar');
+    formData.append('idColaborador',idColaborador);
+    formData.append('idProyecto', localStorage.getItem("idProyecto"));
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json=JSON.parse(data);
+            mensajeSweetAlert(json[0].mensaje, json[0].status);
+            verTodosLosColaboradoresProyecto();
+            
+        }
+    });
+}
+
+function cargarColaboradoresFiltroModificar(){
+
+    var formData = new FormData();
+    formData.append('accion','cargarColaboradoresFiltro');
+    formData.append('nombreUsuario', $('#nombreU').val());
+    formData.append('departamento', $('#departamentoSelect').val()); 
+    formData.append('habilidad', $('#habilidadSelect').val()); 
+    $.ajax({                        
+        type: "POST",                 
+        url: "../business/proyectosAction.php",                     
+        data: formData, 
+        dataType: "html",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data)             
+        {
+            console.log(data);
+            json = JSON.parse(data);
+            html="";            
+            for(i=0; i<json.length;i++){
+                //variables = '"'+json[i].nomUsu+" "+json[i].apeUsu+',"'+json[i].nomD+'"';
+                localStorage.setItem(i.toString(),JSON.stringify(json[i]))
+                html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="agregarColaboradorProyectoModificar('+json[i].idUsu+')">Agregar</button></td></tr>';
+                                                                
+            }  
+            $("#tablaPosibles").html(html);
+            
+        }
+    });
+}

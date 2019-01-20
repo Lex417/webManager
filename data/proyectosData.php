@@ -111,7 +111,7 @@
           $nom=$arrayNombre[0];
         }
         if(empty($nombre)&& $departamento=="0" && $habilidad=="0" ){
-            $stmt = $this->objetoConexion->prepare('SELECT nombre_Usuario,apellido_Usuario,id_Usuario,nombre_Departamento,nombre_Manager,apellido_Manager,nombre_Skill from vista_mostrar_todo_filtro');
+            $stmt = $this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaColaborador.idColaborador,tablaDepartamento.nombreDepartamento,tablaSkill.nombreSkill, tablaEquipoTrabajo.idEquipoTrabajo from tablaPersona inner join tablaColaborador on tablaPersona.idPersona = tablaColaborador.idPersona inner join tablaEquipoTrabajo on tablaColaborador.idEquipotrabajo = tablaEquipoTrabajo.idEquipotrabajo inner join tablaDepartamento on tablaDepartamento.idDepartamento = tablaEquipoTrabajo.idDepartamento inner join tablaSkillColaborador on tablaColaborador.idColaborador = tablaSkillColaborador.idColaborador inner join tablaSkill on tablaSkill.idSkill=tablaSkillColaborador.idSkill ');
             $stmt->execute();
         }else if(empty($nombre)&& $departamento=="0" && $habilidad!="0" ){
             $stmt = $this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaColaborador.idColaborador,tablaDepartamento.nombreDepartamento,tablaSkill.nombreSkill, tablaEquipoTrabajo.idEquipoTrabajo from tablaPersona inner join tablaColaborador on tablaPersona.idPersona = tablaColaborador.idPersona inner join tablaEquipoTrabajo on tablaColaborador.idEquipotrabajo = tablaEquipoTrabajo.idEquipotrabajo inner join tablaDepartamento on tablaDepartamento.idDepartamento = tablaEquipoTrabajo.idDepartamento inner join tablaSkillColaborador on tablaColaborador.idColaborador = tablaSkillColaborador.idColaborador inner join tablaSkill on tablaSkill.idSkill=tablaSkillColaborador.idSkill where tablaSkill.idSkill=?');
@@ -169,14 +169,20 @@
         
        // print_r($json);
         foreach ($json as $val) {
-          $sql1=$this->objetoConexion->prepare('SELECT idProyecto,idColaborador from tablaProyectoColaborador Where idProyecto=? AND idColaborador=?');
+          $sql1=$this->objetoConexion->prepare('SELECT idProyecto,idColaborador,idProyectoColaborador,estadoProyectoColaborador from tablaProyectoColaborador Where idProyecto=? AND idColaborador=?');
           $idUsu = $val['idUsu'];
           $sql1->execute([$idProyecto,$idUsu]);
           if($sql1->fetch()){
             $data = array();
-            $text = array('status' => "error", 'mensaje'=>"El colaborador ya se encuentra asignado en el proyecto");
-            array_push($data, $text);
-            echo json_encode($data);
+            if($sql1->fetch()['estadoProyectoColaborador']=="rechazado" ){
+                 $sql1=$this->objetoConexion->prepare('UPDATE  tablaProyectoColaborador SET estadoProyectoColaborador = ? WHERE idProyectoColaborador =?');
+                 $sql1->execute(['pendiente',$sql->fetch()['idProyectoColaborador']]);
+            }else{
+              $text = array('status' => "error", 'mensaje'=>"El colaborador ya se encuentra asignado en el proyecto");
+              array_push($data, $text);
+              echo json_encode($data);
+            }
+            
 
           }else{
             $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyectocolaborador(idProyecto,idColaborador,estadoProyectoColaborador) VALUES(?,?,?)');
@@ -228,6 +234,86 @@
         }
         return json_encode($listaProyectos);
 
+      }
+
+
+      function verTodosLosColaboradoresProyecto($idProyecto){
+
+        $stmt=$this->objetoConexion->prepare('SELECT tablaProyectoColaborador.idProyectoColaborador, tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaColaborador.idColaborador,tablaDepartamento.nombreDepartamento,tablaSkill.nombreSkill, tablaEquipoTrabajo.idEquipoTrabajo from tablaProyectoColaborador inner join tablaColaborador on tablaProyectoColaborador.idColaborador = tablaColaborador.idPersona inner join tablaPersona on tablaPersona.idPersona = tablaColaborador.idPersona  inner join tablaEquipoTrabajo on tablaColaborador.idEquipotrabajo = tablaEquipoTrabajo.idEquipotrabajo inner join tablaDepartamento on tablaDepartamento.idDepartamento = tablaEquipoTrabajo.idDepartamento inner join tablaSkillColaborador on tablaColaborador.idColaborador = tablaSkillColaborador.idColaborador inner join tablaSkill on tablaSkill.idSkill=tablaSkillColaborador.idSkill where tablaProyectoColaborador.idProyecto=? AND tablaProyectoColaborador.estadoProyectoColaborador!= ?');
+        $stmt->execute([$idProyecto,'rechazado']);
+        $listaColaboradores=array();
+        while($fila=$stmt->fetch()){
+            $stmt2=$this->objetoConexion->prepare('SELECT tablaPersona.nombrePersona,tablaPersona.apellidoPersona,tablaTeamManager.idTeamManager from tablaEquipoTrabajo inner join tablaTeamManager on tablaTeamManager.idTeamManager =tablaEquipoTrabajo.idTeamManager inner join tablaPersona on tablaPersona.idPersona= tablaTeamManager.idPersona where tablaEquipoTrabajo.idEquipoTrabajo=?');
+            $stmt2->execute([$fila['idEquipoTrabajo']]);
+            $nombreManager="";
+            $apellidoManager="";
+            while($fila2=$stmt2->fetch()){
+              $nombreManager=$fila2['nombrePersona'];
+              $apellidoManager=$fila2['apellidoPersona'];
+            }
+            $colaboradores=array('nomUsu'=>$fila['nombrePersona'],
+        'apeUsu'=>$fila['apellidoPersona'],'idUsu'=>$fila['idColaborador'],
+          'nomD'=>$fila['nombreDepartamento'],'nomM'=>$nombreManager,'apeM'=>$apellidoManager,'nomS'=>$fila['nombreSkill'], 'idProyectoColaborador'=>$fila['idProyectoColaborador']);
+            
+            array_push($listaColaboradores,$colaboradores);
+        }
+        return json_encode($listaColaboradores);
+
+      }
+
+      function eliminarColaboradorProyecto($idProyectoColaborador){
+        $stmt=$this->objetoConexion->prepare('UPDATE  tablaProyectoColaborador SET estadoProyectoColaborador = ? WHERE idProyectoColaborador =?');
+        
+        if($stmt->execute(["rechazado",$idProyectoColaborador])) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      
+       function agregarColaboradorProyectoModificar($idColaborador,$idProyecto){
+        
+       
+          $sql1=$this->objetoConexion->prepare('SELECT idProyecto,idColaborador,idProyectoColaborador,estadoProyectoColaborador from tablaProyectoColaborador Where idProyecto=? AND idColaborador=?');
+          $sql1->execute([$idProyecto,$idColaborador]); 
+          $bandera=false;
+          while($res = $sql1->fetch()){
+            $bandera=true;
+            $data = array();
+           if($res['estadoProyectoColaborador']=="rechazado" ){
+                 $sql2=$this->objetoConexion->prepare('UPDATE  tablaProyectoColaborador SET estadoProyectoColaborador = ? WHERE idProyectoColaborador =?');
+                 $sql2->execute(['pendiente',$res['idProyectoColaborador']]);
+                 $data = array();
+                 $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
+                 array_push($data, $text);
+                 echo json_encode($data);
+            }else{
+              $text = array('status' => "error", 'mensaje'=>"El colaborador ya se encuentra asignado en el proyecto");
+              array_push($data, $text);
+              echo json_encode($data);
+            }
+            
+
+          }if($bandera==false){
+            $sql = $this->objetoConexion->prepare('INSERT INTO tablaproyectocolaborador(idProyecto,idColaborador,estadoProyectoColaborador) VALUES(?,?,?)');
+            if(!$sql->execute([(int)$idProyecto,(int)$idColaborador,"pendiente"])) {
+              $bandera=false;
+              $data = array();
+               $text = array('status' => "error", 'mensaje'=>"No insertó correctamente");
+               array_push($data, $text);
+               echo json_encode($data);
+              
+              //echo 'Error occurred:'.implode(":",$this->objetoConexion->errorInfo());
+            } else{
+               $data = array();
+               $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
+               array_push($data, $text);
+               echo json_encode($data);
+            }
+          }
+          
+        
       }
 
     }
