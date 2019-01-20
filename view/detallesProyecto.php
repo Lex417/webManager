@@ -4,11 +4,11 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		
-		
+
+
 		<!--<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">-->
-		
-		
+
+
 		<link rel="stylesheet" href="chosen.min.css">
 		<link rel="stylesheet" href="datepicker/css/datepicker.css">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
 		<!-- Bootstrap CSS-->
 		<link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-	 
+
 		<!-- Vendor CSS-->
 		<link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
 		<link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
@@ -36,17 +36,17 @@
 
 		<title>Web Manager</title>
 	</head>
-	<body onload="editarDatosProyecto(); obtenerVistaUsuariosPorProyecto();">
+	<body onload="editarDatosProyecto(); obtenerVistaUsuariosPorProyecto(); despliegaObjetivos(); obtenerNombreManagerActual();">
 		<div class="page-wrapper">
 			<?php include "menu.php"?>
 			<div class="page-container">
-				<?php include "header.php"?> 
+				<?php include "header.php"?>
 				<br>
 				<br>
 				<br>
 				<div class="container">
 					<div class="row">
-						<div class="col-12 col-sm-12 col-md-12 col-xs-12 mtb-5p">
+						<div class="col-9 col-sm-9 col-md-9 col-xs-12 mtb-5p">
 							<div class="card text-white bg-primary">
 								<div class="card-body background-white">
 									<div class="col-12 col-sm-12 col-md-12 col-xs-12 mb-5p">
@@ -63,7 +63,7 @@
 																<div class="col-12 col-sm-12 col-md-12 col-xs-12" style="padding: 0;">
 																	<div class="row">
 																		<div class="col-9 col-sm-9 col-md-9 col-xs-12" style="display: flex;">
-																			
+
 																			<input type="hidden" class="form-control width-100" disabled id="id_Proyecto" name="id_Proyecto" aria-label="Recipient's username" aria-describedby="button-addon2">
 																		</div>
 
@@ -107,27 +107,32 @@
 																	<div class="row">
 																		<div class="col-9 col-sm-9 col-md-9 col-xs-12" style="display: flex;padding: 0;">
 																			<div class="col-6 col-sm-6 col-md-6 col-xs-6" style="display: flex;">
-																				<label for="estado_Proyecto" class="text-inline-block" style="display: inline-block;padding-right: 10px;">Estado</label> 
+																				<label for="estado_Proyecto" class="text-inline-block" style="display: inline-block;padding-right: 10px;">Estado</label>
 																				   <select onclick=editarEstadoProyecto(); class="custom-select mr-sm-2" name="estado_Proyecto" id="estado_Proyecto">
 
 																				   </select>
 																			</div>
 																			<div class="col-6 col-sm-6 col-md-6 col-xs-6" style="display: flex;">
-																				<label  class="text-inline-block" for="id_Proyect_Manager" style="display: inline-block;padding-right: 10px;"> Manager 
+
+																				<label  class="text-inline-block" for="id_Proyect_Manager" style="display: inline-block;padding-right: 10px;"> Manager Actual
+
 																			   </label>
-																				<select  name="id_Proyect_Manager"	id="id_Proyect_Manager" class="custom-select mr-sm-2" id="">
-																					<option value="1">1</option>
-																					<option value="2">2</option>
-																					<option value="3">3</option>
+
+																				<select  name="selectNombresManagers"	id="selectNombresManagers" class="custom-select mr-sm-2" id="">
+																					<!-- se agregan las opciones desde javascript  -->
+
 																				</select>
 																			</div>
+																			<div class="col-3 col-sm-3 col-md-3 col-xs-12">
+																			<button type="button" onclick=" obtenerNombresManagers();" class="btn btn-outline-primary width-200 mb-5p">Cambiar Manager</button>
+																		</div>
 																		</div>
 																	</div>
 																	<div class="row">
 																		<div class="col-12 col-sm-12 col-md-12 col-xs-12 text-right">
 																			<button type="button" onclick="actualizarDatosProyectoBD();" id="btGuardarCambios" disabled class="au-btn au-btn-icon au-btn--blue">Guardar cambios</button>
 																		</div>
-																		
+
 																	</div>
 																</div>
 															</form>
@@ -135,21 +140,45 @@
 													</div>
 												</div>
 											</div>
-											
+
 							           </div>
 							       </div>
 					          </div>
 					      </div>
 					   </div>
+						 <!-- Tabla Objetivos  -->
+						 <div class="col-3 mtb-5p" id="columnaTabla">
+								 <div class="au-card-inner" id="columnaTabla3">
+									 <div class="table-responsive-sm">
+										 <table class="table table-sm  table-hover thead table-dark" id="tablaObj">
+											 <thead class="thead-dark" id="objThead">
+
+
+											 </thead>
+											 <tbody id="tablaObjetivos">
+
+											 </tbody>
+										 </table>
+
+								 </div>
+							 </div>
+						 </div>
 					</div>
 				</div>
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <h2 class="title-1">Colaboradores</h2>
-                                    <button onclick="location.href='informacion.php' ;"class="au-btn au-btn-icon au-btn--blue">
+                                    <button onclick=" modificarColaboradores();"class="au-btn au-btn-icon au-btn--blue">
 									Editar colaboradores</i></button>
+
                                 </div>
                             </div>
+
+
+							
+							
+
+
 
 				<div class="container">
 					<div class="row">
@@ -167,34 +196,105 @@
 														</div>
 														<div class="card-body background-white">
 														<div class="table-responsive">
-														<table class="table">
+															<table class=" text-center   table table-striped table table-bordered table-hover " >
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">Cédula</th>
 																	<th scope="col">Nombre</th>
 																	<th scope="col">Apellido</th>
 																	<th scope="col">Puesto</th>
-																	<th scope="col">Tipo</th>
+																	<th scope="col" style="width:123px;">Tipo</th>
 																	<th scope="col">Estado</th>
+																	<th scope="col" style="padding: 0px; width: 16px;">&nbsp;</th>
 																</tr>
 															</thead>
-															<tbody id="t_body_empleados_proyecto">
+															<tbody id="">
+																<tr>
+																	<td colspan="7" style="padding: 0px; border: none;">
+																		<div style="height: 298px; overflow: auto;">
+																			<table id="">
+																				<tbody id="t_body_empleados_proyecto">
+
+																				</tbody>
+																			</table>
+																		</div>
+																	</td>
+																</tr>
 
 															</tbody>
 														</table>
 													</div>
-															
+
 														</div>
 													</div>
 												</div>
 											</div>
-											
+
 							           </div>
 							       </div>
 					          </div>
 					      </div>
 					   </div>
 					</div>
+				</div>
+
+
+				<!-- MODAL -->
+				<div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+
+							 <div class="modal-header">
+									 <h3 class="modal-title" id="exampleModalLongTitle">Agregar Objetivo</h3>
+									 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									 <span aria-hidden="true">&times;</span>
+									 </button>
+							 </div>
+
+							 <div class="modal-body">
+										<div class="card">
+												<div class="card-body">
+												<form action="#" method="post" id="form-add-objetivo" >
+														<fieldset>
+																<div class="form-group">
+																		<label for="descripcion" class="control-label mb-1">Descripción</label>
+																		<textarea id="descripcion" name="descripcion" type="text" class="form-control" aria-required="true" aria-label="With textarea" required="required" ></textarea>
+																</div>
+
+																<div class="form-group">
+																		<label for="estado" class="control-label mb-1">Estado</label>
+																		<select  id="select-estado" name="select-estado" class="form-control">
+																				<option value="0">Activo</option>
+																				<option value="1">Inactivo</option>
+																		</select>
+																</div>
+																</div>
+														</div>
+												</div>
+								<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										<button type="button" class="btn btn-primary" onclick="insertarObjetivo();" data-dismiss="modal"><i class="fa fa-dot-circle-o"></i> Agregar</button>
+								</div>
+								</fieldset>
+						 </form>
+						</div>
+					</div>
+				</div>
+				<!-- MODAL -->
+
+				<!-- MODAL CONFIRMAR -->
+				<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+				  <div class="modal-dialog modal-sm">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h4 class="modal-title" id="myModalLabel">Desea eliminar objetivo?</h4>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" id="modal-btn-no">No</button>
+				        <button type="button" class="btn btn-primary" id="modal-btn-si">Sí</button>
+				      </div>
+				    </div>
+				  </div>
 				</div>
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -252,5 +352,5 @@
 					});
 		   </script>
 		   <?php include_once('../dependencies.php'); ?>
-  </body>  
+  </body>
 </html>

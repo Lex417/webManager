@@ -12,13 +12,13 @@ class usuariosBusiness {
     function getFiltro($palabra) {
         $res = "";
         switch($palabra) {
-        case "id":
+        case "1":
             $res = "cedulaPersona";
             break;
-        case "nombre":
+        case "2":
             $res = "nombrePersona";
             break;
-        case "puesto":
+        case "3":
             $res = "nombrePuesto";
             break;
         }
@@ -60,6 +60,9 @@ class usuariosBusiness {
     function obtener_colaboradores_proyecto($id){
         return $this->data->obtener_colaboradores_proyecto($id);
     }
+    function obtenerNombresManagers(){
+        return $this->data->obtenerNombresManagers();
+    }
 
     function contar_usuarios() {
         return $this->data->contar_usuarios();
@@ -75,5 +78,10 @@ class usuariosBusiness {
         $filtro = $this->getFiltro($filtro);
         return $this->data->busqueda_filtrada($palabra, $filtro);
     }
+    function obtenerNombreManagerActual($idProyecto){
+        return  $this->data->obtenerNombreManagerActual($idProyecto);
+
+    }
+     
 }
 ?>

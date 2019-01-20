@@ -1,5 +1,5 @@
-<?php 
-    
+<?php
+
 
     include "proyectosBusiness.php";
     $accion=$_POST['accion'];
@@ -8,6 +8,10 @@
 
     if($accion=="obtenerVistaProyectos"){
         echo $business->obtenerVistaPreviaProyecto();
+    }
+
+    if($accion=="obtenerDatosGrafica"){
+      echo $business->obtenerDatosGrafica();
     }
 
     if($accion=="editarDatosProyecto"){
@@ -23,30 +27,32 @@
     $desc_Proyecto=$_POST['desc_Proyecto'];
     $estado_Proyecto=$_POST['estado_Proyecto'];
     echo $business->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto);
-}
+}//////////////////////////////////////
 
     if($accion == 'insertarProyecto') {
-    $text = null;
-    if(isset($_POST['id_Proyecto']) &&
-       isset($_POST['nombre_Proyecto']) &&
+      $result = 0;
+    if( isset($_POST['nombre_Proyecto']) &&
        isset($_POST['inicio_Proyecto']) &&
        isset($_POST['fin_Proyecto']) &&
        isset($_POST['desc_Proyecto']) &&
        isset($_POST['estado_Proyecto']) &&
        isset($_POST['id_Proyect_Manager'])) {
 
-        if($business->insertarProyecto($_POST['id_Proyecto'], $_POST['nombre_Proyecto'], $_POST['inicio_Proyecto'], $_POST['fin_Proyecto'], $_POST['desc_Proyecto'], $_POST['estado_Proyecto'], $_POST['id_Proyect_Manager'])) {
-            $text = array('status' => "true", 'error'=>"");
+        $tempResult = $business->insertarProyecto($_POST['nombre_Proyecto'], $_POST['inicio_Proyecto'], $_POST['fin_Proyecto'], $_POST['desc_Proyecto'], $_POST['estado_Proyecto'], $_POST['id_Proyect_Manager']);
+
+        if($tempResult > 0) {
+            $result = $tempResult;
         } else {
-            $text = array('status' => "false", 'error'=>"Error al insertar en la bd");
+            $result = 0;
         }
 
-       } else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
-       
-       echo json_encode($text);
-      } else if($accion == 'modificar_usuario') {
+        } else {
+          $result = -1;
+        }
 
-      } else if($accion == 'eliminar_usuario') {
+        header('Content-Type: application/json');
+        //Devolvemos el array pasado a JSON como objeto
+        echo json_encode($result, JSON_FORCE_OBJECT);
 
       } else if($accion == 'mostrar_usuario') {
               $business->mostrar_usuarios();
@@ -61,14 +67,14 @@
       }
 
       if($accion=="cargarColaboradoresFiltro"){
-        $nombre=$_POST['nombreUsuario']; 
-       $departamento=$_POST['departamento']; 
-       $habilidad=$_POST['habilidad']; 
+        $nombre=$_POST['nombreUsuario'];
+       $departamento=$_POST['departamento'];
+       $habilidad=$_POST['habilidad'];
         echo $business->cargarColaboradoresFiltro($nombre,$departamento,$habilidad);
       }
 
       if($accion=="agregarColaboradoresProyecto"){
-        $json=$_POST['json']; 
+        $json=$_POST['json'];
         $json = json_decode($json,true);
         $idProyecto = $_POST['idProyecto'];
         $business->agregarColaboradoresProyecto($json,$idProyecto);
@@ -76,6 +82,40 @@
 
       if($accion=="cargarTodosProyectos"){
         echo $business->cargarTodosProyectos();
+      }
+      if($accion=="cargarObjetivos"){
+        $id=$_POST['id'];
+        echo $business->cargarObjetivos($id);
+      }
+      if($accion=="insertarObjetivo"){
+        $text = null;
+        if(isset($_POST['descripcionObjetivo']) &&
+           isset($_POST['estadoObjetivo']) &&
+           $_POST['descripcionObjetivo']) {
+
+             $id=$_POST['id'];
+             $descripcionObjtv=$_POST['descripcionObjetivo'];
+             $estadoObjtv=$_POST['estadoObjetivo'];
+             if($business->insertarObjetivo($id, $descripcionObjtv, $estadoObjtv)){
+               $text = array('status' => "true", 'error'=>"");
+             } else {
+               $text = array('status' => "false", 'error'=>"Error al insertar en la bd.");
+             }
+        }else{
+          $text = array('status' => "false", 'error'=>"Error, faltan datos.");
+        }
+        echo json_encode($text);
+      }
+      if($accion=="eliminarObjetivo"){
+        $id=$_POST['id'];
+        $text=null;
+        
+        if($business->borrarObjetivo($id)){
+          $text = array('status' => "true", 'error'=>"");
+        } else{
+          $text = array('status' => "false", 'error'=>"Error al borrar de la bd.");
+        }
+        echo json_encode($text);
       }
 
       if($accion=="verTodosLosColaboradoresProyecto"){

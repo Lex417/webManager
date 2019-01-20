@@ -1,7 +1,7 @@
-<?php 
+<?php
 
     class proyectosBusiness{
-        
+
         private $data;
 
         function __construct(){
@@ -12,17 +12,21 @@
             return $this->data->obtenerVistaPreviaProyecto();
 
         }
-         function insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, 
-            $estado_Proyecto, $id_Proyect_Manager) {
-            return $this->data->insertarProyecto($id_Proyecto,$nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
+        function obtenerDatosGrafica(){
+          return $this->data->obtenerGraficaProyectos();
         }
+        function insertarProyecto($nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto, 
+              $estado_Proyecto, $id_Proyect_Manager) {
+              return $this->data->insertarProyecto($nombre_Proyecto, $inicio_Proyecto, $fin_Proyecto, $desc_Proyecto,  $estado_Proyecto, $id_Proyect_Manager);
+          }
+
 
         function obtenerProyecto($id){
             return $this->data->obtenerProyecto($id);
 
         }
-        function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto){
-            return $this->data->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto);
+        function actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto,$manager_Id){
+            return $this->data->actualizarDatosProyectoBD($id_Proyecto,$nombre_Proyecto,$inicio_Proyecto,$fin_Proyecto,$desc_Proyecto,$estado_Proyecto,$manager_Id);
         }
 
         function cargarDepartamentos(){
@@ -48,6 +52,7 @@
           return $this->data->cargarTodosProyectos();
       }
 
+
       function verTodosLosColaboradoresProyecto($idProyecto){
         return $this->data->verTodosLosColaboradoresProyecto($idProyecto);
       }
@@ -58,5 +63,15 @@
 
       function agregarColaboradorProyectoModificar($idColaborador,$idProyecto){
         return $this->data->agregarColaboradorProyectoModificar($idColaborador,$idProyecto);
+    }
+
+      function cargarObjetivos($id){
+          return $this->data->cargarObjetivos($id);
+      }
+      function insertarObjetivo($id, $descripcionObjtv, $estadoObjtv){
+          return $this->data->insertarObjetivo($id, $descripcionObjtv, $estadoObjtv);
+      }
+      function borrarObjetivo($id){
+          return $this->data->borrarObjetivo($id);
       }
  }
