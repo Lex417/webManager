@@ -66,7 +66,11 @@ function obtenerColaboradorManager() {
         }
     });
 }
+function verDetallesNotificacion(){
+   // alert("hola");
 
+    $('#mediumModal').modal('show'); // abrir
+}
 //  ESTA FUNCION LO QUE HACE ES AGREGAR DIV QUE CONTINEN LAS NOTIFICACIONES PARA MOSTRARLAS EN LE MODAL.
 function mostrarNotificaciones(){
     var modalAllNotificaciones = document.getElementById("modalAllNotificaciones");
@@ -85,7 +89,7 @@ function mostrarNotificaciones(){
         modalAllNotificaciones.appendChild(notifi_title_div);
 
 
-        for (var i=0; i<4; i++){ 
+        for (var i=0; i<5; i++){ 
             
             var notifi_item =  document.createElement("DIV");
             notifi_item.setAttribute("class","notifi__item");
@@ -95,8 +99,10 @@ function mostrarNotificaciones(){
             
             var icon =document.createElement("i");
             icon.setAttribute("class","zmdi zmdi-email-open");
-            icon.setAttribute("data-toggle","modal");
+
+            icon.setAttribute("data-modal","modal");
             icon.setAttribute("data-target","#mediumModal");
+                        
 
             //agregamos un ucono
             notifi_icon.appendChild(icon);
@@ -107,13 +113,6 @@ function mostrarNotificaciones(){
             var content =document.createElement("DIV");
             content.setAttribute("class","content");
             
-
-
-
-
-            
-
-
 
             var text_notifi  =document.createElement("p");
             text_notifi.innerText="Un usuario a solicitado unirse a un proyecto";
@@ -129,16 +128,24 @@ function mostrarNotificaciones(){
             //agregamos el contenido de la notificacion
             notifi_item.appendChild(content);
 
-            var notifi__footer = document.createElement("DIV");
-            notifi__footer.setAttribute("class","notifi__footer");
+
+
+            //IMPORTANTE AGREGAMOS UN EVENTO AL DIV DE CADA NOTIFICACION PARA ABRIR MODAL QUE MUESTRA LOS
+            //DETALLES DE CADA CANOFICACION
+            notifi_item.addEventListener("click",verDetallesNotificacion,true);
+            
+            modalAllNotificaciones.appendChild(notifi_item);
 
             
-
-
-            modalAllNotificaciones.appendChild(notifi_item);
             
         }
+        var notifi__footer = document.createElement("DIV");
+        notifi__footer.setAttribute("class","notifi__footer");
+        
+
         var action = document.createElement("a");
+
+        
         action.href = "informacion.php";
         action.innerText="Ver todas";
         action.style="margin-left:80px;";
