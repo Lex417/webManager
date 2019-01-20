@@ -190,6 +190,55 @@ function cambiar_pagina($newNum, $limite) {
 
     }
 
+    function eliminarSkillColaborador($idSkillColaborador){
+        $stmt=$this->objetoConexion->prepare('DELETE FROM tablaSkillColaborador WHERE idSkillColaborador = ?');
+        if($stmt->execute([$idSkillColaborador])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function obtenerSkill(){
+        $stmt=$this->objetoConexion->prepare('SELECT nombreSkill,idSkill FROM tablaskill');
+        $stmt->execute();
+        $listaSkills=array();
+        while($fila=$stmt->fetch()){
+                $skill=array('nomSkill'=>$fila['nombreSkill'],'idSki'=>$fila['idSkill']);                
+                array_push($listaSkills,$skill);
+        }
+        return json_encode($listaSkills);
+    }
+
+    function agregarHabilidad($cedulaColaborador,$idSkill){
+        $stmt=$this->objetoConexion->prepare('SELECT idColaborador FROM tablacolaborador INNER JOIN tablapersona ON tablacolaborador.idpersona = tablapersona.idpersona WHERE tablapersona.cedulaPersona=?');
+        $stmt->execute([$cedulaColaborador]);
+        $idColaborador="";
+        while($fila=$stmt->fetch()){
+            $idColaborador=$fila['idColaborador'];                
+        }
+        $stmt=$this->objetoConexion->prepare('SELECT idColaborador FROM tablaskillcolaborador WHERE idSkill=? AND idColaborador = ?');
+        $stmt->execute([$idSkill,$idColaborador]);
+        $bandera = true;
+        while($fila=$stmt->fetch()){
+            $bandera = false;
+        }
+        if($bandera){
+            $stmt=$this->objetoConexion->prepare('INSERT INTO tablaskillcolaborador(idSkill,idColaborador) VALUES(?,?)');
+            $stmt->execute([$idSkill,$idColaborador]);
+            $data = array();
+            $text = array('status' => "success", 'mensaje'=>"Se insertó correctamente");
+            array_push($data, $text);
+            echo json_encode($data);
+        }else{
+            $data = array();
+            $text = array('status' => "error", 'mensaje'=>"Ya posee la habilidad asignada");
+            array_push($data, $text);
+            echo json_encode($data);
+        }
+        
+    }
+
 }
 
 ?>

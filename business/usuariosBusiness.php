@@ -82,5 +82,15 @@ class usuariosBusiness {
         return $this->data->obtenerSkillUsuario($cedUsuario);
     }
 
+    function eliminarSkillColaborador($idSkillColaborador){
+        return $this->data->eliminarSkillColaborador($idSkillColaborador);
+    }
+    function obtenerSkill(){
+        return $this->data->obtenerSkill();
+    }
+    function agregarHabilidad($cedulaColaborador,$idSkill){
+        return $this->data->agregarHabilidad($cedulaColaborador,$idSkill);
+    }
+
 }
 ?>

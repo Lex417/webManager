@@ -89,8 +89,18 @@ if($accion == 'insertar_usuario') {
 }else if($accion=='obtenerSkillUsuario'){
     $cedUsuario = $_POST['cedUsuario'];
     echo $business->obtenerSkillUsuario($cedUsuario);
-} else { $text = array('status' => "false", 'error'=>"Error dato vacios");}
-
+}else if($accion=='eliminarSkillColaborador'){
+    $idSkillColaborador = $_POST['idSkillColaborador'];
+    echo $business->eliminarSkillColaborador($idSkillColaborador);
+}else if($accion=='obtenerSkill'){
+    echo $business->obtenerSkill();
+}else if($accion=='agregarHabilidad'){
+        $cedulaColaborador = $_POST['cedulaColaborador'];
+        $idSkill = $_POST['idSkill'];
+        echo $business->agregarHabilidad($cedulaColaborador,$idSkill);
+}else { 
+        $text = array('status' => "false", 'error'=>"Error dato vacios");
+}
 
 
 

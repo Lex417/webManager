@@ -25,7 +25,7 @@
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
-                <div class="section__content section__content--p30">
+                <div class="section_content section_content--p30">
                     <div class="container-fluid">
                     <!-- Aqui va el cuerpo de la pantalla -->
                       <div class="row" style = "padding: 20px">
@@ -90,10 +90,13 @@
                     </div>
 
                   </div>
+                  <button type="button" class="au-btn au-btn--blue" style="margin-left:72%" data-toggle="modal" onclick="obtenerSkill()" data-target="#modalAgregarHabilidades">
+                      <i class="far fa-edit"></i> Agregar habilidades
+                  </button>
                   <div class="row" style="padding: 10px 20px 0px;">
                     <div class="col">
                       <div class=" table-responsive m-b-40">
-                          <table  class="table table-borderless table-striped table-earning">
+                          <table  class="table table-borderless table-striped table-earning" id="tSkillsActuales">
                             <thead>
                               <th>Habilidad</th>
                               <th>Acciones</th>
@@ -102,7 +105,6 @@
                           </table>
                       </div>
                     </div>
-                
                   </div>
                 </div>
                 <!-- <div class="modal fade" id="modalVerUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -193,6 +195,44 @@
                       </div>
                     </div>
 
+
+
+                    <div class="modal fade" id="modalAgregarHabilidades" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <h3 id="titulo-ver-perfil"class="modal-title">Agregar habilidades</h3>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+
+                          <div class="modal-body">
+                            <div class="card">
+                              <div class="card-body">
+                              <div class="row" style="padding: 10px 20px 0px;">
+                                <div class="col">
+                                  <div class=" table-responsive m-b-40">
+                                      <table  class="table table-borderless table-striped table-earning" id="tablaSkillAgregar">
+                                        <thead>
+                                          <th>Habilidad</th>
+                                          <th>Acciones</th>
+                                        </thead>
+                                        <tbody id="t_Skill_agregar"></tbody>
+                                      </table>
+                                  </div>
+                                </div>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
                     <!-- MODAL EDITAR USAURIO -->
                     <!-- MODAL MENSAJE CONFIRMACION EDITAR PERFIL -->
                     <div class="modal fade" id="mensaje-editar-perfil">
@@ -218,6 +258,11 @@
                     <!-- MODAL MENSAJE CONFIRMACION EDITAR PERFIL-->
 
     <?php include_once('../dependencies.php'); ?>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
 </body>
 
 </html>

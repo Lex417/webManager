@@ -831,6 +831,7 @@ function obtenerSkillUsuario(){
                 html += '<tr><td>'+json[i].nomSkill+ '</td><td><button type="button" class="btn btn-outline-success" onclick="eliminarSkillColaborador('+json[i].idSkillColaborador+')">Eliminar</button></td></tr>';
               }
               $("#t_Skill").html(html);
+
           }
       });
    }, 1000);
@@ -838,6 +839,81 @@ function obtenerSkillUsuario(){
 
 }
 
-function eliminarSkillColaborador(idColab){
+function eliminarSkillColaborador(idSkillColaborador){
+    formData = new FormData();
+    formData.append('accion', 'eliminarSkillColaborador');
+    formData.append('idSkillColaborador',idSkillColaborador);
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+          console.log(data);
+          obtenerSkillUsuario();
+        }
+    });
+}
 
+function obtenerSkill(){
+    formData = new FormData();
+    formData.append('accion', 'obtenerSkill');
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            console.log(data);
+            var json = JSON.parse(data);
+            html="";
+            for(i=0; i<json.length;i++){
+                html += '<tr><td>'+json[i].nomSkill+ '</td><td><button type="button" class="btn btn-outline-success" onclick="aregarHabilidad('+json[i].idSki+')">Agregar habilidad</button></td></tr>';
+            }
+            $("#t_Skill_agregar").html(html);
+           
+            
+
+        }
+    });
+}
+
+function aregarHabilidad(idSkill){
+    cedUsuario=document.getElementById("cedula-perfil").value;
+    formData = new FormData();
+    formData.append('accion', 'agregarHabilidad');
+    formData.append('cedulaColaborador',cedUsuario);
+    formData.append('idSkill', idSkill);
+//AGREGANDO UNA FUNCION
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            console.log(data);
+            var json = JSON.parse(data);
+            obtenerSkillUsuario();
+            mensajeSweetAlert(json[0].mensaje, json[0].status);
+        }
+    });
+}
+
+//Funcion de SweetAlert , la variable estado debe ser "success" o "error"
+function mensajeSweetAlert(titulo, estado){
+    swal({
+      text: titulo,
+      type: estado,
+      button: "Aceptar",
+    });
 }
