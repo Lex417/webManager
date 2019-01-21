@@ -98,6 +98,14 @@ if($accion == 'insertar_usuario') {
         $cedulaColaborador = $_POST['cedulaColaborador'];
         $idSkill = $_POST['idSkill'];
         echo $business->agregarHabilidad($cedulaColaborador,$idSkill);
+}else if($accion=='pagarMembresia'){
+    $nomTarjeta=$_POST['nomTarjeta'];
+    $numeroTarjeta=$_POST['numeroTarjeta'];
+    $fechaTarjeta=$_POST['fechaTarjeta'];
+    $codTarjeta=$_POST['codTarjeta'];
+    $cedEmpresa=$_POST['cedEmpresa'];
+    $contEmpresa=$_POST['contEmpresa'];
+    echo $business->pagarMembresia($nomTarjeta,$numeroTarjeta,$fechaTarjeta,$codTarjeta,$cedEmpresa,$contEmpresa);
 }else { 
         $text = array('status' => "false", 'error'=>"Error dato vacios");
 }

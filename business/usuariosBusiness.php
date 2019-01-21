@@ -91,6 +91,11 @@ class usuariosBusiness {
     function agregarHabilidad($cedulaColaborador,$idSkill){
         return $this->data->agregarHabilidad($cedulaColaborador,$idSkill);
     }
+    
+
+    function pagarMembresia($nomTarjeta,$numeroTarjeta,$fechaTarjeta,$codTarjeta,$cedEmpresa,$contEmpresa){
+        return $this->data->pagarMembresia($nomTarjeta,$numeroTarjeta,$fechaTarjeta,$codTarjeta,$cedEmpresa,$contEmpresa);
+    }
 
 }
 ?>

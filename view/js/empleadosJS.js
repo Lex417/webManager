@@ -158,7 +158,7 @@ function mostrarNotificaciones(){
 // obtiene la vista para ver los usuarios por proyecto (Modificar con base nueva)
 function obtenerVistaUsuariosPorProyecto() {
     var formData = new FormData();
-    formData.append('accion', '_usuarios_proyecto');
+    formData.append('accion', 'mostrar_usuarios_proyecto');
      // getQueryVariable();  CON ESTE METODO OBTENEMOS EL ID DEL PROYECTO DEL URL DE LA PAGINA.
     formData.append('id',getQueryVariable());
 //AGREGANDO UNA FUNCION
@@ -171,6 +171,7 @@ function obtenerVistaUsuariosPorProyecto() {
         contentType: false,
         processData: false,
         success: function(respuesta) {
+          console.log(respuesta);
              var json = JSON.parse(respuesta);
              console.log(json);
             var t_body = document.getElementById('t_body_empleados_proyecto');
@@ -916,4 +917,37 @@ function mensajeSweetAlert(titulo, estado){
       type: estado,
       button: "Aceptar",
     });
+}
+
+function pagarMembresía(){
+    nomTarjeta=document.getElementById("cc-name").value;
+    numeroTarjeta=document.getElementById("cc-number").value;
+    fechaTarjeta=document.getElementById("cc-exp").value;
+    codTarjeta=document.getElementById("x_card_code").value;
+    cedEmpresa=document.getElementById("x_ced").value;
+    contEmpresa=document.getElementById("x_pass").value;
+    formData = new FormData();
+    formData.append('accion', 'pagarMembresia');
+    formData.append('nomTarjeta',nomTarjeta);
+    formData.append('numeroTarjeta',numeroTarjeta);
+    formData.append('fechaTarjeta',fechaTarjeta);
+    formData.append('codTarjeta',codTarjeta);
+    formData.append('cedEmpresa',cedEmpresa);
+    formData.append('contEmpresa',contEmpresa);
+    $.ajax({
+        type: "POST",
+        url:  "../business/usuariosAction.php",
+        data: formData,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            console.log(data);
+            var json = JSON.parse(data);
+            mensajeSweetAlert(json[0].mensaje, json[0].status);
+            location.href="dashProyectos.php";
+        }
+    });
+
 }

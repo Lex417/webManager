@@ -65,6 +65,8 @@
                                     <h2 class="title-1">Proyectos</h2>
                                     <button onclick="location.href='vistaProyecto.php' ;"class="au-btn au-btn-icon au-btn--blue">
                                         <i class="zmdi zmdi-plus"></i>Nuevo proyecto</button>
+                                    <button onclick="location.href='verTodosProyectos.php' ;"class="au-btn au-btn-icon au-btn--blue">
+                                        <i class="zmdi zmdi-plus"></i>Ver Todos los Proyectos</button>    
                                         
                                 </div>
                             </div>
