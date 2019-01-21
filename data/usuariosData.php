@@ -239,6 +239,26 @@ function cambiar_pagina($newNum, $limite) {
         
     }
 
+    function pagarMembresia($nomTarjeta,$numeroTarjeta,$fechaTarjeta,$codTarjeta,$cedEmpresa,$contEmpresa){
+         
+          $numeroTarjeta= substr($numeroTarjeta,0,-4); 
+        
+        $stmt=$this->objetoConexion->prepare('UPDATE  tablanegocio SET planNegocio=?,tipoTarjeta=?,digitosTarjetaNegocio=?,fechaTarjetaNegocio=?  WHERE passwordNegocio=? AND cedulaNegocio=? AND estadoNegocio=?');
+        $stmt->execute(['Mensual','VISA',$numeroTarjeta,$fechaTarjeta,$contEmpresa,$cedEmpresa,'activo']);    
+        
+        if($stmt->rowCount()>0){
+            $data = array();
+            $text = array('status' => "success", 'mensaje'=>"El pago se realizó correctamente");
+            array_push($data, $text);
+            echo json_encode($data);
+        }else{
+            $data = array();
+            $text = array('status' => "error", 'mensaje'=>"El pago no se realizó correctamente");
+            array_push($data, $text);
+            echo json_encode($data);
+        }
+    }
+
 }
 
 ?>

@@ -260,9 +260,7 @@
     <?php include_once('../dependencies.php'); ?>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
-   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+   
 </body>
 
 </html>

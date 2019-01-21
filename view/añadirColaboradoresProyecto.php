@@ -112,7 +112,7 @@
 												</div>
 												<div class="card-body background-white">
 													<div class="table-responsive">
-														<table class="table table-borderless table-striped table-earning">
+														<table class="table table-borderless table-striped table-earning" id="tPosibles">
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">Nombre</th>
@@ -138,7 +138,7 @@
 												</div>
 												<div class="card-body background-white">
 													<div >
-														<table class="table table-borderless table-striped table-earning">
+														<table class="table table-borderless table-striped table-earning" id="tAgregados">
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">Nombre</th>
@@ -239,7 +239,10 @@
     <script src="vendor/select2/select2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
-
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
+	<script src="https:/cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	
+	
     <!-- Main JS-->
     <script src="js/main.js"></script>
     <script src="js/proyectosJs.js"></script>

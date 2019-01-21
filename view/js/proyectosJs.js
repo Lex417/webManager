@@ -585,7 +585,15 @@ function cargarColaboradoresFiltro(){
                 html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="agregarColaborador('+i+')">Agregar</button></td></tr>';
 
             }
+
             $("#tablaPosibles").html(html);
+            $('#tPosibles').DataTable({
+                "pageLength": 5,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
 
         }
     });
@@ -599,7 +607,15 @@ function agregarColaborador(i){
         html += '<tr><td>'+listaPosiblesColaboradores[i].nomUsu+" "+listaPosiblesColaboradores[i].apeUsu+'</td><td>'+listaPosiblesColaboradores[i].nomD+'</td><td>'+listaPosiblesColaboradores[i].nomS+'</td><td>'+listaPosiblesColaboradores[i].nomM+" "+listaPosiblesColaboradores[i].apeM+ '</td><td><button type="button" onclick="eliminarLista('+i+')" class="btn btn-outline-success">Eliminar</button></td></tr>';
 
     }
+    $('#tAgregados').dataTable().fnDestroy();
     $("#tablaAgregados").html(html);
+     $('#tAgregados').DataTable({
+        "pageLength": 5,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bInfo": false,
+        "bAutoWidth": false
+    });
 }
 
 function eliminarLista(cont){
@@ -609,7 +625,16 @@ function eliminarLista(cont){
         html += '<tr><td>'+listaPosiblesColaboradores[i].nomUsu+" "+listaPosiblesColaboradores[i].apeUsu+'</td><td>'+listaPosiblesColaboradores[i].nomD+'</td><td>'+listaPosiblesColaboradores[i].nomS+'</td><td>'+listaPosiblesColaboradores[i].nomM+" "+listaPosiblesColaboradores[i].apeM+ '</td><td><button type="button" onclick="eliminarLista('+i+')" class="btn btn-outline-success">Eliminar</button></td></tr>';
 
     }
+    
+     $('#tAgregados').dataTable().fnDestroy();
     $("#tablaAgregados").html(html);
+     $('#tAgregados').DataTable({
+        "pageLength": 5,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bInfo": false,
+        "bAutoWidth": false
+    });
 }
 
 
@@ -664,7 +689,7 @@ function verTodosProyectosTabla(){
             html="";
 
             for(i=0; i<listaProyectos.length;i++){
-                 html += '<tr><td>'+listaProyectos[i].nomP+'</td><td>'+listaProyectos[i].fechIP+'</td><td>'+listaProyectos[i].fechFP+'</td><td>'+listaProyectos[i].nomM+'</td><td>'+listaProyectos[i].progreso+'</td></tr>';
+                 html += '<tr><td>'+listaProyectos[i].nomP+'</td><td>'+listaProyectos[i].fechIP+'</td><td>'+listaProyectos[i].fechFP+'</td><td>'+listaProyectos[i].nomM+'</td><td>'+listaProyectos[i].progreso+'%</td></tr>';
 
             }
             $("#tablaProyectos").html(html);
@@ -706,7 +731,16 @@ function verTodosLosColaboradoresProyecto(){
                 html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="eliminarColaboradorProyecto('+json[i].idProyectoColaborador+')">Eliminar</button></td></tr>';
                                                                 
             }  
+            
+            $('#tAgregados').dataTable().fnDestroy();
             $("#tablaAgregados").html(html);
+             $('#tAgregados').DataTable({
+                "pageLength": 5,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bInfo": false,
+                "bAutoWidth": false
+    });
             
         }
     });
@@ -764,7 +798,15 @@ function cargarColaboradoresFiltroModificar(){
                 html += '<tr><td>'+json[i].nomUsu+" "+json[i].apeUsu+'</td><td>'+json[i].nomD+'</td><td>'+json[i].nomS+'</td><td>'+json[i].nomM+" "+json[i].apeM+ '</td><td><button type="button" class="btn btn-outline-success" onclick="agregarColaboradorProyectoModificar('+json[i].idUsu+')">Agregar</button></td></tr>';
                                                                 
             }  
+            $('#tPosibles').dataTable().fnDestroy();
             $("#tablaPosibles").html(html);
+             $('#tPosibles').DataTable({
+                "pageLength": 5,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
             
         }
     });
