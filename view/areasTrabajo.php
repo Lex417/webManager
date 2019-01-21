@@ -83,11 +83,33 @@
                         <div class="row" style="padding: 40px 35px 10px;">
                             <div id="pagination" class="pagination"></div>
                         </div>
+                        
                     <!-- Aqui va el cuerpo de la pantalla -->
                     </div> 
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
+            <!-- MENSAJE DEPARTAMENTO VACIO -->
+            <div class="modal fade" id="mensaje-dep-vacio">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h3 class="modal-title">Mensaje</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="alert alert-warning">
+                                <strong>Aviso</strong> Sin colaboradores por el momento..
+                            </div>
+                        </div>
+
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- MENSAJE DEPARTAMENTO VACIO -->
             <!-- END PAGE CONTAINER-->
         </div>
 

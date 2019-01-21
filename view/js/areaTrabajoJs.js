@@ -150,7 +150,11 @@ function countDesarrollo() {
             var tot_filas = $('#select-resultados-area').children(':selected').text();
             var total_pag = Math.ceil((tam / tot_filas));
             $('#pagination').empty();
-            if(total_pag == 1) {
+            if(total_pag == 0) {
+                $('#mensaje-dep-vacio').modal('show');
+                setTimeout(ocultar_mensaje_dep_vacios, 2000);
+            }
+            else if(total_pag == 1) {
                 html += '<a name="btn-pagination" class="active" id='+1+' onclick="mostrarDepDesarrollo('+1+');" href="#">'+1+'</a>'
             } else {
                 for(i = 1; i <= total_pag; i++) {
@@ -183,7 +187,11 @@ function countSoporte() {
             var tot_filas = $('#select-resultados-area').children(':selected').text();
             var total_pag = Math.ceil((tam / tot_filas));
             $('#pagination').empty();
-            if(total_pag == 1) {
+            if(total_pag == 0) {
+                $('#mensaje-dep-vacio').modal('show');
+                setTimeout(ocultar_mensaje_dep_vacios, 2000);
+            }
+            else if(total_pag == 1) {
                 html += '<a name="btn-pagination" class="active" id='+1+' onclick="mostrarDepSoporte('+1+');" href="#">'+1+'</a>'
             } else {
                 for(i = 1; i <= total_pag; i++) {
@@ -217,7 +225,11 @@ function countQa() {
             var total_pag = Math.ceil((tam / tot_filas));
             
             $('#pagination').empty();
-            if(total_pag == 1) {
+            if(total_pag == 0) {
+                $('#mensaje-dep-vacio').modal('show');
+                setTimeout(ocultar_mensaje_dep_vacios, 2000);
+            }
+            else if(total_pag == 1) {
                 html += '<a name="btn-pagination" class="active" id='+1+' onclick="mostrarDepQa('+1+');" href="#">'+1+'</a>'
             } else {
                 for(i = 1; i <= total_pag; i++) {
@@ -252,7 +264,12 @@ function countLeadership() {
             var total_pag = Math.ceil((tam / tot_filas));
             console.log(total_pag);
             $('#pagination').empty();
-            if(total_pag == 1) {
+
+            if(total_pag == 0) {
+                $('#mensaje-dep-vacio').modal('show');
+                setTimeout(ocultar_mensaje_dep_vacios, 2000);
+            }
+            else if(total_pag == 1) {
                 html += '<a name="btn-pagination" class="active" id='+1+' onclick="mostrarDepTeamLeader('+1+');" href="#">'+1+'</a>'
             } else {
                 for(i = 0; i <= total_pag; i++) {
@@ -388,6 +405,11 @@ function desplegar_dep_liderazgo() {
     countLeadership();
     mostrarDepTeamLeader(1);
     
+}
+
+
+function ocultar_mensaje_dep_vacios() {
+    $('#mensaje-dep-vacio').modal('hide');
 }
 
 function agregar_eventos() {

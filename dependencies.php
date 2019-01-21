@@ -25,6 +25,10 @@
 <script src="vendor/chartjs/Chart.bundle.min.js"></script>
 <script src="vendor/select2/select2.min.js">
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
@@ -35,3 +39,4 @@
     <script src="js/proyectosActivos.js"></script>
     <!-- Pagination.js-->
     <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+

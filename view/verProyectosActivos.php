@@ -107,48 +107,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="modal fade" id="modalVerUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-
-                          <div class="modal-header">
-                            <h3 id="titulo-ver-perfil"class="modal-title"></h3>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          </div>
-
-                          <div class="modal-body">
-                            <div class="card">
-                              <div class="card-body">
-                                <form action="#" method="post" id="form-edit-usuario" novalidate="novalidate">
-                                  <div class="form-group">
-                                    <label for="cedula-perfil" class="control-label mb-1">Número de Cedula</label>
-                                    <input readonly="readonly" id="cedula-perfil" name="cedula-perfil" type="text" class="form-control">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="pass-perfil" class="control-label mb-1">Contraseña</label>
-                                    <input readonly="readonly" id="pass-perfil" name="pass-perfil" type="password" class="form-control">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="estado-perfil" class="control-label mb-1">Estado de Usuario</label>
-                                    <input readonly="readonly" id="estado-perfil" name="estado-perfil" type="text" class="form-control">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="manager-perfil" class="control-label mb-1">Manager Asignado</label>
-                                    <input readonly="readonly" id="manager-perfil" name="manager-perfil" type="text" class="form-control">
-                                  </div>     
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div> -->
-                    <!-- MODAL EDITAR USAURIO -->
-
                     <div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -258,11 +216,6 @@
                     <!-- MODAL MENSAJE CONFIRMACION EDITAR PERFIL-->
 
     <?php include_once('../dependencies.php'); ?>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
-   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
 </body>
 
 </html>
